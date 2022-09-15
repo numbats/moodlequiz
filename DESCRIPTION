@@ -25,5 +25,6 @@ Imports:
     rmarkdown,
     stringr,
     xfun
-URL: https://github.com/emitanaka/moodlequiz
+URL: https://github.com/emitanaka/moodlequiz,
+    http://emitanaka.org/moodlequiz/
 BugReports: https://github.com/emitanaka/moodlequiz/issues
