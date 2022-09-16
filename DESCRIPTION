@@ -6,12 +6,12 @@ Authors@R:
              family = "Tanaka", 
              email = "dr.emi.tanaka@gmail.com", 
              role = c("aut", "cre"),
-             comment = c(ORCID = "0000-0002-1455-259X"),
+             comment = c(ORCID = "0000-0002-1455-259X")),
       person(given = "Mitchell",
              family = "O'Hara-Wild",
              email = "mail@mitchelloharawild.com",
              role = c("aut"),
-             comment = c(ORCID = "0000-0002-3813-7155"))
+             comment = c(ORCID = "0000-0002-3813-7155")))
 Description: Provides an alternative interface to working with the exams package
   for producing Moodle questions of the cloze type
 License: MIT + file LICENSE
