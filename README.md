@@ -33,7 +33,7 @@ the x, y, color, and size are mapped randomly to one of the variables in
 the `mtcars` data.
 
     ---
-    output: teachr::teachr_cloze
+    output: moodlequiz::teachr_cloze
     title: Drawing a scatterplot
     times: 5
     topic: datavis

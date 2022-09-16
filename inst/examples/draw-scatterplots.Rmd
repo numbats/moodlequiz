@@ -1,5 +1,5 @@
 ---
-output: teachr::teachr_cloze
+output: moodlequiz::teachr_cloze
 title: Drawing a scatterplot
 times: 5
 topic: datavis
