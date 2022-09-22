@@ -11,5 +11,5 @@ cloze(x)
 }
 \description{
 Use this function to declare a cloze question in an R Markdown document
-with the \code{teachr::teachr_cloze} output format.
+with the \code{moodlequiz::moodlequiz_cloze} output format.
 }

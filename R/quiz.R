@@ -9,14 +9,14 @@
 #' @import rmarkdown
 #'
 #' @export
-teachr_cloze <- function(self_contained = TRUE,
-                         extra_dependencies = NULL,
-                         theme = NULL,
-                         includes = NULL,
-                         lib_dir = NULL,
-                         md_extensions = NULL,
-                         pandoc_args = NULL,
-                         ...) {
+moodlequiz_cloze <- function(self_contained = TRUE,
+                             extra_dependencies = NULL,
+                             theme = NULL,
+                             includes = NULL,
+                             lib_dir = NULL,
+                             md_extensions = NULL,
+                             pandoc_args = NULL,
+                             ...) {
   pre_knit <- function(input, ...) {
     # Parse yaml
     front_matter <- rmarkdown::yaml_front_matter(input)
@@ -28,9 +28,9 @@ teachr_cloze <- function(self_contained = TRUE,
     cloze_rmd <- stringr::str_replace_all(
       readLines(input),
       cloze_pattern,
-      replacement = "`r teachr::cloze(\\2)`"
+      replacement = "`r moodlequiz::cloze(\\2)`"
     )
-    cloze_sol <- stringr::str_match_all(readLines(input),cloze_pattern)
+    cloze_sol <- stringr::str_match_all(readLines(input), cloze_pattern)
 
     cloze_table$reset()
     knitr::knit(output = tempfile(), text = cloze_rmd, envir = new.env())
@@ -39,27 +39,27 @@ teachr_cloze <- function(self_contained = TRUE,
     if(length(delimiters) == 2) delimiters <- c(delimiters, length(cloze_rmd))
 
     exams_rmd <- c(
-      "`r teachr:::cloze_table$reset()`",
+      "`r moodlequiz:::cloze_table$reset()`",
       "Question",
       "========",
       cloze_rmd[(delimiters[2]+1):(delimiters[3]-1)],
       "Answerlist",
       "----------",
-      "`r teachr:::cloze_questionlist()`",
+      "`r moodlequiz:::cloze_questionlist()`",
       "",
       "Solution",
       "========",
       cloze_rmd[-(delimiters[1]:delimiters[3])],
       "Answerlist",
       "----------",
-      "`r teachr:::cloze_answerlist()`",
+      "`r moodlequiz:::cloze_answerlist()`",
       # paste("*", paste0("`r ", do.call(rbind, cloze_sol)[,3], "`")),
       "",
       "Meta-information",
       "========",
       paste("extitle:", front_matter$title),
       "extype: cloze",
-      "exsolution: `r paste0(do.call(c, teachr:::cloze_table$list()), collapse = '|')`",
+      "exsolution: `r paste0(do.call(c, moodlequiz:::cloze_table$list()), collapse = '|')`",
       paste("exclozetype:", paste0(vapply(cloze_table$list(), function(x) cloze_type(x), character(1L)), collapse = "|")),
       paste("exname:", xfun::sans_ext(basename(input))),
       paste("extol:", front_matter$tolerance%||%0.05)
@@ -71,10 +71,10 @@ teachr_cloze <- function(self_contained = TRUE,
 
     file_nm <- xfun::sans_ext(basename(input))
     exams::exams2moodle(
-      input_fn, name = front_matter$topic%||%file_nm, stitle = file_nm, n = front_matter$times,
+      input_fn, name = front_matter$topic %||% file_nm, stitle = file_nm, n = front_matter$times,
     )
     file.rename(
-      xfun::with_ext(front_matter$topic%||%file_nm, ".xml"),
+      xfun::with_ext(front_matter$topic %||% file_nm, ".xml"),
       xfun::with_ext(input, ".xml")
     )
 
@@ -127,7 +127,7 @@ cloze_table <- cloze_table()
 #' Cloze question
 #'
 #' Use this function to declare a cloze question in an R Markdown document
-#' with the `teachr::teachr_cloze` output format.
+#' with the `moodlequiz::moodlequiz_cloze` output format.
 #'
 #' @param x The question's solution.
 #'
@@ -137,6 +137,7 @@ cloze <- function(x) {
   paste0("##ANSWER", cloze_table$length(), "##")
 }
 
+#' @export
 cloze_type <- function(x, ...) {
   UseMethod("cloze_type")
 }
