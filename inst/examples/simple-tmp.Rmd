@@ -1,0 +1,38 @@
+`r moodlequiz:::cloze_table$reset()`
+Question
+========
+
+```{r, include = FALSE}
+library(moodlequiz)
+```
+
+
+What is 2 + 2? `r moodlequiz::cloze(4)`
+
+What is 2 + 3? `r moodlequiz::cloze(schoice(c(2, 4, 5), 5))`
+
+
+What is the command for calculating average? `r moodlequiz::cloze("mean")`
+
+
+
+
+
+Answerlist
+----------
+`r moodlequiz:::cloze_questionlist()`
+
+Solution
+========
+Answerlist
+----------
+`r moodlequiz:::cloze_answerlist()`
+
+Meta-information
+========
+extitle: Super simple example
+extype: cloze
+exsolution: `r paste0(do.call(c, moodlequiz:::cloze_table$list()), collapse = '|')`
+exclozetype: num|schoice|string
+exname: simple
+extol: 0.05

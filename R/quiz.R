@@ -174,7 +174,7 @@ cloze_answer <- function(x, ...) {
 cloze_answer.numeric <- function(x, ...) x
 cloze_answer.character <- function(x, ...) x
 cloze_answer.moodle_schoice <- function(x, ...) {
-  pos <- str_locate_all(x, stringr::fixed("1"))[[1]][,1]
+  pos <- stringr::str_locate_all(x, stringr::fixed("1"))[[1]][,1]
   qs <- attr(x, "opts")
   qs[pos] <- paste0("**", attr(x, "opts")[pos], "**")
   qs
