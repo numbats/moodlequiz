@@ -1,5 +1,5 @@
 ---
-output: teachr::teachr_cloze
+output: moodlequiz::moodlequiz_cloze
 title: Layer choices
 times: 5
 topic: datavis
@@ -8,7 +8,7 @@ topic: datavis
 ```{r set-up, include = FALSE}
 library(tidyverse)
 library(rlang)
-library(teachr)
+library(moodlequiz)
 library(exams)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide",

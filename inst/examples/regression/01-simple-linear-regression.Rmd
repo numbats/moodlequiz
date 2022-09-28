@@ -1,5 +1,5 @@
 ---
-output: teachr::teachr_cloze
+output: moodlequiz::moodlequiz_cloze
 title: Fit a simple linear model
 times: 5
 topic: regression
@@ -10,7 +10,7 @@ tolerance: 0.0001
 library(tidyverse)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide")
-library(teachr)
+library(moodlequiz)
 library(exams)
 ```
 ```{r data}

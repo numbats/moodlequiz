@@ -1,5 +1,5 @@
 ---
-output: teachr::teachr_cloze
+output: moodlequiz::moodlequiz_cloze
 title: Transformation
 times: 5
 topic: regression
@@ -8,7 +8,7 @@ tolerance: 0.0001
 
 ```{r set-up, include = FALSE}
 library(tidyverse)
-library(teachr)
+library(moodlequiz)
 library(exams)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide")

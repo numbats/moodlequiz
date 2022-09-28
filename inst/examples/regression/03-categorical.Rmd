@@ -1,5 +1,5 @@
 ---
-output: teachr::teachr_cloze
+output: moodlequiz::moodlequiz_cloze
 title: Modelling with categorical variables
 times: 5
 topic: regression
@@ -9,9 +9,11 @@ tolerance: 1
 
 ```{r set-up, include = FALSE}
 library(tidyverse)
-library(teachr)
+library(moodlequiz)
 library(exams)
+library(simulate) # remotes::install_github("emitanaka/simulate")
 library(edibble) # experimental -- code below may break
+# remotes::install_github("emitanaka/edibble", ref = "dev")
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide")
 
