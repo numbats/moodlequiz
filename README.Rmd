@@ -30,6 +30,7 @@ You can install the development version of moodlequiz like so:
 remotes::install_github("emitanaka/moodlequiz")
 ```
 
+
 ## Example
 
 Below is a Moodle quiz where the students have to select the right variables from the data to map onto the plot aesthetics in `ggplot2`. 

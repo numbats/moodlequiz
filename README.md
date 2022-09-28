@@ -50,7 +50,7 @@ the `mtcars` data.
                           fig.path = "",
                           fig.cap = "",
                           fig.align = "center")
-    library(teachr)
+    library(moodlequiz)
     library(exams)
     ```
     ```{r data}
