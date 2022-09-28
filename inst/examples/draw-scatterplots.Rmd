@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE,
                       fig.path = "",
                       fig.cap = "",
                       fig.align = "center")
-library(teachr)
+library(moodlequiz)
 library(exams)
 ```
 ```{r data}
