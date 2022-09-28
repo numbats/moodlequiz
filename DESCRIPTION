@@ -22,6 +22,7 @@ RoxygenNote: 7.2.1
 Imports: 
     exams,
     knitr,
+    rlang,
     rmarkdown,
     stringr,
     xfun

@@ -83,7 +83,7 @@ moodlequiz_cloze <- function(self_contained = TRUE,
     xfun::write_utf8(
       stringr::str_replace(
         paste0(xfun::read_utf8(out_file), collapse = "\n"),
-        fixed("<ul>\n<li><ul>\n<li></li>\n</ul></li>\n</ul> {"),
+        stringr::fixed("<ul>\n<li><ul>\n<li></li>\n</ul></li>\n</ul> {"),
         "{"
       ),
       out_file
@@ -174,7 +174,7 @@ cloze_answer <- function(x, ...) {
 cloze_answer.numeric <- function(x, ...) x
 cloze_answer.character <- function(x, ...) x
 cloze_answer.moodle_schoice <- function(x, ...) {
-  pos <- str_locate_all(x, fixed("1"))[[1]][,1]
+  pos <- str_locate_all(x, stringr::fixed("1"))[[1]][,1]
   qs <- attr(x, "opts")
   qs[pos] <- paste0("**", attr(x, "opts")[pos], "**")
   qs
@@ -192,7 +192,7 @@ cloze_answer.moodle_schoice <- function(x, ...) {
 #' @export
 schoice <- function(opts, sol) {
   if(is.character(sol)) sol <- match(sol, opts)
-  sol_code <- rep_along(opts, "0")
+  sol_code <- rlang::rep_along(opts, "0")
   sol_code[sol] <- "1"
   sol_code <- paste0(sol_code, collapse = "")
   return(structure(sol_code, opts = opts, class = "moodle_schoice"))
@@ -213,7 +213,7 @@ schoice <- function(opts, sol) {
 #' @export
 mchoice <- function(opts, sol) {
   if(is.character(sol)) sol <- match(sol, opts)
-  sol_code <- rep_along(opts, "0")
+  sol_code <- rlang::rep_along(opts, "0")
   sol_code[sol] <- "1"
   sol_code <- paste0(sol_code, collapse = "")
   return(structure(sol_code, opts = opts, class = c("moodle_mchoice", "moodle_schoice")))
