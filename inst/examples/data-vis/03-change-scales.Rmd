@@ -1,0 +1,54 @@
+---
+output: teachr::teachr_cloze
+title: Changing scales
+times: 5
+topic: datavis
+---
+
+
+```{r set-up, include = FALSE}
+library(tidyverse)
+library(rlang)
+library(teachr)
+library(exams)
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide",
+                      fig.height = 10, 
+                      fig.width = 10,
+                      fig.path = "",
+                      fig.cap = "",
+                      fig.align = "center")
+```
+```{r data}
+cols <- colnames(diamonds)
+x <- sample(c("carat", "depth", "x", "y", "z"), 1)
+wrap <- sample(c("cut", "color", "clarity"), 1)
+```
+
+
+Using the `diamonds` dataset, complete the code below to generate the target plot below. The plot is using a log with base 10 transformation on the y-axis, a square-root transformation on the x-axis and the color is using the default viridis palette. **Only exact match with the answer will be marked correct, so make sure you entered your answer as you intended!**
+
+```{r, echo = TRUE, results = "show"}
+data(diamonds, package = "ggplot2")
+str(diamonds)
+```
+
+```r
+ggplot(diamonds, aes(x = `cloze x`, y = price)) + 
+  geom_`cloze "hex"`() +
+  facet_wrap(~`cloze wrap`) +
+  scale_`cloze "y_log10"`(name = "Price ($)", labels = scales::comma) +
+  scale_`cloze "x_sqrt"`() +
+  scale_`cloze "fill"`_viridis_c()
+```
+
+
+```{r, results = "show"}
+ggplot(diamonds, aes(x = !!sym(x), y = price)) + 
+  geom_hex() +
+  facet_wrap(sym(wrap)) +
+  scale_y_log10(name = "Price ($)", labels = scales::comma) +
+  scale_x_sqrt() +
+  scale_fill_viridis_c()
+```
+

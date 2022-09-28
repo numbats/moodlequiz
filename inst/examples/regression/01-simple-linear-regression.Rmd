@@ -1,0 +1,61 @@
+---
+output: teachr::teachr_cloze
+title: Fit a simple linear model
+times: 5
+topic: regression
+tolerance: 0.0001
+---
+
+```{r set-up, include = FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide")
+library(teachr)
+library(exams)
+```
+```{r data}
+fn <- "data-01.csv"
+a <- 0
+b <- sample(c(-1, 1), 1) * sample(c(0, 0.6, 0.9), 1)
+dat <- data.frame(x = runif(200, -1, 1)) %>% 
+  mutate(y = a + b * x + rnorm(n(), 0, 0.25)) %>% 
+  mutate(across(everything(), ~round(.x, 2)))
+write.csv(dat, fn, row.names = FALSE, quote = FALSE)
+
+fit <- lm(y ~ x, data = dat)
+bhats <- round(coef(fit), 4)
+bpvl <- summary(fit)$coefficients[2, 4]
+bsol <- c(bpvl >= 0.05, (bpvl < 0.05) & (bhats[2] > 0), (bpvl < 0.05) & (bhats[2] < 0))
+
+opts <- c("`x` and `y` are not significantly correlated",
+          "`y` increases significantly with `x`",
+          "`y` decreases significantly with `x`")
+```   
+
+
+Using the data provided in [`r fn`](`r fn`) estimate a linear regression of
+`y` on `x` and answer the following questions. _**For numerical answers, write your answer to 4 decimal places.**_
+
+a) Which of the statement is true? `cloze schoice(opts, opts[bsol])`
+b) What is the least squares estimate of the **intercept**? `cloze bhats[1]`
+c) What is the least squares estimate of the **slope**? `cloze bhats[2]`
+d) What is the **correlation** of `x` and `y`? `cloze round(cor(dat$x, dat$y), 4)`
+
+---
+
+To replicate the analysis in R:
+
+```r
+dat <- read.csv("`r fn`")
+fit <- lm(y ~ x, data = dat)
+summary(fit)
+```
+
+It is also always good practice to visualise the data:
+
+```r
+library(ggplot2)
+ggplot(dat, aes(x, y)) +
+ geom_point() + 
+ geom_smooth(method = "lm", se = FALSE)
+```

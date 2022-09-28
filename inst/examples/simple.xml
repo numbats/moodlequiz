@@ -16,6 +16,9 @@
 <questiontext format="html">
 <text><![CDATA[
 <p>
+<pre><code>sample(c(&quot;What is the function for average? `r moodlequiz::cloze(&#39;mean&#39;)`&quot;,
+         &quot;What is the function for standard deviation? `r moodlequiz::cloze(&#39;sd&#39;)`&quot;), 1)</code></pre>
+<p>[1] “What is the function for standard deviation? <code>r moodlequiz::cloze('sd')</code>”</p>
 <p>What is 2 + 2?  {1:NUMERICAL:=4:0.05}</p>
 <p>What is 2 + 3? {1:MULTICHOICE:2~4~5~~~=}</p>
 <p>What is the command for calculating average?  {1:SHORTANSWER:%100%mean}</p>

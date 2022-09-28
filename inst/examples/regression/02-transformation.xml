@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+
+<question type="category">
+<category>
+<text>$course$/02-transformation/02-transformation</text>
+</category>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R1 Q1 : Transformation </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<p>Date on the concentration of polychlorinated biphenyl (PCB) residues in a series of lake trout from Cayuga Lake, NY, were reported in Bache et al (1972). The ages of the fish were accurately known, because the fish were annually stocked as yearlings and distinctly marked as to year class. Each whole fish was mechanically chopped, ground, and thoroughly mixed, and 5-gram samples taken. The samples were treated and PCB residues in parts per million (ppm) were estimated using column chromatography.</p>
+<p>Bates and Watts (1988) use a linear model</p>
+<p><span class="math display">\[\log_{10}(\texttt{PCB}) = \beta_0 + \beta_1 \texttt{Age}^{1/3}.\]</span></p>
+<p>Scientists asserts that this model is still appropriate to measure PCB residues of lake trouts in NY. A scientist repeated the experiment with the result provided in <a href="@@PLUGINFILE@@/data-02.csv">data-02.csv</a>. Fit the above model proposed by Bates and Watts. <em><strong>For numerical answers, write your answer to 4 decimal places.</strong></em></p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the estimate of <span class="math inline">\(\beta_0\)</span>?  {1:NUMERICAL:=-0.8982:1e-04}</li>
+<li>What is the estimate of <span class="math inline">\(\beta_1\)</span>?  {1:NUMERICAL:=0.9261:1e-04}</li>
+<li>A lake trout aged 7 years was sampled from Cayuga Lake, NY. What is the predicted value of the PCB residue for this fish under the proposed model?  {1:NUMERICAL:=7.471:1e-04}</li>
+<li>Do you think the proposed model is appropriate for your collected data? {1:MULTICHOICE:%100%The proposed model looks like a reasonable fit.~%0%No, the proposed model is not a good fit at all.}</li>
+</ol>
+</p>]]></text>
+<file name="data-02.csv" encoding="base64">QWdlLFBDQgoxLDEuMjgwMjIwMzYyNjU2ODkKMSwxLjAzMzYzNjYyMjg0Njc1CjEsMC44OTE4NTc1NDE4NzgwMDcKMSwxLjEzMTIxMTQwOTA1NTM3CjIsMi43NTEyNDc5NjgxMDE1CjIsMS4yOTM2OTk3MDMzMjQwNAoyLDEuOTUwNzg4NzUwNzA0MDYKMywxLjk3MzE1ODAwOTYzMTQ4CjMsMi42MjIxMzQ5MTgyMDI3MwozLDMuNDc3Mjc1MDc0NTI0NDkKNCwzLjUxMDAzMzQ0NzQxMjk1CjQsMy43OTYxNDY3MjQ2MDIxNAo0LDQuMzk2MzM0MDg1OTE0MTEKNSw1LjY4Nzk2Mjk5MTA4MTU1CjYsNS4xMTM0OTk3NDg0NTYzNQo2LDQuNzgwMDI5ODMyODgwNTEKNiw2Ljg0NDE2MTE2MzM5Njk0CjcsNi45Njg5NzQ5MDAxMjEzNwo3LDYuMjM1MDkxMzI3MDYyMjcKNyw4LjE1MDQyOTg4MjUwMjY2CjgsMTEuMDUzNjMwMjM1ODk1NAo4LDYuNjAzMjI4MzQ2MjQzNDMKOCw4LjQ4MTc1NzU2Mzg0MTUzCjksMTQuMTUxMTk2NzI0ODI5NgoxMSwxNC42NzAwNTE2ODMxNTc2CjEyLDEyLjYyNzgwNjYxMzkxMDUKMTIsMjAuOTEzNDYzNTc2MDM5CjEyLDE4LjgzMjUyNTc0NjA2OTkK</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>To replicate the analysis in R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-02.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(PCB) <span class="sc">~</span> <span class="fu">I</span>(Age<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">data =</span> dat)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">Age =</span> <span class="dv">7</span>))</span></code></pre></div>
+<p>You can check the fit in a variety of ways. One way to do this is to visualise the fitted model to the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Age, PCB)) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">I</span>(x<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<ol type = "a">
+<li> -0.8982 </li>
+<li> 0.9261 </li>
+<li> 7.471 </li>
+<li> <strong>The proposed model looks like a reasonable fit.</strong> / No, the proposed model is not a good fit at all. </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>4</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R2 Q1 : Transformation </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<p>Date on the concentration of polychlorinated biphenyl (PCB) residues in a series of lake trout from Cayuga Lake, NY, were reported in Bache et al (1972). The ages of the fish were accurately known, because the fish were annually stocked as yearlings and distinctly marked as to year class. Each whole fish was mechanically chopped, ground, and thoroughly mixed, and 5-gram samples taken. The samples were treated and PCB residues in parts per million (ppm) were estimated using column chromatography.</p>
+<p>Bates and Watts (1988) use a linear model</p>
+<p><span class="math display">\[\log_{10}(\texttt{PCB}) = \beta_0 + \beta_1 \texttt{Age}^{1/3}.\]</span></p>
+<p>Scientists asserts that this model is still appropriate to measure PCB residues of lake trouts in NY. A scientist repeated the experiment with the result provided in <a href="@@PLUGINFILE@@/data-02.csv">data-02.csv</a>. Fit the above model proposed by Bates and Watts. <em><strong>For numerical answers, write your answer to 4 decimal places.</strong></em></p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the estimate of <span class="math inline">\(\beta_0\)</span>?  {1:NUMERICAL:=0.3588:1e-04}</li>
+<li>What is the estimate of <span class="math inline">\(\beta_1\)</span>?  {1:NUMERICAL:=-0.102:1e-04}</li>
+<li>A lake trout aged 7 years was sampled from Cayuga Lake, NY. What is the predicted value of the PCB residue for this fish under the proposed model?  {1:NUMERICAL:=1.4577:1e-04}</li>
+<li>Do you think the proposed model is appropriate for your collected data? {1:MULTICHOICE:%0%The proposed model looks like a reasonable fit.~%100%No, the proposed model is not a good fit at all.}</li>
+</ol>
+</p>]]></text>
+<file name="data-02.csv" encoding="base64">QWdlLFBDQgoxLDIuMDk4MDc4NjIzNTYyMTMKMSwxLjQ5NzI0MjM5NjQwODEKMSwwLjg0NTg3OTMzMDcyMzQ4OAoxLDIuMDg5NjI4MzE2NjI5NzMKMiwyLjA2NDg0OTI3MjkxODc1CjIsMS45OTI5ODY3ODE3OTg3MQoyLDIuMjc0OTkxNzM3ODY5NQozLDEuMjk4NjA0ODA2OTc0MDIKMywxLjUxNzE0NTk2MzAwOTQxCjMsMi4xMDQ2MzA1ODE4OTU2NQo0LDEuOTQxNjg2OTYyNDA0NzEKNCwxLjIxNTUzMzA2NzMyODg3CjQsMS4xOTU0MDc1Mjk5NDk5OAo1LDEuNDg2MDQ0NDYyOTg1MDgKNiwwLjkzMjA1ODE5MzM3NDc1Mwo2LDEuOTg3NzczODcxNzIzNTgKNiwxLjY5NDI0OTY1Mzg2NzU5CjcsMS45ODEwNjIwMjEwNTI4Mgo3LDIuMTU4MzMwNDY0OTI2ODgKNywxLjAyODg3MDE0MjkxODEyCjgsMS43NzI5NzQ3ODgzNzQ1Mgo4LDIuNzg0ODcxMzU2MTY3NDkKOCwxLjQ4Mjk5NTg4NzMzNTAzCjksMi4zMTQ2MDg3OTgxNjAyMQoxMSwwLjg5NzMyOTUyNDEzMDMyOQoxMiwxLjM3Mjg2MDEyNjEzOTM5CjEyLDEuMTc2NjUwODQ2NTE3NzgKMTIsMC41OTExMTY2MDQ4NzY1NzEK</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>To replicate the analysis in R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-02.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(PCB) <span class="sc">~</span> <span class="fu">I</span>(Age<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">data =</span> dat)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">Age =</span> <span class="dv">7</span>))</span></code></pre></div>
+<p>You can check the fit in a variety of ways. One way to do this is to visualise the fitted model to the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Age, PCB)) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">I</span>(x<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<ol type = "a">
+<li> 0.3588 </li>
+<li> -0.102 </li>
+<li> 1.4577 </li>
+<li> The proposed model looks like a reasonable fit. / <strong>No, the proposed model is not a good fit at all.</strong> </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>4</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R3 Q1 : Transformation </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<p>Date on the concentration of polychlorinated biphenyl (PCB) residues in a series of lake trout from Cayuga Lake, NY, were reported in Bache et al (1972). The ages of the fish were accurately known, because the fish were annually stocked as yearlings and distinctly marked as to year class. Each whole fish was mechanically chopped, ground, and thoroughly mixed, and 5-gram samples taken. The samples were treated and PCB residues in parts per million (ppm) were estimated using column chromatography.</p>
+<p>Bates and Watts (1988) use a linear model</p>
+<p><span class="math display">\[\log_{10}(\texttt{PCB}) = \beta_0 + \beta_1 \texttt{Age}^{1/3}.\]</span></p>
+<p>Scientists asserts that this model is still appropriate to measure PCB residues of lake trouts in NY. A scientist repeated the experiment with the result provided in <a href="@@PLUGINFILE@@/data-02.csv">data-02.csv</a>. Fit the above model proposed by Bates and Watts. <em><strong>For numerical answers, write your answer to 4 decimal places.</strong></em></p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the estimate of <span class="math inline">\(\beta_0\)</span>?  {1:NUMERICAL:=-1.0968:1e-04}</li>
+<li>What is the estimate of <span class="math inline">\(\beta_1\)</span>?  {1:NUMERICAL:=1.0361:1e-04}</li>
+<li>A lake trout aged 7 years was sampled from Cayuga Lake, NY. What is the predicted value of the PCB residue for this fish under the proposed model?  {1:NUMERICAL:=7.6794:1e-04}</li>
+<li>Do you think the proposed model is appropriate for your collected data? {1:MULTICHOICE:%100%The proposed model looks like a reasonable fit.~%0%No, the proposed model is not a good fit at all.}</li>
+</ol>
+</p>]]></text>
+<file name="data-02.csv" encoding="base64">QWdlLFBDQgoxLDAuNzA4ODkxNjYwOTczNzkzCjEsMC44OTUzMTYyNTQxOTM3NTMKMSwwLjY5NTAyNTg4MTU5OTY1NgoxLDEuMDM0NDE5MjU3MTQwNwoyLDIuMTEyMTk4OTYxNDE2ODQKMiwxLjk0MDY2MDUxNjQ0NDEzCjIsMi4zNzE5NDg0OTEzNTEyNgozLDIuMzQ4NDAwOTc3MTk2NjYKMywyLjE1MzYzMTE2NTg0NTI0CjMsMS44NzU2ODYzNjk4MjQwNwo0LDQuMTAwODkxMjcwNTQ1NzcKNCwzLjAyNDgzOTYyNDc1NTM4CjQsMy4wNDU4MzY0NjA4NjM2OAo1LDMuODg0NDU3NjYwMzQ2NTYKNiw1LjgxNTMzNDk2ODM0NDYxCjYsMy42Mzk3MzQzNzg3NDczMwo2LDYuNzgzNTcyNTI1MDg1NjkKNywxMi4yNjYwNDA1NzU5NzczCjcsOC4yMzQ2ODU4MDIyMDkzMgo3LDguMzkyNDg2OTIxODIyNjkKOCwxMi45OTcxMzQyMjQ2NjU0CjgsOC4xMTE5Njc4MDIyMzUxNwo4LDkuNjk1MDc5NTQzNjU3OTYKOSwxMS40ODU3MDg3NzY0MjE4CjExLDE3LjI1MTQ2NzMxOTU0OTgKMTIsMTYuMjI1MDQ2MjEwMTI5NQoxMiwxOC4yNjA4NDc3OTM4OTU3CjEyLDE4LjgxNzU0MjI3MjU4NjkK</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>To replicate the analysis in R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-02.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(PCB) <span class="sc">~</span> <span class="fu">I</span>(Age<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">data =</span> dat)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">Age =</span> <span class="dv">7</span>))</span></code></pre></div>
+<p>You can check the fit in a variety of ways. One way to do this is to visualise the fitted model to the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Age, PCB)) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">I</span>(x<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<ol type = "a">
+<li> -1.0968 </li>
+<li> 1.0361 </li>
+<li> 7.6794 </li>
+<li> <strong>The proposed model looks like a reasonable fit.</strong> / No, the proposed model is not a good fit at all. </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>4</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R4 Q1 : Transformation </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<p>Date on the concentration of polychlorinated biphenyl (PCB) residues in a series of lake trout from Cayuga Lake, NY, were reported in Bache et al (1972). The ages of the fish were accurately known, because the fish were annually stocked as yearlings and distinctly marked as to year class. Each whole fish was mechanically chopped, ground, and thoroughly mixed, and 5-gram samples taken. The samples were treated and PCB residues in parts per million (ppm) were estimated using column chromatography.</p>
+<p>Bates and Watts (1988) use a linear model</p>
+<p><span class="math display">\[\log_{10}(\texttt{PCB}) = \beta_0 + \beta_1 \texttt{Age}^{1/3}.\]</span></p>
+<p>Scientists asserts that this model is still appropriate to measure PCB residues of lake trouts in NY. A scientist repeated the experiment with the result provided in <a href="@@PLUGINFILE@@/data-02.csv">data-02.csv</a>. Fit the above model proposed by Bates and Watts. <em><strong>For numerical answers, write your answer to 4 decimal places.</strong></em></p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the estimate of <span class="math inline">\(\beta_0\)</span>?  {1:NUMERICAL:=-122.9458:1e-04}</li>
+<li>What is the estimate of <span class="math inline">\(\beta_1\)</span>?  {1:NUMERICAL:=98.1927:1e-04}</li>
+<li>A lake trout aged 7 years was sampled from Cayuga Lake, NY. What is the predicted value of the PCB residue for this fish under the proposed model?  {1:NUMERICAL:=7.76541098194969e+64:1e-04}</li>
+<li>Do you think the proposed model is appropriate for your collected data? {1:MULTICHOICE:%0%The proposed model looks like a reasonable fit.~%100%No, the proposed model is not a good fit at all.}</li>
+</ol>
+</p>]]></text>
+<file name="data-02.csv" encoding="base64">QWdlLFBDQgoxLDAuMDc3NDQyNzc3NTA3OTcxOAoxLDAuOTE4NzE3MTEyODQxMjY4CjEsMC4yOTIzNzExMjMyNzMxNjUKMSwxLjk0OTUxODA3MjQ0NjM1CjIsMTE5My4wNDQ3Nzc0Mzc2NwoyLDQ3Ny44MjA5OTExNjA3ODgKMiwzMzAyLjgyNDE1OTM5MDUKMywyMjAxMDc4MTcuNzEyODg0CjMsMzg0MDU3NjUuOTM2MTQ5NAozLDIzMjk2ODA2My4wMDc4NTEKNCwxNTI5MjI3MTE4NzcxNTYKNCwzMzQxNTQ4MjY4NDgyMjYyCjQsMjgwODIyODQwOTI3MjcyCjUsMS4xMDIyMjcwOTQ3MzQyMmUrMjQKNiw1LjA3ODQ4MjA4NjM2OTU1ZSszNQo2LDMuMjkzNDY3Njg2MzgxMjRlKzM0CjYsNy45Njg2OTI5MDIzNjcyZSszNAo3LDUuNjY0NTcyNTU5MTIwODhlKzQ3CjcsMi4yOTcwMzQxNTUwMzkxN2UrNDgKNywxLjIyNDMyMzY5ODM5NDllKzQ4CjgsMS4xNzY4NTU2MzU4NDI0ZSs2Mwo4LDIuMDIzNDI0MzE2NDI4OTVlKzYyCjgsMS40MzQ0MDcxNjg0MzExNWUrNjMKOSwzLjE3NDQzMjY0NDQ5MjE3ZSs4MAoxMSwxLjkxNzcxNjYwODA5MzE5ZSsxMjAKMTIsMi45MjY1MjY2ODY5MDMzNGUrMTQyCjEyLDQuNjkzMDc5MzgyMTk5MmUrMTQyCjEyLDQuMzk5ODcyNzUwMjUwNjdlKzE0Mgo=</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>To replicate the analysis in R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-02.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(PCB) <span class="sc">~</span> <span class="fu">I</span>(Age<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">data =</span> dat)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">Age =</span> <span class="dv">7</span>))</span></code></pre></div>
+<p>You can check the fit in a variety of ways. One way to do this is to visualise the fitted model to the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Age, PCB)) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">I</span>(x<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<ol type = "a">
+<li> -122.9458 </li>
+<li> 98.1927 </li>
+<li> 7.76541098194969e+64 </li>
+<li> The proposed model looks like a reasonable fit. / <strong>No, the proposed model is not a good fit at all.</strong> </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>4</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R5 Q1 : Transformation </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<p>Date on the concentration of polychlorinated biphenyl (PCB) residues in a series of lake trout from Cayuga Lake, NY, were reported in Bache et al (1972). The ages of the fish were accurately known, because the fish were annually stocked as yearlings and distinctly marked as to year class. Each whole fish was mechanically chopped, ground, and thoroughly mixed, and 5-gram samples taken. The samples were treated and PCB residues in parts per million (ppm) were estimated using column chromatography.</p>
+<p>Bates and Watts (1988) use a linear model</p>
+<p><span class="math display">\[\log_{10}(\texttt{PCB}) = \beta_0 + \beta_1 \texttt{Age}^{1/3}.\]</span></p>
+<p>Scientists asserts that this model is still appropriate to measure PCB residues of lake trouts in NY. A scientist repeated the experiment with the result provided in <a href="@@PLUGINFILE@@/data-02.csv">data-02.csv</a>. Fit the above model proposed by Bates and Watts. <em><strong>For numerical answers, write your answer to 4 decimal places.</strong></em></p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the estimate of <span class="math inline">\(\beta_0\)</span>?  {1:NUMERICAL:=0.5667:1e-04}</li>
+<li>What is the estimate of <span class="math inline">\(\beta_1\)</span>?  {1:NUMERICAL:=-0.2505:1e-04}</li>
+<li>A lake trout aged 7 years was sampled from Cayuga Lake, NY. What is the predicted value of the PCB residue for this fish under the proposed model?  {1:NUMERICAL:=1.2234:1e-04}</li>
+<li>Do you think the proposed model is appropriate for your collected data? {1:MULTICHOICE:%0%The proposed model looks like a reasonable fit.~%100%No, the proposed model is not a good fit at all.}</li>
+</ol>
+</p>]]></text>
+<file name="data-02.csv" encoding="base64">QWdlLFBDQgoxLDIuMDU1NjEyMTI3NjA0MTIKMSwyLjAzMzI4NjM0MDI3MDAzCjEsMi40NjgwOTIyNDQ4NjIwNAoxLDEuOTk5MzE5NTExNTE5NjkKMiwxLjIzMDk3MjE5MjA2ODQ5CjIsMS45NTczNTAzNjcwMjI5NgoyLDMuMTAzNzkyNDE4NjgyNzIKMywxLjY0MDM4NjUwNjg2NjU5CjMsMS4xOTY2MjIzMjQzMzYwMwozLDEuODU2NDYzMjU3MzIyMQo0LDEuODE3OTAxODA4NTIxOTMKNCwxLjQ4NTcyMjkzNTcyNTM5CjQsMS44MDMwMjc1MDkzNjc2Mgo1LDEuMjIxNDI4MDQ1MTIzODYKNiwwLjk3NjQ4MTc2NjgxNjk3Mwo2LDEuNzI0NTA2ODk4MzMxMDUKNiwwLjM4MDg3MjA0OTYyNTIzOAo3LDEuNTc5OTY3Njg1MTEzNTQKNywxLjUwMDgxMjYxMzQ3MjIKNywxLjQwNzc4NjgyOTk0MjA5CjgsMS4zOTY5MTUwMjU2MTE0OAo4LDAuNTY0Mjg1NTA0OTQwMjM1CjgsMS4xNTE0NzgxOTA0NzM4OAo5LDEuMjc4NDYxMjkxMjAzMTYKMTEsMC4zNDg0NDY3NTMxODU0MzkKMTIsMi4yNDM1NTM4OTAxNjcxOQoxMiwxLjAzOTg4MDQ3MTYzODE0CjEyLDEuOTA4MDY4MjE5NDk2MDgK</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>To replicate the analysis in R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-02.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(PCB) <span class="sc">~</span> <span class="fu">I</span>(Age<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">data =</span> dat)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">Age =</span> <span class="dv">7</span>))</span></code></pre></div>
+<p>You can check the fit in a variety of ways. One way to do this is to visualise the fitted model to the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Age, PCB)) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">I</span>(x<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<ol type = "a">
+<li> 0.5667 </li>
+<li> -0.2505 </li>
+<li> 1.2234 </li>
+<li> The proposed model looks like a reasonable fit. / <strong>No, the proposed model is not a good fit at all.</strong> </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>4</defaultgrade>
+</question>
+
+</quiz>

@@ -1,0 +1,119 @@
+---
+output: teachr::teachr_cloze
+title: Multiple linear regression
+times: 5
+topic: regression
+tolerance: 0.0001
+#keep_rmd: true
+---
+
+```{r set-up, include = FALSE}
+library(tidyverse)
+library(teachr)
+library(exams)
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide")
+
+## Choose number based on below
+original <- read_tsv("http://www.statsci.org/data/general/hills.txt")
+fit0 <- lm(log(Time) ~ log(Climb) * log(Distance), data = original)
+fit1 <- lm(log(Climb) ~ log(Distance), data = original)
+
+betas0 <- coef(fit0)
+betas1 <- coef(fit1)
+df <- tibble(race_id = 1:200) %>% 
+  mutate(climb = rexp(n(), 1/200),
+         climb = climb / max(climb) * 7200 + 300,
+         distance = exp(betas1[1] + betas1[2] * log(climb) + rnorm(n(), 0, sigma(fit1))),
+         distance = distance / max(distance) * 26 + 2,
+         time = exp(betas0[1] + betas0[2] * log(climb) + betas0[3] * log(distance) + 
+                      betas0[4] * log(climb) * log(distance) + rnorm(n(), 0, sigma(fit0))))
+# pred <- map_dfr(fivenum(original$Climb), ~{
+#     res <- tibble(Distance = seq(min(original$Distance), max(original$Distance), length.out = 1000)) %>% 
+#       mutate(Climb = .x)
+#     res$Time <- exp(predict(fit0, res))
+#     res
+#   })
+#   
+# 
+# ggplot(original, aes(Distance, Time)) +
+#   geom_point(aes(fill = Climb), shape = 22) + 
+#   scale_x_log10() +
+#   scale_y_log10() +
+#   geom_line(data = pred, aes(color = factor(Climb)))
+
+fn <- "data-04.csv"
+
+fit1 <- lm(log10(time) ~ log10(climb) * log10(distance), data = df)
+fit2 <- lm(log10(time) ~ log10(distance), data = df)
+beta1 <- round(coef(fit1), 4)
+beta2 <- round(coef(fit2), 4)
+
+write.csv(df, fn, row.names = FALSE, quote = FALSE)
+```   
+
+
+The data provided in [`r fn`](`r fn`) contains information about the record-winning times of 200 races. The data contains the following variables:
+
+* `distance`: the distance covered in miles,
+* `climb`: elevation climbed during the race in feet, and
+* `time`: the record time for race in minutes.
+
+The following two models are proposed:
+
+$$\begin{align}M_1: &\log_{10}(\texttt{time}_i) = \beta_0 + \beta_1 \log_{10}(\texttt{climb}_i) + \beta_2 \log_{10}(\texttt{distance}_i) + \beta_3 \log_{10}(\texttt{climb}_i) \times \log_{10}(\texttt{distance}_i) + e_{1i},\\ M_2: & \log_{10}(\texttt{time}_i) = \gamma_0 + \gamma_1\log_{10}(\texttt{distance}_i) + e_{2i},\end{align}$$
+$$$$
+where $i = 1, ..., 200$ and assume $e_{1i}\sim N(0, \sigma^2), e_{2i} \sim N(0, \sigma^2)$. Fit the model using least squares method. 
+
+
+a) For $M_1$, what is the least squares estimate of the following parameters to 4 decimal places? 
+  * $\hat{\beta}_0 =$ `cloze beta1[1]`
+  * $\hat{\beta}_1 =$ `cloze beta1[2]`
+  * $\hat{\beta}_2 =$ `cloze beta1[3]`
+  * $\hat{\beta}_3 =$ `cloze beta1[4]`
+b) What is the sum of the squares of the residuals for $M_1$ and $M_2$, respectively, to 4 decimal places?  
+$M_1$: `cloze round(sum(fit1$residuals^2), 4)` and $M_2$: `cloze round(sum(fit2$residuals^2), 4)`.
+c) You want to draw a scatter plot with the fitted model $M_2$ superimposed on it like the plot below.
+```{r, fig.show="hold"}
+library(ggplot2)
+ggplot(df, aes(distance, time)) +
+  geom_point() + 
+  geom_smooth(method = lm, formula = y ~ x, se = FALSE) +
+  scale_x_log10() + 
+  scale_y_log10()
+```
+
+Complete the code below to draw the above plot.
+```r
+library(ggplot2)
+ggplot(df, aes(distance, time)) +
+  geom_point() + 
+  geom_`cloze "smooth"`(method = lm, formula = y ~ x, se = FALSE) +
+  `cloze "scale_x_log10"`() + 
+  scale_y_log10()
+```
+
+---
+
+The two models are fitted in R like below:
+
+```r
+df <- read.csv("`r fn`")
+fit1 <- lm(log10(time) ~ log10(climb) * log10(distance), data = df)
+fit2 <- lm(log10(time) ~ log10(distance), data = df)
+coef(fit1)
+sum(fit1$residuals^2)
+sum(fit2$residuals^2)
+```
+
+When superimposing the model, you need the $\log_{10}$ scale transformations like below.
+
+```r
+library(ggplot2)
+ggplot(df, aes(distance, time)) +
+  geom_point() + 
+  geom_smooth(method = lm, formula = y ~ x, se = FALSE) +
+  scale_x_log10() + 
+  scale_y_log10()
+```
+

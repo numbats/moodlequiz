@@ -1,0 +1,82 @@
+---
+output: teachr::teachr_cloze
+title: Changing themes
+times: 5
+topic: datavis
+---
+
+```{r set-up, include = FALSE}
+library(tidyverse)
+library(rlang)
+library(teachr)
+library(exams)
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide",
+                      fig.height = 6, 
+                      fig.width = 6,
+                      fig.path = "",
+                      fig.cap = "",
+                      fig.align = "center",
+                      warning = FALSE,
+                      message = FALSE)
+```
+```{r data}
+cont <- c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", 
+"body_mass_g")
+cats <- c("species", "island", "sex")
+clean_labels <- setNames(c("Bill length (mm)", "Bill depth (mm)", 
+                          "Flipper length (mm)", "Body mass (g)",
+                          "Species", "Island", "Sex"), c(cont, cats))
+x <- sample(cont, 1)
+y <- sample(setdiff(cont, x), 1)
+color <- sample(cats, 1)
+facet <- sample(setdiff(cats, color))
+theme_args <- setdiff(names(as.list(args(theme))), c("...", ""))
+ele <- c("element_text", "element_rect", "element_line")
+```
+
+
+For the following plot made using the `penguins` dataset, identify the theme argument names and the corresponding function to modify the look of the plot. 
+
+```{r, echo = TRUE, results = "show"}
+data(penguins, package = "palmerpenguins")
+str(penguins)
+```
+
+```r
+ggplot(penguins, aes(x = `r x`, y = `r y`, color = `r color`)) + 
+  geom_point() +
+  facet_grid(`r facet[1]` ~ `r facet[2]`) +
+  labs(x = `r clean_labels[x]`, 
+       y = `r clean_labels[y]`,
+       color = `r clean_labels[color]`) +
+  theme(`cloze schoice(theme_args, "strip.background")` = element_rect(fill = "indianred"),
+        `cloze schoice(theme_args, "strip.text")` = element_text(color = "white"),
+        `cloze schoice(theme_args, "panel.background")` = `cloze schoice(ele, "element_rect")`(fill = "white", color = "black"),
+        `cloze schoice(theme_args, "panel.grid")` = `cloze schoice(ele, "element_line")`(color = "pink"),
+        `cloze schoice(theme_args, "axis.title")` = `cloze schoice(ele, "element_text")`(size = 18),
+        `cloze schoice(theme_args, "plot.title")` = element_text(size = 24, face = "bold"))
+```
+
+
+```{r, results = "show"}
+ggplot(penguins, aes(x = !!sym(x), y = !!sym(y), color = !!sym(color))) + 
+  geom_point() +
+  facet_grid(as.formula(paste0(facet[1], "~", facet[2]))) +
+  labs(x = clean_labels[x], y = clean_labels[y], color = clean_labels[color], title = "Palmer Penguins") +
+  theme(strip.background = element_rect(fill = "indianred"),
+        strip.text = element_text(color = "white"),
+        panel.background = element_rect(fill = "white",
+                                        color = "black"),
+        panel.grid = element_line(color = "pink"),
+        axis.title = element_text(size = 18),
+        plot.title = element_text(size = 24, face = "bold"))
+```
+
+---
+
+This was a very hard one so well done if you got it right! 
+
+You had to recognise what changed from the default in the plot (e.g. notice that the panel background is not the default grey but white instead and it has a black border). 
+
+Since the code for the data is provided, you could have also recreated this plot by yourself and see if it matches up with the output. 

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+
+<question type="category">
+<category>
+<text>$course$/03-categorical/03-categorical</text>
+</category>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R1 Q1 : Modelling with categorical variables </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[
+<p>
+<p>Students in a class decided to run an experiment on paper planes. The experiment consisted of using different designs, paper thickness and angles of release of planes to see the distance travelled. Knowing that paper aeroplanes are greatly influenced by wind, they performed the experiment in a hallway of the University, where the effects of wind can be controlled to some extent by closing the doors.</p>
+<p>In order to make the experimental units as homogeneous as possible they allocated one person to a task, so person 1 folded and threw all planes, person 2 calculated the random order assignment, measured all the distances, checked that the angles of flight were right, and checked that the plane release was the same each time.</p>
+<p>The factors that we considered each had two levels as follows:</p>
+<ul>
+<li>Paper: A4 size with two thickness: 80gms and 50gms</li>
+<li>Design: High Performance Dual Glider, and Incredibly Simple Glider</li>
+<li>Angle of release: Horizontal, or 45 degrees upward.</li>
+</ul>
+<p>The random order assignment was calculated using the random number function of a calculator. Each combination of factors was assigned a number from one to eight, the random numbers were generated and accordingly the order of the experiment was found.</p>
+<p>The result of the experiment is provided in <a href="@@PLUGINFILE@@/data-03.csv">data-03.csv</a> and the data dictionary is as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>design</code></td>
+<td>High-performance = 1, Inredibly simple = 2</td>
+</tr>
+<tr class="even">
+<td><code>angle</code></td>
+<td>Horizontal = 1, 45 degrees = 2</td>
+</tr>
+<tr class="odd">
+<td><code>paper</code></td>
+<td>80gms = 1, 50gms = 2</td>
+</tr>
+<tr class="even">
+<td><code>distance</code></td>
+<td>Distance travelled in mm</td>
+</tr>
+<tr class="odd">
+<td><code>order</code></td>
+<td>Order in which the runs were conducted</td>
+</tr>
+</tbody>
+</table>
+<p>Fit a linear model for <code>distance</code> which includes the terms <code>design</code>, <code>angle</code> and <code>paper</code> with its two-way and three-way interactions.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Which of the variables significantly effect the distance the paper plane travelled based on provided data? {1:MULTIRESPONSE:plane~=design~angle}</li>
+<li>On average, how much more distance does the paper plane travel if using a 80gms paper compared to a 50gms paper given that both were thrown at a horizontal angle with incredibly simple design? If it is less, enter your answer as a negative value rounded to the closest integer.  {1:NUMERICAL:=88:1}</li>
+<li>Are any of the interaction effects significant? If so which one(s)? {1:MULTIRESPONSE:=No interaction effects are significant~angle:plane~angle:design~design:plane~angle:design:plane}</li>
+</ol>
+</p>]]></text>
+<file name="data-03.csv" encoding="base64">ZGVzaWduLGFuZ2xlLHBhcGVyLGRpc3RhbmNlLG9yZGVyCjIsMiwxLDMwMDAwMDYsMQoxLDIsMiw2MDAwMjY5LDIKMSwxLDEsNjAwMDA4MiwzCjEsMSwyLDYwMDAxNTQsNAoyLDIsMiwzMDAwMDE4LDUKMSwxLDIsNTk5OTgzNyw2CjEsMiwxLDU5OTk4NjcsNwoxLDIsMiw1OTk5ODU2LDgKMiwxLDEsMjk5OTkzMCw5CjIsMSwyLDMwMDAxOTYsMTAKMSwxLDIsNTk5OTk3MSwxMQoxLDIsMSw2MDAwMTk1LDEyCjIsMiwyLDI5OTk5MzMsMTMKMiwyLDEsMjk5OTQ1OSwxNAoxLDIsMSw1OTk5NzI1LDE1CjIsMiwyLDMwMDAwNDAsMTYKMSwyLDIsNTk5OTYzMywxNwoxLDEsMSw1OTk5ODM4LDE4CjIsMSwxLDMwMDAwODQsMTkKMSwxLDEsNjAwMDI0NSwyMAoyLDEsMSwzMDAwMjI2LDIxCjIsMiwxLDMwMDA0NDksMjIKMiwxLDIsMjk5OTkwNiwyMwoyLDIsMiwzMDAwMDU4LDI0CjIsMiwxLDMwMDAwODQsMjUKMSwyLDIsNTk5OTU0OCwyNgoyLDEsMiwyOTk5OTgyLDI3CjEsMiwxLDYwMDAwMzQsMjgKMSwxLDEsNTk5OTkxNywyOQoyLDEsMSwzMDAwMjg1LDMwCjEsMSwyLDU5OTk4NzQsMzEKMiwxLDIsMzAwMDA5MSwzMgo=</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>You needed to transform the variables: <code>design</code>, <code>angle</code> and <code>paper</code> into factors as these are not numerical variables. To replicate the analysis in R, the code is provided below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-03.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(design<span class="sc">:</span>paper, as.factor))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> design<span class="sc">*</span>paper<span class="sc">*</span>angle, <span class="at">data =</span> dat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">angle =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">design =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">paper =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>()</span></code></pre></div>
+<p>You can visualise the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">angle =</span> <span class="fu">factor</span>(angle, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;horizontal&quot;</span>, <span class="st">&quot;45 degrees&quot;</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">design =</span> <span class="fu">factor</span>(design, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;high-performance&quot;</span>, <span class="st">&quot;simple&quot;</span>)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">paper =</span> <span class="fu">factor</span>(paper, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;80gms&quot;</span>, <span class="st">&quot;50gms&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(angle, distance)) <span class="sc">+</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(design <span class="sc">~</span> paper)</span></code></pre></div>
+<ol type = "a">
+<li> plane / <strong>design</strong> / angle </li>
+<li> 88 </li>
+<li> <strong>No interaction effects are significant</strong> / angle:plane / angle:design / design:plane / angle:design:plane </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R2 Q1 : Modelling with categorical variables </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[
+<p>
+<p>Students in a class decided to run an experiment on paper planes. The experiment consisted of using different designs, paper thickness and angles of release of planes to see the distance travelled. Knowing that paper aeroplanes are greatly influenced by wind, they performed the experiment in a hallway of the University, where the effects of wind can be controlled to some extent by closing the doors.</p>
+<p>In order to make the experimental units as homogeneous as possible they allocated one person to a task, so person 1 folded and threw all planes, person 2 calculated the random order assignment, measured all the distances, checked that the angles of flight were right, and checked that the plane release was the same each time.</p>
+<p>The factors that we considered each had two levels as follows:</p>
+<ul>
+<li>Paper: A4 size with two thickness: 80gms and 50gms</li>
+<li>Design: High Performance Dual Glider, and Incredibly Simple Glider</li>
+<li>Angle of release: Horizontal, or 45 degrees upward.</li>
+</ul>
+<p>The random order assignment was calculated using the random number function of a calculator. Each combination of factors was assigned a number from one to eight, the random numbers were generated and accordingly the order of the experiment was found.</p>
+<p>The result of the experiment is provided in <a href="@@PLUGINFILE@@/data-03.csv">data-03.csv</a> and the data dictionary is as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>design</code></td>
+<td>High-performance = 1, Inredibly simple = 2</td>
+</tr>
+<tr class="even">
+<td><code>angle</code></td>
+<td>Horizontal = 1, 45 degrees = 2</td>
+</tr>
+<tr class="odd">
+<td><code>paper</code></td>
+<td>80gms = 1, 50gms = 2</td>
+</tr>
+<tr class="even">
+<td><code>distance</code></td>
+<td>Distance travelled in mm</td>
+</tr>
+<tr class="odd">
+<td><code>order</code></td>
+<td>Order in which the runs were conducted</td>
+</tr>
+</tbody>
+</table>
+<p>Fit a linear model for <code>distance</code> which includes the terms <code>design</code>, <code>angle</code> and <code>paper</code> with its two-way and three-way interactions.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Which of the variables significantly effect the distance the paper plane travelled based on provided data? {1:MULTIRESPONSE:plane~=design~angle}</li>
+<li>On average, how much more distance does the paper plane travel if using a 80gms paper compared to a 50gms paper given that both were thrown at a horizontal angle with incredibly simple design? If it is less, enter your answer as a negative value rounded to the closest integer.  {1:NUMERICAL:=-275:1}</li>
+<li>Are any of the interaction effects significant? If so which one(s)? {1:MULTIRESPONSE:=No interaction effects are significant~angle:plane~angle:design~design:plane~angle:design:plane}</li>
+</ol>
+</p>]]></text>
+<file name="data-03.csv" encoding="base64">ZGVzaWduLGFuZ2xlLHBhcGVyLGRpc3RhbmNlLG9yZGVyCjIsMiwxLDM2MzIsMQoxLDIsMSw1NTA5LDIKMSwyLDEsNTUzMCwzCjIsMSwyLDM0NzQsNAoxLDIsMSw1NjY0LDUKMiwxLDEsMzE5Niw2CjEsMSwyLDU3MTIsNwoxLDIsMiw1NDg1LDgKMSwxLDEsNTIwMSw5CjIsMiwxLDM3MjcsMTAKMSwxLDEsNTE5MiwxMQoyLDIsMSwzNzczLDEyCjEsMSwyLDU0MjMsMTMKMiwxLDIsMzc3NCwxNAoyLDIsMiwzOTgxLDE1CjEsMiwyLDUzNzEsMTYKMSwyLDIsNTg5NSwxNwoyLDIsMiwzMjIwLDE4CjEsMSwyLDUzMzAsMTkKMiwyLDIsMzQzMSwyMAoyLDIsMSwzMzI2LDIxCjEsMSwyLDU1NTAsMjIKMiwxLDEsMzI1MywyMwoxLDEsMSw1NTA1LDI0CjEsMiwyLDU3NDUsMjUKMiwxLDEsMzQ4NCwyNgoxLDIsMSw1ODAxLDI3CjIsMSwxLDMzNjcsMjgKMiwxLDIsMzQyMywyOQoyLDIsMiwzNDYzLDMwCjIsMSwyLDM3MjgsMzEKMSwxLDEsNTQzNCwzMgo=</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>You needed to transform the variables: <code>design</code>, <code>angle</code> and <code>paper</code> into factors as these are not numerical variables. To replicate the analysis in R, the code is provided below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-03.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(design<span class="sc">:</span>paper, as.factor))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> design<span class="sc">*</span>paper<span class="sc">*</span>angle, <span class="at">data =</span> dat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">angle =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">design =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">paper =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>()</span></code></pre></div>
+<p>You can visualise the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">angle =</span> <span class="fu">factor</span>(angle, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;horizontal&quot;</span>, <span class="st">&quot;45 degrees&quot;</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">design =</span> <span class="fu">factor</span>(design, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;high-performance&quot;</span>, <span class="st">&quot;simple&quot;</span>)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">paper =</span> <span class="fu">factor</span>(paper, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;80gms&quot;</span>, <span class="st">&quot;50gms&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(angle, distance)) <span class="sc">+</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(design <span class="sc">~</span> paper)</span></code></pre></div>
+<ol type = "a">
+<li> plane / <strong>design</strong> / angle </li>
+<li> -275 </li>
+<li> <strong>No interaction effects are significant</strong> / angle:plane / angle:design / design:plane / angle:design:plane </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R3 Q1 : Modelling with categorical variables </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[
+<p>
+<p>Students in a class decided to run an experiment on paper planes. The experiment consisted of using different designs, paper thickness and angles of release of planes to see the distance travelled. Knowing that paper aeroplanes are greatly influenced by wind, they performed the experiment in a hallway of the University, where the effects of wind can be controlled to some extent by closing the doors.</p>
+<p>In order to make the experimental units as homogeneous as possible they allocated one person to a task, so person 1 folded and threw all planes, person 2 calculated the random order assignment, measured all the distances, checked that the angles of flight were right, and checked that the plane release was the same each time.</p>
+<p>The factors that we considered each had two levels as follows:</p>
+<ul>
+<li>Paper: A4 size with two thickness: 80gms and 50gms</li>
+<li>Design: High Performance Dual Glider, and Incredibly Simple Glider</li>
+<li>Angle of release: Horizontal, or 45 degrees upward.</li>
+</ul>
+<p>The random order assignment was calculated using the random number function of a calculator. Each combination of factors was assigned a number from one to eight, the random numbers were generated and accordingly the order of the experiment was found.</p>
+<p>The result of the experiment is provided in <a href="@@PLUGINFILE@@/data-03.csv">data-03.csv</a> and the data dictionary is as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>design</code></td>
+<td>High-performance = 1, Inredibly simple = 2</td>
+</tr>
+<tr class="even">
+<td><code>angle</code></td>
+<td>Horizontal = 1, 45 degrees = 2</td>
+</tr>
+<tr class="odd">
+<td><code>paper</code></td>
+<td>80gms = 1, 50gms = 2</td>
+</tr>
+<tr class="even">
+<td><code>distance</code></td>
+<td>Distance travelled in mm</td>
+</tr>
+<tr class="odd">
+<td><code>order</code></td>
+<td>Order in which the runs were conducted</td>
+</tr>
+</tbody>
+</table>
+<p>Fit a linear model for <code>distance</code> which includes the terms <code>design</code>, <code>angle</code> and <code>paper</code> with its two-way and three-way interactions.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Which of the variables significantly effect the distance the paper plane travelled based on provided data? {1:MULTIRESPONSE:plane~=design~angle}</li>
+<li>On average, how much more distance does the paper plane travel if using a 80gms paper compared to a 50gms paper given that both were thrown at a horizontal angle with incredibly simple design? If it is less, enter your answer as a negative value rounded to the closest integer.  {1:NUMERICAL:=1502:1}</li>
+<li>Are any of the interaction effects significant? If so which one(s)? {1:MULTIRESPONSE:=No interaction effects are significant~angle:plane~angle:design~design:plane~angle:design:plane}</li>
+</ol>
+</p>]]></text>
+<file name="data-03.csv" encoding="base64">ZGVzaWduLGFuZ2xlLHBhcGVyLGRpc3RhbmNlLG9yZGVyCjEsMSwxLDY4MjQsMQoxLDIsMiw1NTY2LDIKMSwxLDEsNzEyNiwzCjEsMiwyLDU1OTMsNAoyLDIsMSw1MDM4LDUKMiwyLDEsNDk2MCw2CjIsMSwxLDQ5MjAsNwoxLDEsMSw3MDUyLDgKMSwyLDEsNjg5MSw5CjEsMiwyLDUyMjIsMTAKMSwxLDIsNTYwNiwxMQoyLDIsMiwzNDM1LDEyCjEsMiwxLDcwMzUsMTMKMSwxLDEsNzE1MiwxNAoyLDEsMSw1MDM3LDE1CjEsMiwyLDU3MzksMTYKMSwxLDIsNTc1MywxNwoxLDIsMSw3MTczLDE4CjIsMSwyLDM3MjQsMTkKMiwyLDIsMzQ4MiwyMAoyLDEsMiwzNjM4LDIxCjIsMSwxLDUyMTEsMjIKMiwyLDEsNTExOCwyMwoxLDIsMSw2ODYzLDI0CjIsMSwxLDUwNzEsMjUKMiwxLDIsMzU1MCwyNgoxLDEsMiw1NTMwLDI3CjEsMSwyLDUzNDAsMjgKMiwyLDEsNDg5NiwyOQoyLDIsMiwzNDY0LDMwCjIsMSwyLDMzMTcsMzEKMiwyLDIsMzQzMywzMgo=</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>You needed to transform the variables: <code>design</code>, <code>angle</code> and <code>paper</code> into factors as these are not numerical variables. To replicate the analysis in R, the code is provided below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-03.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(design<span class="sc">:</span>paper, as.factor))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> design<span class="sc">*</span>paper<span class="sc">*</span>angle, <span class="at">data =</span> dat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">angle =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">design =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">paper =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>()</span></code></pre></div>
+<p>You can visualise the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">angle =</span> <span class="fu">factor</span>(angle, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;horizontal&quot;</span>, <span class="st">&quot;45 degrees&quot;</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">design =</span> <span class="fu">factor</span>(design, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;high-performance&quot;</span>, <span class="st">&quot;simple&quot;</span>)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">paper =</span> <span class="fu">factor</span>(paper, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;80gms&quot;</span>, <span class="st">&quot;50gms&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(angle, distance)) <span class="sc">+</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(design <span class="sc">~</span> paper)</span></code></pre></div>
+<ol type = "a">
+<li> plane / <strong>design</strong> / angle </li>
+<li> 1502 </li>
+<li> <strong>No interaction effects are significant</strong> / angle:plane / angle:design / design:plane / angle:design:plane </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R4 Q1 : Modelling with categorical variables </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[
+<p>
+<p>Students in a class decided to run an experiment on paper planes. The experiment consisted of using different designs, paper thickness and angles of release of planes to see the distance travelled. Knowing that paper aeroplanes are greatly influenced by wind, they performed the experiment in a hallway of the University, where the effects of wind can be controlled to some extent by closing the doors.</p>
+<p>In order to make the experimental units as homogeneous as possible they allocated one person to a task, so person 1 folded and threw all planes, person 2 calculated the random order assignment, measured all the distances, checked that the angles of flight were right, and checked that the plane release was the same each time.</p>
+<p>The factors that we considered each had two levels as follows:</p>
+<ul>
+<li>Paper: A4 size with two thickness: 80gms and 50gms</li>
+<li>Design: High Performance Dual Glider, and Incredibly Simple Glider</li>
+<li>Angle of release: Horizontal, or 45 degrees upward.</li>
+</ul>
+<p>The random order assignment was calculated using the random number function of a calculator. Each combination of factors was assigned a number from one to eight, the random numbers were generated and accordingly the order of the experiment was found.</p>
+<p>The result of the experiment is provided in <a href="@@PLUGINFILE@@/data-03.csv">data-03.csv</a> and the data dictionary is as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>design</code></td>
+<td>High-performance = 1, Inredibly simple = 2</td>
+</tr>
+<tr class="even">
+<td><code>angle</code></td>
+<td>Horizontal = 1, 45 degrees = 2</td>
+</tr>
+<tr class="odd">
+<td><code>paper</code></td>
+<td>80gms = 1, 50gms = 2</td>
+</tr>
+<tr class="even">
+<td><code>distance</code></td>
+<td>Distance travelled in mm</td>
+</tr>
+<tr class="odd">
+<td><code>order</code></td>
+<td>Order in which the runs were conducted</td>
+</tr>
+</tbody>
+</table>
+<p>Fit a linear model for <code>distance</code> which includes the terms <code>design</code>, <code>angle</code> and <code>paper</code> with its two-way and three-way interactions.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Which of the variables significantly effect the distance the paper plane travelled based on provided data? {1:MULTIRESPONSE:plane~=design~angle}</li>
+<li>On average, how much more distance does the paper plane travel if using a 80gms paper compared to a 50gms paper given that both were thrown at a horizontal angle with incredibly simple design? If it is less, enter your answer as a negative value rounded to the closest integer.  {1:NUMERICAL:=25:1}</li>
+<li>Are any of the interaction effects significant? If so which one(s)? {1:MULTIRESPONSE:=No interaction effects are significant~angle:plane~angle:design~design:plane~angle:design:plane}</li>
+</ol>
+</p>]]></text>
+<file name="data-03.csv" encoding="base64">ZGVzaWduLGFuZ2xlLHBhcGVyLGRpc3RhbmNlLG9yZGVyCjEsMSwxLDU0MDQsMQoxLDIsMiw1NDc2LDIKMiwxLDEsMzI3NiwzCjEsMiwyLDUzMTcsNAoxLDIsMSw1NTk3LDUKMiwxLDIsMzAzMSw2CjEsMSwyLDU1NDcsNwoxLDEsMiw1NjQ2LDgKMiwyLDIsMzI1OSw5CjIsMSwxLDM5NDcsMTAKMiwyLDEsMzQ4MywxMQoyLDIsMSwzNTUzLDEyCjEsMiwxLDU0MjIsMTMKMiwxLDIsMzU5NiwxNAoxLDIsMSw1MzcwLDE1CjIsMiwxLDMxMTgsMTYKMiwxLDEsMzUyNCwxNwoyLDIsMiwzNDE1LDE4CjEsMSwyLDU0NjMsMTkKMiwyLDIsMzU4MCwyMAoyLDEsMSwzNDY0LDIxCjEsMiwxLDU1ODksMjIKMSwyLDIsNTYwNywyMwoxLDEsMSw1NTQ5LDI0CjEsMiwyLDUxNjQsMjUKMiwxLDIsMzg0NiwyNgoxLDEsMSw1NjAxLDI3CjIsMiwxLDM2MTgsMjgKMiwxLDIsMzYzOCwyOQoxLDEsMSw1MzgxLDMwCjEsMSwyLDU2NDMsMzEKMiwyLDIsMzIzNiwzMgo=</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>You needed to transform the variables: <code>design</code>, <code>angle</code> and <code>paper</code> into factors as these are not numerical variables. To replicate the analysis in R, the code is provided below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-03.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(design<span class="sc">:</span>paper, as.factor))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> design<span class="sc">*</span>paper<span class="sc">*</span>angle, <span class="at">data =</span> dat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">angle =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">design =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">paper =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>()</span></code></pre></div>
+<p>You can visualise the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">angle =</span> <span class="fu">factor</span>(angle, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;horizontal&quot;</span>, <span class="st">&quot;45 degrees&quot;</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">design =</span> <span class="fu">factor</span>(design, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;high-performance&quot;</span>, <span class="st">&quot;simple&quot;</span>)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">paper =</span> <span class="fu">factor</span>(paper, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;80gms&quot;</span>, <span class="st">&quot;50gms&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(angle, distance)) <span class="sc">+</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(design <span class="sc">~</span> paper)</span></code></pre></div>
+<ol type = "a">
+<li> plane / <strong>design</strong> / angle </li>
+<li> 25 </li>
+<li> <strong>No interaction effects are significant</strong> / angle:plane / angle:design / design:plane / angle:design:plane </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R5 Q1 : Modelling with categorical variables </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[
+<p>
+<p>Students in a class decided to run an experiment on paper planes. The experiment consisted of using different designs, paper thickness and angles of release of planes to see the distance travelled. Knowing that paper aeroplanes are greatly influenced by wind, they performed the experiment in a hallway of the University, where the effects of wind can be controlled to some extent by closing the doors.</p>
+<p>In order to make the experimental units as homogeneous as possible they allocated one person to a task, so person 1 folded and threw all planes, person 2 calculated the random order assignment, measured all the distances, checked that the angles of flight were right, and checked that the plane release was the same each time.</p>
+<p>The factors that we considered each had two levels as follows:</p>
+<ul>
+<li>Paper: A4 size with two thickness: 80gms and 50gms</li>
+<li>Design: High Performance Dual Glider, and Incredibly Simple Glider</li>
+<li>Angle of release: Horizontal, or 45 degrees upward.</li>
+</ul>
+<p>The random order assignment was calculated using the random number function of a calculator. Each combination of factors was assigned a number from one to eight, the random numbers were generated and accordingly the order of the experiment was found.</p>
+<p>The result of the experiment is provided in <a href="@@PLUGINFILE@@/data-03.csv">data-03.csv</a> and the data dictionary is as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>design</code></td>
+<td>High-performance = 1, Inredibly simple = 2</td>
+</tr>
+<tr class="even">
+<td><code>angle</code></td>
+<td>Horizontal = 1, 45 degrees = 2</td>
+</tr>
+<tr class="odd">
+<td><code>paper</code></td>
+<td>80gms = 1, 50gms = 2</td>
+</tr>
+<tr class="even">
+<td><code>distance</code></td>
+<td>Distance travelled in mm</td>
+</tr>
+<tr class="odd">
+<td><code>order</code></td>
+<td>Order in which the runs were conducted</td>
+</tr>
+</tbody>
+</table>
+<p>Fit a linear model for <code>distance</code> which includes the terms <code>design</code>, <code>angle</code> and <code>paper</code> with its two-way and three-way interactions.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Which of the variables significantly effect the distance the paper plane travelled based on provided data? {1:MULTIRESPONSE:plane~=design~angle}</li>
+<li>On average, how much more distance does the paper plane travel if using a 80gms paper compared to a 50gms paper given that both were thrown at a horizontal angle with incredibly simple design? If it is less, enter your answer as a negative value rounded to the closest integer.  {1:NUMERICAL:=3000073:1}</li>
+<li>Are any of the interaction effects significant? If so which one(s)? {1:MULTIRESPONSE:%0%No interaction effects are significant~%0%angle:plane~%0%angle:design~%0%design:plane~%0%angle:design:plane}</li>
+</ol>
+</p>]]></text>
+<file name="data-03.csv" encoding="base64">ZGVzaWduLGFuZ2xlLHBhcGVyLGRpc3RhbmNlLG9yZGVyCjIsMSwxLDYwMDAxNjIsMQoyLDEsMSw1OTk5ODUzLDIKMiwyLDEsNjAwMDI0MCwzCjEsMiwxLDExOTk5OTc2LDQKMSwxLDIsNjAwMDIwOCw1CjEsMSwyLDU5OTk3NDEsNgoxLDIsMiw1OTk5ODIzLDcKMiwyLDIsMzAwMDA4MCw4CjIsMiwxLDYwMDAwMTQsOQoxLDEsMSwxMTk5OTc2MCwxMAoyLDEsMiwzMDAwMjEwLDExCjIsMiwxLDYwMDAxNzEsMTIKMiwxLDIsMjk5OTY3MywxMwoxLDIsMiw1OTk5NzI0LDE0CjEsMSwxLDEyMDAwMTAyLDE1CjIsMiwyLDMwMDAyMTMsMTYKMSwyLDEsMTE5OTk4OTgsMTcKMiwyLDEsNTk5OTk1MywxOAoxLDEsMSwxMTk5OTk3NiwxOQoyLDEsMSw1OTk5OTA1LDIwCjEsMiwyLDU5OTk4OTgsMjEKMSwyLDEsMTE5OTk4OTQsMjIKMSwxLDIsNjAwMDI1MCwyMwoxLDEsMSwxMTk5OTczMCwyNAoyLDIsMiwzMDAwMTQ4LDI1CjEsMiwyLDYwMDA0MjIsMjYKMiwxLDIsMjk5OTk3OCwyNwoxLDEsMiw2MDAwMjQ4LDI4CjIsMSwyLDI5OTk4NTgsMjkKMSwyLDEsMTE5OTk3OTUsMzAKMiwxLDEsNjAwMDA5MiwzMQoyLDIsMiwyOTk5ODE4LDMyCg==</file>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<p>You needed to transform the variables: <code>design</code>, <code>angle</code> and <code>paper</code> into factors as these are not numerical variables. To replicate the analysis in R, the code is provided below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-03.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(design<span class="sc">:</span>paper, as.factor))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> design<span class="sc">*</span>paper<span class="sc">*</span>angle, <span class="at">data =</span> dat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">angle =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">design =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">paper =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>()</span></code></pre></div>
+<p>You can visualise the data like below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">angle =</span> <span class="fu">factor</span>(angle, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;horizontal&quot;</span>, <span class="st">&quot;45 degrees&quot;</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">design =</span> <span class="fu">factor</span>(design, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;high-performance&quot;</span>, <span class="st">&quot;simple&quot;</span>)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">paper =</span> <span class="fu">factor</span>(paper, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;80gms&quot;</span>, <span class="st">&quot;50gms&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(angle, distance)) <span class="sc">+</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(design <span class="sc">~</span> paper)</span></code></pre></div>
+<ol type = "a">
+<li> plane / <strong>design</strong> / angle </li>
+<li> 3000073 </li>
+<li> No interaction effects are significant / angle:plane / angle:design / design:plane / angle:design:plane </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+</quiz>

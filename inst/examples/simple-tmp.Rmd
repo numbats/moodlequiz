@@ -7,6 +7,11 @@ library(moodlequiz)
 ```
 
 
+```{r, results = "asis"}
+sample(c("What is the function for average? `r moodlequiz::cloze('mean')`",
+         "What is the function for standard deviation? `r moodlequiz::cloze('sd')`"), 1)
+```
+
 What is 2 + 2? `r moodlequiz::cloze(4)`
 
 What is 2 + 3? `r moodlequiz::cloze(schoice(c(2, 4, 5), 5))`

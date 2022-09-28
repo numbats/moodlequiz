@@ -1,0 +1,65 @@
+---
+output: teachr::teachr_cloze
+title: Layer choices
+times: 5
+topic: datavis
+---
+
+```{r set-up, include = FALSE}
+library(tidyverse)
+library(rlang)
+library(teachr)
+library(exams)
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide",
+                      fig.height = 4, 
+                      fig.width = 5,
+                      fig.path = "",
+                      fig.cap = "",
+                      fig.align = "center",
+                      warning = FALSE,
+                      message = FALSE)
+```
+```{r data}
+dbls <- c("price", "lotsize")
+counts <- c("bedrooms", "bathrms", "stories", "garagepl")
+fcts <- c("driveway", "recroom", "fullbase", "gashw", "airco", "prefarea")
+
+x1 <- sample(dbls, 1)
+x2 <- sample(fcts, 1)
+x3 <- c(sample(dbls, 1), sample(fcts, 1))
+
+q1 <- sample(c("geom_point", "geom_line", "geom_label", "geom_smooth", "geom_histogram"))
+q2 <- sample(c("geom_bar", "geom_line", "geom_text", "geom_path", "geom_boxplot"))
+q3 <- sample(c("geom_point", "geom_line", "geom_density_2d", "geom_path", "geom_violin"))
+```
+
+
+Question
+========
+We will be using the `Housing` data from the `Ecdat` package for the following questions. The format of the data and information on the variables in the data are provided below.
+
+```{r, echo = TRUE, results = "show"}
+data(Housing, package = "Ecdat")
+str(Housing)
+```
+
+* `price`: sale price of a house
+* `lotsize`: the lot size of a property in square feet
+* `bedrooms`: number of bedrooms
+* `bathrms`: number of full bathrooms
+* `stories`: number of stories excluding basement
+* `driveway`: does the house has a driveway?
+* `recroom`: does the house has a recreational room?
+* `fullbase`: does the house has a full finished basement?
+* `gashw`: does the house uses gas for hot water heating?
+* `airco`: does the house has central air conditioning?
+* `garagepl`: number of garage places
+* `prefarea`: is the house located in the preferred neighbourhood of the city?
+
+Choose the most appropriate `geom_*` function from the given list to visualise the following variables:
+
+a) `r x1`: `cloze schoice(q1, "geom_histogram")`
+b) `r x2`: `cloze schoice(q2, "geom_bar")`
+c) `r x3[1]` and `r x3[2]` together: `cloze schoice(q3, "geom_violin")`
+

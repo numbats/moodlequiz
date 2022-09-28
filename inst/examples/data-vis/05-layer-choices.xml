@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+
+<question type="category">
+<category>
+<text>$course$/05-layer-choices/05-layer-choices</text>
+</category>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R1 Q1 : Layer choices </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<h1 id="question">question</h1>
+<p>We will be using the <code>Housing</code> data from the
+<code>Ecdat</code> package for the following questions. The format of
+the data and information on the variables in the data are provided
+below.</p>
+<pre class="text"><code>data(Housing, package = &quot;Ecdat&quot;)
+str(Housing)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    546 obs. of  12 variables:
+##  $ price   : num  42000 38500 49500 60500 61000 66000 66000 69000 83800 88500 ...
+##  $ lotsize : num  5850 4000 3060 6650 6360 4160 3880 4160 4800 5500 ...
+##  $ bedrooms: num  3 2 3 3 2 3 3 3 3 3 ...
+##  $ bathrms : num  1 1 1 1 1 1 2 1 1 2 ...
+##  $ stories : num  2 1 1 2 1 1 2 3 1 4 ...
+##  $ driveway: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ recroom : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 2 1 2 1 1 2 2 ...
+##  $ fullbase: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 2 2 1 2 1 ...
+##  $ gashw   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ airco   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 2 1 1 1 2 ...
+##  $ garagepl: num  1 0 0 0 0 0 2 0 0 1 ...
+##  $ prefarea: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<ul>
+<li><code>price</code>: sale price of a house</li>
+<li><code>lotsize</code>: the lot size of a property in square feet</li>
+<li><code>bedrooms</code>: number of bedrooms</li>
+<li><code>bathrms</code>: number of full bathrooms</li>
+<li><code>stories</code>: number of stories excluding basement</li>
+<li><code>driveway</code>: does the house has a driveway?</li>
+<li><code>recroom</code>: does the house has a recreational room?</li>
+<li><code>fullbase</code>: does the house has a full finished
+basement?</li>
+<li><code>gashw</code>: does the house uses gas for hot water
+heating?</li>
+<li><code>airco</code>: does the house has central air
+conditioning?</li>
+<li><code>garagepl</code>: number of garage places</li>
+<li><code>prefarea</code>: is the house located in the preferred
+neighbourhood of the city?</li>
+</ul>
+<p>Choose the most appropriate <code>geom_*</code> function from the
+given list to visualise the following variables:</p>
+<ol style="list-style-type: lower-alpha">
+<li>lotsize: {1:MULTICHOICE:%0%geom_line~%0%geom_smooth~%0%geom_label~%100%geom_histogram~%0%geom_point}</li>
+<li>driveway: {1:MULTICHOICE:%0%geom_line~%0%geom_text~%0%geom_boxplot~%100%geom_bar~%0%geom_path}</li>
+<li>price and recroom together: {1:MULTICHOICE:%0%geom_point~%0%geom_path~%0%geom_line~%0%geom_density_2d~%100%geom_violin}</li>
+</ol>
+</p>]]></text>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<ol type = "a">
+<li> geom_line / geom_smooth / geom_label / <strong>geom_histogram</strong> / geom_point </li>
+<li> geom_line / geom_text / geom_boxplot / <strong>geom_bar</strong> / geom_path </li>
+<li> geom_point / geom_path / geom_line / geom_density_2d / <strong>geom_violin</strong> </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R2 Q1 : Layer choices </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<h1 id="question">question</h1>
+<p>We will be using the <code>Housing</code> data from the
+<code>Ecdat</code> package for the following questions. The format of
+the data and information on the variables in the data are provided
+below.</p>
+<pre class="text"><code>data(Housing, package = &quot;Ecdat&quot;)
+str(Housing)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    546 obs. of  12 variables:
+##  $ price   : num  42000 38500 49500 60500 61000 66000 66000 69000 83800 88500 ...
+##  $ lotsize : num  5850 4000 3060 6650 6360 4160 3880 4160 4800 5500 ...
+##  $ bedrooms: num  3 2 3 3 2 3 3 3 3 3 ...
+##  $ bathrms : num  1 1 1 1 1 1 2 1 1 2 ...
+##  $ stories : num  2 1 1 2 1 1 2 3 1 4 ...
+##  $ driveway: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ recroom : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 2 1 2 1 1 2 2 ...
+##  $ fullbase: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 2 2 1 2 1 ...
+##  $ gashw   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ airco   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 2 1 1 1 2 ...
+##  $ garagepl: num  1 0 0 0 0 0 2 0 0 1 ...
+##  $ prefarea: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<ul>
+<li><code>price</code>: sale price of a house</li>
+<li><code>lotsize</code>: the lot size of a property in square feet</li>
+<li><code>bedrooms</code>: number of bedrooms</li>
+<li><code>bathrms</code>: number of full bathrooms</li>
+<li><code>stories</code>: number of stories excluding basement</li>
+<li><code>driveway</code>: does the house has a driveway?</li>
+<li><code>recroom</code>: does the house has a recreational room?</li>
+<li><code>fullbase</code>: does the house has a full finished
+basement?</li>
+<li><code>gashw</code>: does the house uses gas for hot water
+heating?</li>
+<li><code>airco</code>: does the house has central air
+conditioning?</li>
+<li><code>garagepl</code>: number of garage places</li>
+<li><code>prefarea</code>: is the house located in the preferred
+neighbourhood of the city?</li>
+</ul>
+<p>Choose the most appropriate <code>geom_*</code> function from the
+given list to visualise the following variables:</p>
+<ol style="list-style-type: lower-alpha">
+<li>price: {1:MULTICHOICE:%100%geom_histogram~%0%geom_smooth~%0%geom_line~%0%geom_label~%0%geom_point}</li>
+<li>fullbase: {1:MULTICHOICE:%100%geom_bar~%0%geom_path~%0%geom_boxplot~%0%geom_line~%0%geom_text}</li>
+<li>lotsize and prefarea together: {1:MULTICHOICE:%0%geom_path~%0%geom_line~%100%geom_violin~%0%geom_density_2d~%0%geom_point}</li>
+</ol>
+</p>]]></text>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<ol type = "a">
+<li> <strong>geom_histogram</strong> / geom_smooth / geom_line / geom_label / geom_point </li>
+<li> <strong>geom_bar</strong> / geom_path / geom_boxplot / geom_line / geom_text </li>
+<li> geom_path / geom_line / <strong>geom_violin</strong> / geom_density_2d / geom_point </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R3 Q1 : Layer choices </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<h1 id="question">question</h1>
+<p>We will be using the <code>Housing</code> data from the
+<code>Ecdat</code> package for the following questions. The format of
+the data and information on the variables in the data are provided
+below.</p>
+<pre class="text"><code>data(Housing, package = &quot;Ecdat&quot;)
+str(Housing)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    546 obs. of  12 variables:
+##  $ price   : num  42000 38500 49500 60500 61000 66000 66000 69000 83800 88500 ...
+##  $ lotsize : num  5850 4000 3060 6650 6360 4160 3880 4160 4800 5500 ...
+##  $ bedrooms: num  3 2 3 3 2 3 3 3 3 3 ...
+##  $ bathrms : num  1 1 1 1 1 1 2 1 1 2 ...
+##  $ stories : num  2 1 1 2 1 1 2 3 1 4 ...
+##  $ driveway: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ recroom : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 2 1 2 1 1 2 2 ...
+##  $ fullbase: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 2 2 1 2 1 ...
+##  $ gashw   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ airco   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 2 1 1 1 2 ...
+##  $ garagepl: num  1 0 0 0 0 0 2 0 0 1 ...
+##  $ prefarea: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<ul>
+<li><code>price</code>: sale price of a house</li>
+<li><code>lotsize</code>: the lot size of a property in square feet</li>
+<li><code>bedrooms</code>: number of bedrooms</li>
+<li><code>bathrms</code>: number of full bathrooms</li>
+<li><code>stories</code>: number of stories excluding basement</li>
+<li><code>driveway</code>: does the house has a driveway?</li>
+<li><code>recroom</code>: does the house has a recreational room?</li>
+<li><code>fullbase</code>: does the house has a full finished
+basement?</li>
+<li><code>gashw</code>: does the house uses gas for hot water
+heating?</li>
+<li><code>airco</code>: does the house has central air
+conditioning?</li>
+<li><code>garagepl</code>: number of garage places</li>
+<li><code>prefarea</code>: is the house located in the preferred
+neighbourhood of the city?</li>
+</ul>
+<p>Choose the most appropriate <code>geom_*</code> function from the
+given list to visualise the following variables:</p>
+<ol style="list-style-type: lower-alpha">
+<li>lotsize: {1:MULTICHOICE:%100%geom_histogram~%0%geom_label~%0%geom_line~%0%geom_smooth~%0%geom_point}</li>
+<li>gashw: {1:MULTICHOICE:%0%geom_path~%100%geom_bar~%0%geom_boxplot~%0%geom_text~%0%geom_line}</li>
+<li>price and prefarea together: {1:MULTICHOICE:%0%geom_density_2d~%0%geom_path~%0%geom_point~%0%geom_line~%100%geom_violin}</li>
+</ol>
+</p>]]></text>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<ol type = "a">
+<li> <strong>geom_histogram</strong> / geom_label / geom_line / geom_smooth / geom_point </li>
+<li> geom_path / <strong>geom_bar</strong> / geom_boxplot / geom_text / geom_line </li>
+<li> geom_density_2d / geom_path / geom_point / geom_line / <strong>geom_violin</strong> </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R4 Q1 : Layer choices </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<h1 id="question">question</h1>
+<p>We will be using the <code>Housing</code> data from the
+<code>Ecdat</code> package for the following questions. The format of
+the data and information on the variables in the data are provided
+below.</p>
+<pre class="text"><code>data(Housing, package = &quot;Ecdat&quot;)
+str(Housing)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    546 obs. of  12 variables:
+##  $ price   : num  42000 38500 49500 60500 61000 66000 66000 69000 83800 88500 ...
+##  $ lotsize : num  5850 4000 3060 6650 6360 4160 3880 4160 4800 5500 ...
+##  $ bedrooms: num  3 2 3 3 2 3 3 3 3 3 ...
+##  $ bathrms : num  1 1 1 1 1 1 2 1 1 2 ...
+##  $ stories : num  2 1 1 2 1 1 2 3 1 4 ...
+##  $ driveway: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ recroom : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 2 1 2 1 1 2 2 ...
+##  $ fullbase: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 2 2 1 2 1 ...
+##  $ gashw   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ airco   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 2 1 1 1 2 ...
+##  $ garagepl: num  1 0 0 0 0 0 2 0 0 1 ...
+##  $ prefarea: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<ul>
+<li><code>price</code>: sale price of a house</li>
+<li><code>lotsize</code>: the lot size of a property in square feet</li>
+<li><code>bedrooms</code>: number of bedrooms</li>
+<li><code>bathrms</code>: number of full bathrooms</li>
+<li><code>stories</code>: number of stories excluding basement</li>
+<li><code>driveway</code>: does the house has a driveway?</li>
+<li><code>recroom</code>: does the house has a recreational room?</li>
+<li><code>fullbase</code>: does the house has a full finished
+basement?</li>
+<li><code>gashw</code>: does the house uses gas for hot water
+heating?</li>
+<li><code>airco</code>: does the house has central air
+conditioning?</li>
+<li><code>garagepl</code>: number of garage places</li>
+<li><code>prefarea</code>: is the house located in the preferred
+neighbourhood of the city?</li>
+</ul>
+<p>Choose the most appropriate <code>geom_*</code> function from the
+given list to visualise the following variables:</p>
+<ol style="list-style-type: lower-alpha">
+<li>lotsize: {1:MULTICHOICE:%0%geom_smooth~%0%geom_label~%100%geom_histogram~%0%geom_line~%0%geom_point}</li>
+<li>gashw: {1:MULTICHOICE:%0%geom_boxplot~%100%geom_bar~%0%geom_path~%0%geom_line~%0%geom_text}</li>
+<li>lotsize and gashw together: {1:MULTICHOICE:%0%geom_density_2d~%0%geom_path~%0%geom_line~%100%geom_violin~%0%geom_point}</li>
+</ol>
+</p>]]></text>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<ol type = "a">
+<li> geom_smooth / geom_label / <strong>geom_histogram</strong> / geom_line / geom_point </li>
+<li> geom_boxplot / <strong>geom_bar</strong> / geom_path / geom_line / geom_text </li>
+<li> geom_density_2d / geom_path / geom_line / <strong>geom_violin</strong> / geom_point </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+
+<question type="cloze">
+<name>
+<text> R5 Q1 : Layer choices </text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p>
+<h1 id="question">question</h1>
+<p>We will be using the <code>Housing</code> data from the
+<code>Ecdat</code> package for the following questions. The format of
+the data and information on the variables in the data are provided
+below.</p>
+<pre class="text"><code>data(Housing, package = &quot;Ecdat&quot;)
+str(Housing)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    546 obs. of  12 variables:
+##  $ price   : num  42000 38500 49500 60500 61000 66000 66000 69000 83800 88500 ...
+##  $ lotsize : num  5850 4000 3060 6650 6360 4160 3880 4160 4800 5500 ...
+##  $ bedrooms: num  3 2 3 3 2 3 3 3 3 3 ...
+##  $ bathrms : num  1 1 1 1 1 1 2 1 1 2 ...
+##  $ stories : num  2 1 1 2 1 1 2 3 1 4 ...
+##  $ driveway: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ recroom : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 2 1 2 1 1 2 2 ...
+##  $ fullbase: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 2 2 1 2 1 ...
+##  $ gashw   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ airco   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 2 1 1 1 2 ...
+##  $ garagepl: num  1 0 0 0 0 0 2 0 0 1 ...
+##  $ prefarea: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<ul>
+<li><code>price</code>: sale price of a house</li>
+<li><code>lotsize</code>: the lot size of a property in square feet</li>
+<li><code>bedrooms</code>: number of bedrooms</li>
+<li><code>bathrms</code>: number of full bathrooms</li>
+<li><code>stories</code>: number of stories excluding basement</li>
+<li><code>driveway</code>: does the house has a driveway?</li>
+<li><code>recroom</code>: does the house has a recreational room?</li>
+<li><code>fullbase</code>: does the house has a full finished
+basement?</li>
+<li><code>gashw</code>: does the house uses gas for hot water
+heating?</li>
+<li><code>airco</code>: does the house has central air
+conditioning?</li>
+<li><code>garagepl</code>: number of garage places</li>
+<li><code>prefarea</code>: is the house located in the preferred
+neighbourhood of the city?</li>
+</ul>
+<p>Choose the most appropriate <code>geom_*</code> function from the
+given list to visualise the following variables:</p>
+<ol style="list-style-type: lower-alpha">
+<li>lotsize: {1:MULTICHOICE:%0%geom_line~%0%geom_label~%100%geom_histogram~%0%geom_smooth~%0%geom_point}</li>
+<li>driveway: {1:MULTICHOICE:%0%geom_boxplot~%0%geom_line~%0%geom_path~%0%geom_text~%100%geom_bar}</li>
+<li>price and recroom together: {1:MULTICHOICE:%0%geom_density_2d~%0%geom_path~%100%geom_violin~%0%geom_line~%0%geom_point}</li>
+</ol>
+</p>]]></text>
+</questiontext>
+<generalfeedback format="html">
+<text><![CDATA[<p>
+<ol type = "a">
+<li> geom_line / geom_label / <strong>geom_histogram</strong> / geom_smooth / geom_point </li>
+<li> geom_boxplot / geom_line / geom_path / geom_text / <strong>geom_bar</strong> </li>
+<li> geom_density_2d / geom_path / <strong>geom_violin</strong> / geom_line / geom_point </li>
+</ol>
+</p>]]></text>
+</generalfeedback>
+<penalty>0</penalty>
+<defaultgrade>3</defaultgrade>
+</question>
+
+</quiz>
