@@ -149,7 +149,8 @@ cloze_type.default <- function(x, ...) stop("Unsupported cloze question type.")
 
 cloze_questionlist <- function() {
   paste0(
-    do.call(c, lapply(cloze_table$list(), function(x) paste("*", cloze_question(x)))),
+    # needed the base:: since `c` seems to be overwritten somewhere
+    do.call(base::c, lapply(cloze_table$list(), function(x) paste("*", cloze_question(x)))),
     collapse = "\n"
   )
 }
