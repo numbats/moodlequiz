@@ -1,0 +1,28 @@
+---
+output: 
+  moodlequiz::moodlequiz:
+    self_contained: true
+title: Multi-question example
+---
+|- name: start
+
+```{r, include = FALSE}
+library(moodlequiz)
+```
+
+What is 2 + 2? `r answer_numerical(4)`
+
+What is 2 + 3? `r answer_numerical(5)`
+
+
+```{r}
+hist(rnorm(100))
+```
+
+What is the command for calculating --- average? `r answer_shortanswer(c("mean" = 1))`
+
+---
+|- name: easy
+
+Lucky dip, pick a number!
+`r answer_numerical(1)`
