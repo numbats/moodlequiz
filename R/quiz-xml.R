@@ -44,6 +44,7 @@ moodlequiz <- function(self_contained = TRUE,
     pre_processor = pre_processor,
     post_processor = post_processor,
     base_format = rmarkdown::html_document(
+      highlight = NULL,
       template = system.file("moodle.xml", package = "moodlequiz"),
       ...
     )
