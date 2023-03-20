@@ -28,7 +28,7 @@ answer_singlechoice <- function(options, weight = max(options), feedback = ifels
 }
 
 #' @export
-answer_numerical <- function(correct, weight = 1, tolerance = 0, correct_feedback = sprintf("Correct, %f is the correct answer.", correct)) {
+answer_numerical <- function(correct, weight = 1, tolerance = 0, feedback = sprintf("Correct, %f is the correct answer.", correct)) {
   # Add alternative solutions / thresholds
   sprintf(
     "{%i:NUMERICAL:=%f:%f#%s}",
