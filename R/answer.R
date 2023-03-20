@@ -32,6 +32,6 @@ answer_numerical <- function(correct, weight = 1, tolerance = 0, feedback = spri
   # Add alternative solutions / thresholds
   sprintf(
     "{%i:NUMERICAL:=%f:%f#%s}",
-    weight, correct, tolerance, correct_feedback
+    weight, correct, tolerance, feedback
   )
 }
