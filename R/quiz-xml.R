@@ -40,7 +40,7 @@ moodlequiz <- function(self_contained = TRUE,
   # return format
   output_format(
     knitr = knitr_options(),
-    pandoc = pandoc_options(to = "html", ext = ".xml", lua_filters = system.file("question.lua", package = "moodlequiz")),
+    pandoc = pandoc_options(to = "html", ext = ".xml", lua_filters = c(system.file("question.lua", package = "moodlequiz"), system.file("code.lua", package = "moodlequiz"))),
     pre_processor = pre_processor,
     post_processor = post_processor,
     base_format = rmarkdown::html_document(
