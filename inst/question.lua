@@ -1,7 +1,6 @@
 local question_before = [[
-<question type="cloze">
-<name><text>%s</text>
-</name>
+<question type="%s">
+<name><text>%s</text></name>
 <questiontext format="html">
 <text><cdata>
 ]]
@@ -9,6 +8,7 @@ local question_before = [[
 local question_after = [[
 </cdata></text>
 </questiontext>
+<defaultgrade>%s</defaultgrade>
 <generalfeedback>
 <text></text>
 </generalfeedback>
@@ -18,8 +18,8 @@ local question_after = [[
 
 function Div (elem)
   if elem.classes[1] == "question" then
-    local before = pandoc.RawBlock('html', string.format(question_before, elem.attributes['name']))
-    local after = pandoc.RawBlock('html', question_after)
+    local before = pandoc.RawBlock('html', string.format(question_before, elem.attributes['type'], elem.attributes['name']))
+    local after = pandoc.RawBlock('html', string.format(question_after, elem.attributes['defaultgrade']))
 
     local question = elem.content
     table.insert(question, 1, before)
