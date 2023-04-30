@@ -1,6 +1,5 @@
 local question_before = [[
 <question type="%s">
-<name><text>%s</text></name>
 <questiontext format="html">
 <text><cdata>
 ]]
@@ -8,22 +7,28 @@ local question_before = [[
 local question_after = [[
 </cdata></text>
 </questiontext>
-<defaultgrade>%s</defaultgrade>
-<generalfeedback>
-<text></text>
-</generalfeedback>
-<shuffleanswers>0</shuffleanswers>
+]]
+
+local question_end = [[
 </question>
 ]]
 
 function Div (elem)
   if elem.classes[1] == "question" then
-    local before = pandoc.RawBlock('html', string.format(question_before, elem.attributes['type'], elem.attributes['name']))
-    local after = pandoc.RawBlock('html', string.format(question_after, elem.attributes['defaultgrade']))
+    local before = pandoc.RawBlock('html', string.format(question_before, elem.attributes['type']))
+    local after = pandoc.RawBlock('html', question_after)
 
     local question = elem.content
     table.insert(question, 1, before)
     table.insert(question, after)
+    for k,v in pairs(elem.attributes) do
+      if k~='type' then
+        if k=='name' then v = string.format([[<text>%s</text>]], v) end
+        table.insert(question, pandoc.RawBlock('html', string.format([[<%s>%s</%s>]], k, v, k)))
+      end
+    end
+
+    table.insert(question, pandoc.RawBlock('html', question_end))
 
     return question
   else

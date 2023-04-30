@@ -56,18 +56,23 @@ moodlequiz <- function(self_contained = TRUE,
 }
 
 fence_question <- function(x) {
-  opts_prefix <- "^(\\|\\-\\s*)([^:]+):\\s*(.+)$"
+  opts_prefix <- "^(\\|\\-\\s*)"
   opts_loc <- grep(opts_prefix, x)
-  opts <- sub(opts_prefix, "'\\3'", x[opts_loc])
-  names(opts) <- sub(opts_prefix, "\\2", x[opts_loc])
+  opts <- sub(opts_prefix, "", x[opts_loc])
+  opts <- yaml::yaml.load(opts)
   opts <- list_defaults(
     opts,
+    name = "Unnamed",
     type = "cloze",
-    defaultgrade = 0
+    defaultgrade = 0,
+    shuffleanswers = 0,
+    idnumber = "",
+    generalfeedback = ""
   )
+
   if(length(opts) > 0) x <- x[-opts_loc]
   c(
-    paste0(":::{.question", paste0(" ", names(opts), "=", opts, collapse = ""), "}"),
+    paste0(":::{.question", paste0(" ", names(opts), "='", opts, collapse = "'"), "'}"),
     x,
     ":::"
   )
