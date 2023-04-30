@@ -38,17 +38,21 @@ moodlequiz <- function(self_contained = TRUE,
   }
 
   # return format
-  output_format(
+  out <- output_format(
     knitr = knitr_options(),
     pandoc = pandoc_options(to = "html", ext = ".xml", lua_filters = c(system.file("question.lua", package = "moodlequiz"), system.file("code.lua", package = "moodlequiz"))),
     pre_processor = pre_processor,
     post_processor = post_processor,
-    base_format = rmarkdown::html_document(
+    base_format = bookdown::html_document2(
       highlight = NULL,
       template = system.file("moodle.xml", package = "moodlequiz"),
       ...
     )
   )
+  # use labels of the form (\#label) in knitr
+  out$knitr$opts_knit$bookdown.internal.label = TRUE
+
+  out
 }
 
 fence_question <- function(x) {
