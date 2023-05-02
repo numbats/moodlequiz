@@ -59,7 +59,7 @@ moodlequiz_cloze <- function(self_contained = TRUE,
       "========",
       paste("extitle:", front_matter$title),
       "extype: cloze",
-      "exsolution: `r paste0(do.call(c, moodlequiz:::cloze_table$list()), collapse = '|')`",
+      "exsolution: `r paste0(do.call(base::c, moodlequiz:::cloze_table$list()), collapse = '|')`",
       paste("exclozetype:", paste0(vapply(cloze_table$list(), function(x) cloze_type(x), character(1L)), collapse = "|")),
       paste("exname:", xfun::sans_ext(basename(input))),
       paste("extol:", front_matter$tolerance%||%0.05)
@@ -165,7 +165,7 @@ cloze_question.moodle_schoice <- function(x, ...) {
 
 cloze_answerlist <- function() {
   paste0(
-    do.call(c, lapply(cloze_table$list(), function(x) paste("*", cloze_answer(x)))),
+    do.call(base::c, lapply(cloze_table$list(), function(x) paste("*", cloze_answer(x)))),
     collapse = "\n"
   )
 }
