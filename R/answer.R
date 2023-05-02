@@ -22,10 +22,10 @@ answer_multichoice <- function(
   sprintf(
     "`{%i:MULTIRESPONSE%s%s%s:%s}`{=html}",
     weight,
-    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~"),
     if(shuffle || type != "vertical") "_" else "",
     switch(type, vertical = "", horizontal = "H"),
-    if(shuffle) "S" else ""
+    if(shuffle) "S" else "",
+    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~")
   )
 }
 #' @export
@@ -36,12 +36,12 @@ answer_singlechoice <- function(
     type = c("dropdown", "vertical", "horizontal"),
     shuffle = FALSE) {
   sprintf(
-    "`{%i:MULTICHOICE:%s}`{=html}",
+    "`{%i:MULTICHOICE%s%s:%s}`{=html}",
     weight,
-    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~"),
-    if(shuffle || type != "dropdown") "_" else "",
-    switch(type, dropdown = "", vertical = "V", horizontal = "H"),
-    if(shuffle) "S" else ""
+    switch(type, dropdown = "", vertical = "_V", horizontal = "_H"),
+    #if(shuffle || type != "dropdown") "_" else "",
+    if(shuffle) "S" else "",
+    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~")
   )
 }
 
