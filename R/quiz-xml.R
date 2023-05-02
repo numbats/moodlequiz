@@ -66,6 +66,7 @@ fence_question <- function(x) {
     type = "cloze",
     defaultgrade = 0,
     shuffleanswers = 0,
+    penalty = 0,
     idnumber = "",
     generalfeedback = ""
   )
