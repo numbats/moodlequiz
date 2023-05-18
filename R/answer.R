@@ -53,3 +53,17 @@ answer_numerical <- function(correct, weight = 1, tolerance = 0, feedback = spri
     weight, correct, tolerance, feedback
   )
 }
+
+#' Create a set of choices for single or multiple choice questions
+#'
+#' @param A character vector of selectable choices
+#' @param A character vector of the correct answers
+#'
+#' @export
+choices <- function(options, answer) {
+  i <- options %in% answer
+  if(!any(i)) stop("The correct answer does not exist in the provided options.")
+  i <- as.integer(i)
+  names(i) <- options
+  i
+}
