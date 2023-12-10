@@ -8,8 +8,8 @@ answer_shortanswer <- function(
   sprintf(
     "`{%i:SHORTANSWER%s:%s}`{=html}",
     weight,
-    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~"),
-    if(case_sensitive) "_C" else ""
+    if(case_sensitive) "_C" else "",
+    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~")
   )
 }
 
@@ -19,6 +19,7 @@ answer_multichoice <- function(
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("vertical", "horizontal"),
     shuffle = FALSE) {
+  type <- match.arg(type)
   sprintf(
     "`{%i:MULTIRESPONSE%s%s%s:%s}`{=html}",
     weight,
@@ -35,6 +36,7 @@ answer_singlechoice <- function(
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("dropdown", "vertical", "horizontal"),
     shuffle = FALSE) {
+  type <- match.arg(type)
   sprintf(
     "`{%i:MULTICHOICE%s%s:%s}`{=html}",
     weight,
