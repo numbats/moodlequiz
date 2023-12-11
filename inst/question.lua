@@ -24,6 +24,7 @@ function Div (elem)
     for k,v in pairs(elem.attributes) do
       if k~='type' then
         if k=='name' then v = string.format([[<text>%s</text>]], v) end
+        if k=='category' then v = string.format([[<text>$course$/%s</text>]], v) end
         table.insert(question, pandoc.RawBlock('html', string.format([[<%s>%s</%s>]], k, v, k)))
       end
     end
