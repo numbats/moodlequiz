@@ -56,7 +56,7 @@ moodlequiz <- function(self_contained = TRUE,
 }
 
 fence_question <- function(x) {
-  opts_prefix <- "^(\\|\\-\\s*)"
+  opts_prefix <- "^(\\\\?\\|\\-\\s*)"
   opts_loc <- grep(opts_prefix, x)
   opts <- sub(opts_prefix, "", x[opts_loc])
   opts <- yaml::yaml.load(opts)
