@@ -5,11 +5,14 @@ answer_shortanswer <- function(
     options, weight = max(options),
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     case_sensitive = FALSE) {
+  # Validate an answer is provided
+  options <- options/weight*100
+  if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a short answer question.")
   sprintf(
     "`{%i:SHORTANSWER%s:%s}`{=html}",
     weight,
     if(case_sensitive) "_C" else "",
-    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~")
+    paste0("%", options, "%", names(options), "#", feedback, collapse = "~")
   )
 }
 
@@ -19,6 +22,10 @@ answer_multichoice <- function(
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("vertical", "horizontal"),
     shuffle = FALSE) {
+  # Validate an answer is provided
+  options <- options/weight*100
+  if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a multiple choice question.")
+
   type <- match.arg(type)
   sprintf(
     "`{%i:MULTIRESPONSE%s%s%s:%s}`{=html}",
@@ -26,7 +33,7 @@ answer_multichoice <- function(
     if(shuffle || type != "vertical") "_" else "",
     switch(type, vertical = "", horizontal = "H"),
     if(shuffle) "S" else "",
-    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~")
+    paste0("%", options, "%", names(options), "#", feedback, collapse = "~")
   )
 }
 #' @export
@@ -36,6 +43,10 @@ answer_singlechoice <- function(
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("dropdown", "vertical", "horizontal"),
     shuffle = FALSE) {
+  # Validate an answer is provided
+  options <- options/weight*100
+  if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a single choice question.")
+
   type <- match.arg(type)
   sprintf(
     "`{%i:MULTICHOICE%s%s:%s}`{=html}",
@@ -43,7 +54,7 @@ answer_singlechoice <- function(
     switch(type, dropdown = "", vertical = "_V", horizontal = "_H"),
     #if(shuffle || type != "dropdown") "_" else "",
     if(shuffle) "S" else "",
-    paste0("%", options/weight*100, "%", names(options), "#", feedback, collapse = "~")
+    paste0("%", options, "%", names(options), "#", feedback, collapse = "~")
   )
 }
 
