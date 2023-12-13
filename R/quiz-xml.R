@@ -71,7 +71,7 @@ fence_question <- function(x) {
     generalfeedback = ""
   )
 
-  if(length(opts) > 0) x <- x[-opts_loc]
+  if(length(opts_loc) > 0) x <- x[-opts_loc]
   c(
     paste0(":::{.question", paste0(" ", names(opts), "='", opts, collapse = "'"), "'}"),
     x,
