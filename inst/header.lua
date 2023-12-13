@@ -12,7 +12,9 @@ function process_header (elem)
   elem.attributes.name = pandoc.utils.stringify(elem.content[1])
   if (elem.level == 1) then
     elem.attributes.type = 'category'
-    elem.attributes.category = elem.identifier
+    if (elem.attributes.category == nil) then
+      elem.attributes.category = elem.identifier
+    end
   end
   if (elem.attributes.type == nil) then
     elem.attributes.type = 'cloze'
