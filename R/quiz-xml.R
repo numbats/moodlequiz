@@ -3,12 +3,18 @@
 #' Provides an alternative interface to working with the exams package for
 #' producing Moodle questions any type.
 #'
+#' @param replicates The number of times the questions are rendered, useful for
+#'   producing multiple versions of the same quiz with different random samples.
+#'   To keep identify replicates of questions for random importation into Moodle
+#'   we recommend organising the materials into categories using top level
+#'   headers.
 #' @inheritParams rmarkdown::html_document
 #'
 #' @import rmarkdown
 #'
 #' @export
-moodlequiz <- function(self_contained = TRUE,
+moodlequiz <- function(replicates = 1L,
+                       self_contained = TRUE,
                        extra_dependencies = NULL,
                        theme = NULL,
                        includes = NULL,
