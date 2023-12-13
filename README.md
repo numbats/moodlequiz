@@ -9,15 +9,18 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The `moodlequiz` R package is an alternative interface to produce the
-Moodle XML files via the `exams` package.
+The `moodlequiz` R package which allows the creation of
+[Moodle](https://moodle.org/) quiz questions using literate programming
+with R Markdown. This makes it easy to quickly create a quiz that can be
+randomly replicated with new datasets, questions, and options for
+answers.
 
 ## Installation
 
 You can install the development version of moodlequiz like so:
 
 ``` r
-remotes::install_github("emitanaka/moodlequiz")
+remotes::install_github("numbats/moodlequiz")
 ```
 
 ## Example
