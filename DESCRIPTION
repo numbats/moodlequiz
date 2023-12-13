@@ -12,8 +12,10 @@ Authors@R:
              email = "mail@mitchelloharawild.com",
              role = c("aut"),
              comment = c(ORCID = "0000-0002-3813-7155")))
-Description: Provides an alternative interface to working with the exams package
-  for producing Moodle questions of the cloze type
+Description: Enables the creation of Moodle quiz questions using literate
+  programming with R Markdown. This makes it easy to quickly create a quiz that
+  can be randomly replicated with new datasets, questions, and options for 
+  answers.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: es
