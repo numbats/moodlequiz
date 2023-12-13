@@ -1,7 +1,7 @@
 # Valid answer types: multichoice|truefalse|shortanswer|matching|cloze|essay|numerical|description
 
 #' @export
-answer_shortanswer <- function(
+cloze_shortanswer <- function(
     options, weight = max(options),
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     case_sensitive = FALSE) {
@@ -17,7 +17,7 @@ answer_shortanswer <- function(
 }
 
 #' @export
-answer_multichoice <- function(
+cloze_multichoice <- function(
     options, weight = max(options),
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("vertical", "horizontal"),
@@ -38,7 +38,7 @@ answer_multichoice <- function(
 }
 #' @export
 
-answer_singlechoice <- function(
+cloze_singlechoice <- function(
     options, weight = max(options),
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("dropdown", "vertical", "horizontal"),
@@ -59,7 +59,7 @@ answer_singlechoice <- function(
 }
 
 #' @export
-answer_numerical <- function(correct, weight = 1, tolerance = 0, feedback = sprintf("Correct, %f is the correct answer.", correct)) {
+cloze_numerical <- function(correct, weight = 1, tolerance = 0, feedback = sprintf("Correct, %f is the correct answer.", correct)) {
   # Add alternative solutions / thresholds
   sprintf(
     "`{%i:NUMERICAL:=%f:%f#%s}`{=html}",
@@ -93,15 +93,15 @@ cloze <- function(x, ...) {
 
 #' @export
 cloze.numeric <- function(x, ...) {
-  answer_numerical(x, ...)
+  cloze_numerical(x, ...)
 }
 
 #' @export
 cloze.character <- function(x, choices = NULL, ...) {
   if(is.null(choices))
-    answer_shortanswer(x, ...)
+    cloze_shortanswer(x, ...)
   else if(length(x) > 1)
-    answer_multichoice(choices(choices, x))
+    cloze_multichoice(choices(choices, x))
   else
-    answer_singlechoice(choices(choices, x))
+    cloze_singlechoice(choices(choices, x))
 }
