@@ -1,17 +1,17 @@
 ---
-output: moodlequiz::moodlequiz_cloze
+output: moodlequiz::moodlequiz
 title: Fit a simple linear model
 times: 5
-topic: regression
-tolerance: 0.0001
+category: regression
 ---
+
+## Fit a simple linear model
 
 ```{r set-up, include = FALSE}
 library(tidyverse)
+library(moodlequiz)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide")
-library(moodlequiz)
-library(exams)
 ```
 ```{r data}
 fn <- "data-01.csv"
@@ -32,14 +32,13 @@ opts <- c("`x` and `y` are not significantly correlated",
           "`y` decreases significantly with `x`")
 ```   
 
-
 Using the data provided in [`r fn`](`r fn`) estimate a linear regression of
 `y` on `x` and answer the following questions. _**For numerical answers, write your answer to 4 decimal places.**_
 
-a) Which of the statement is true? `cloze schoice(opts, opts[bsol])`
-b) What is the least squares estimate of the **intercept**? `cloze bhats[1]`
-c) What is the least squares estimate of the **slope**? `cloze bhats[2]`
-d) What is the **correlation** of `x` and `y`? `cloze round(cor(dat$x, dat$y), 4)`
+a) Which of the statement is true? `r cloze(opts[bsol], opts)`
+b) What is the least squares estimate of the **intercept**? `r cloze(bhats[1])`
+c) What is the least squares estimate of the **slope**? `r cloze(bhats[2])`
+d) What is the **correlation** of `x` and `y`? `r cloze(round(cor(dat$x, dat$y), 4), tolerance = 0.0001)`
 
 ---
 

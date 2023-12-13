@@ -1,15 +1,16 @@
 ---
-output: moodlequiz::moodlequiz_cloze
+output: moodlequiz::moodlequiz
 title: Changing themes
 times: 5
-topic: datavis
+category: datavis
 ---
+
+## Theming plots
 
 ```{r set-up, include = FALSE}
 library(tidyverse)
 library(rlang)
 library(moodlequiz)
-library(exams)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide",
                       fig.height = 6, 
@@ -35,7 +36,6 @@ theme_args <- setdiff(names(as.list(args(theme))), c("...", ""))
 ele <- c("element_text", "element_rect", "element_line")
 ```
 
-
 For the following plot made using the `penguins` dataset, identify the theme argument names and the corresponding function to modify the look of the plot. 
 
 ```{r, echo = TRUE, results = "show"}
@@ -50,12 +50,12 @@ ggplot(penguins, aes(x = `r x`, y = `r y`, color = `r color`)) +
   labs(x = `r clean_labels[x]`, 
        y = `r clean_labels[y]`,
        color = `r clean_labels[color]`) +
-  theme(`cloze schoice(theme_args, "strip.background")` = element_rect(fill = "indianred"),
-        `cloze schoice(theme_args, "strip.text")` = element_text(color = "white"),
-        `cloze schoice(theme_args, "panel.background")` = `cloze schoice(ele, "element_rect")`(fill = "white", color = "black"),
-        `cloze schoice(theme_args, "panel.grid")` = `cloze schoice(ele, "element_line")`(color = "pink"),
-        `cloze schoice(theme_args, "axis.title")` = `cloze schoice(ele, "element_text")`(size = 18),
-        `cloze schoice(theme_args, "plot.title")` = element_text(size = 24, face = "bold"))
+  theme(`r cloze("strip.background", theme_args)` = element_rect(fill = "indianred"),
+        `r cloze("strip.text", theme_args)` = element_text(color = "white"),
+        `r cloze("panel.background", theme_args)` = `r cloze("element_rect", ele)`(fill = "white", color = "black"),
+        `r cloze("panel.grid", theme_args)` = `r cloze("element_line", ele)`(color = "pink"),
+        `r cloze("axis.title", theme_args)` = `r cloze("element_text", ele)`(size = 18),
+        `r cloze("plot.title", theme_args)` = element_text(size = 24, face = "bold"))
 ```
 
 

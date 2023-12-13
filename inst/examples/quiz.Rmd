@@ -1,28 +1,26 @@
 ---
-output: 
-  moodlequiz::moodlequiz:
-    self_contained: true
+output: moodlequiz::moodlequiz
 title: Multi-question example
 ---
-|- name: start
+
+## Start
 
 ```{r, include = FALSE}
 library(moodlequiz)
 ```
 
-What is 2 + 2? `r answer_numerical(4)`
+What is 2 + 2? `r cloze(4)`
 
-What is 2 + 3? `r answer_numerical(5)`
+What is 2 + 3? `r cloze(5)`
 
 
 ```{r}
 hist(rnorm(100))
 ```
 
-What is the command for calculating --- average? `r answer_shortanswer(c("mean" = 1))`
+What is the command for calculating the average? `r cloze("mean")`
 
----
-|- name: easy
+## Easy
 
-Lucky dip, pick a number!
-`r answer_numerical(1)`
+Lucky dip, pick a number on the dice!
+`r cloze(sample(1:6, 1))`

@@ -1,16 +1,16 @@
 ---
-output: moodlequiz::moodlequiz_cloze
+output: moodlequiz::moodlequiz
 title: Changing scales
 times: 5
-topic: datavis
+category: datavis
 ---
 
+## Changing scales
 
-```{r set-up, include = FALSE}
+```{r setup, include = FALSE}
 library(tidyverse)
 library(rlang)
 library(moodlequiz)
-library(exams)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide",
                       fig.height = 10, 
@@ -25,7 +25,6 @@ x <- sample(c("carat", "depth", "x", "y", "z"), 1)
 wrap <- sample(c("cut", "color", "clarity"), 1)
 ```
 
-
 Using the `diamonds` dataset, complete the code below to generate the target plot below. The plot is using a log with base 10 transformation on the y-axis, a square-root transformation on the x-axis and the color is using the default viridis palette. **Only exact match with the answer will be marked correct, so make sure you entered your answer as you intended!**
 
 ```{r, echo = TRUE, results = "show"}
@@ -34,12 +33,12 @@ str(diamonds)
 ```
 
 ```r
-ggplot(diamonds, aes(x = `cloze x`, y = price)) + 
-  geom_`cloze "hex"`() +
-  facet_wrap(~`cloze wrap`) +
-  scale_`cloze "y_log10"`(name = "Price ($)", labels = scales::comma) +
-  scale_`cloze "x_sqrt"`() +
-  scale_`cloze "fill"`_viridis_c()
+ggplot(diamonds, aes(x = `r cloze(x)`, y = price)) + 
+  geom_`r cloze("hex")`() +
+  facet_wrap(~`r cloze(wrap)`) +
+  scale_`r cloze("y_log10")`(name = "Price ($)", labels = scales::comma) +
+  scale_`r cloze("x_sqrt")`() +
+  scale_`r cloze("fill")`_viridis_c()
 ```
 
 

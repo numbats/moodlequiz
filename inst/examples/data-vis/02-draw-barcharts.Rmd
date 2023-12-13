@@ -1,15 +1,16 @@
 ---
-output: moodlequiz::moodlequiz_cloze
+output: moodlequiz::moodlequiz
 title: Drawing barcharts
 times: 5
-topic: datavis
+category: datavis
 ---
 
-```{r set-up, include = FALSE}
+## Bar charts
+
+```{r setup, include = FALSE}
 library(tidyverse)
 library(rlang)
 library(moodlequiz)
-library(exams)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide",
                       fig.height = 4, 
@@ -26,8 +27,6 @@ y <- sample(cats, 1)
 fill <- sample(setdiff(cats, y), 1)
 ```
 
-
-
 In this question, we will be drawing a barplot using the `starwars` dataset. A partial code to draw the plot below is shown. Fill the gaps to draw the plot below.
 
 ```{r, echo = TRUE, results = "show"}
@@ -36,8 +35,8 @@ str(dplyr::select(starwars, name:species))
 ```
 
 ```r
-ggplot(starwars, aes(y = `cloze schoice(cols, y)`, fill = `cloze schoice(cols, fill)`)) + 
-  `cloze schoice(ls(envir = as.environment("package:ggplot2"), pattern = "^geom_"), "geom_bar")`(position = "fill", color = "black")
+ggplot(starwars, aes(y = `r cloze(y, cols)`, fill = `r cloze(fill, cols)`)) + 
+  `r cloze("geom_bar", ls(envir = as.environment("package:ggplot2"), pattern = "^geom_"))`(position = "fill", color = "black")
 ```
 
 ```{r, results = "show", fig.height = 10, fig.width = 10}

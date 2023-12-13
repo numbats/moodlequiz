@@ -1,15 +1,15 @@
 ---
-output: moodlequiz::moodlequiz_cloze
+output: moodlequiz::moodlequiz
 title: Transformation
 times: 5
-topic: regression
-tolerance: 0.0001
+category: regression
 ---
+
+## Transforming data
 
 ```{r set-up, include = FALSE}
 library(tidyverse)
 library(moodlequiz)
-library(exams)
 knitr::opts_chunk$set(echo = FALSE,
                       results = "hide")
 
@@ -45,10 +45,10 @@ $$\log_{10}(\texttt{PCB}) = \beta_0 + \beta_1 \texttt{Age}^{1/3}.$$
 Scientists asserts that this model is still appropriate to measure PCB residues of lake trouts in NY. A scientist repeated the experiment with the result provided in [`r fn`](`r fn`). Fit the above model proposed by Bates and Watts. _**For numerical answers, write your answer to 4 decimal places.**_
 
 
-a) What is the estimate of $\beta_0$? `cloze est[1]`
-b) What is the estimate of $\beta_1$? `cloze est[2]`
-c) A lake trout aged 7 years was sampled from Cayuga Lake, NY. What is the predicted value of the PCB residue for this fish under the proposed model? `cloze pred`
-d) Do you think the proposed model is appropriate for your collected data? `cloze schoice(opts, opts[sol])`
+a) What is the estimate of $\beta_0$? `r cloze(est[1], tolerance = 0.0001)`
+b) What is the estimate of $\beta_1$? `r cloze(est[2], tolerance = 0.0001)`
+c) A lake trout aged 7 years was sampled from Cayuga Lake, NY. What is the predicted value of the PCB residue for this fish under the proposed model? `r cloze(pred)`
+d) Do you think the proposed model is appropriate for your collected data? `r cloze(opts[sol], opts)`
 
 ---
 

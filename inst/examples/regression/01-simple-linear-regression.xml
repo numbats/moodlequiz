@@ -1,258 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <quiz>
 
-
-<question type="category">
-<category>
-<text>$course$/regression/01-simple-linear-regression</text>
-</category>
-</question>
-
-
 <question type="cloze">
-<name>
-<text> R1 Q1 : Fit a simple linear model </text>
-</name>
 <questiontext format="html">
 <text><![CDATA[
-<p>
-<p>Using the data provided in <a href="@@PLUGINFILE@@/data-01.csv">data-01.csv</a>
-estimate a linear regression of <code>y</code> on <code>x</code> and
-answer the following questions. <em><strong>For numerical answers, write
-your answer to 4 decimal places.</strong></em></p>
+
+<p>Using the data provided in <a href="data-01.csv">data-01.csv</a> estimate a linear regression of
+<code>y</code> on <code>x</code> and answer the following questions. <em><strong>For numerical answers, write your answer to 4 decimal places.</strong></em></p>
 <ol style="list-style-type: lower-alpha">
-<li>Which of the statement is true? {1:MULTICHOICE:=<code>x</code> and <code>y</code> are not significantly
-correlated~<code>y</code> increases significantly with <code>x</code>~<code>y</code> decreases significantly with <code>x</code>}</li>
-<li>What is the least squares estimate of the
-<strong>intercept</strong>?  {1:NUMERICAL:=-0.0123:1e-04}</li>
-<li>What is the least squares estimate of the <strong>slope</strong>?
- {1:NUMERICAL:=0.0123:1e-04}</li>
-<li>What is the <strong>correlation</strong> of <code>x</code> and
-<code>y</code>?  {1:NUMERICAL:=0.0271:1e-04}</li>
+<li>Which of the statement is true? <code>{1:MULTICHOICE:%0%</code>x<code>and</code>y<code>are not significantly correlated#Incorrect~%100%</code>y<code>increases significantly with</code>x<code>#Correct~%0%</code>y<code>decreases significantly with</code>x#Incorrect}</li>
+<li>What is the least squares estimate of the <strong>intercept</strong>? {1:NUMERICAL:=0.027500:0.000000#Correct, 0.027500 is the correct answer.}</li>
+<li>What is the least squares estimate of the <strong>slope</strong>? {1:NUMERICAL:=0.953000:0.000000#Correct, 0.953000 is the correct answer.}</li>
+<li>What is the <strong>correlation</strong> of <code>x</code> and <code>y</code>? {1:NUMERICAL:=0.896600:0.000000#Correct, 0.896600 is the correct answer.}</li>
 </ol>
-</p>]]></text>
-<file name="data-01.csv" encoding="base64">eCx5Ci0wLjcyLC0wLjI3Ci0wLjI3LC0wLjI1CjAuNiwtMC4wNAotMC4yOSwtMC4yOQotMC42NiwwLjEyCi0wLjkxLC0wLjQ1Ci0wLjkxLDAuMDcKMC42MiwtMC4xNQowLjgzLDAuMzEKMC42NSwtMC4wOQotMC4wNSwtMC4zMwowLjgxLDAuMTIKLTAuNDYsMC4yOAowLjYzLC0wLjI3CjAuNTYsLTAuMTcKMC45NywtMC4yNQowLjIyLDAuMTgKLTAuMzcsLTAuNQowLjg4LDAuMDQKMC4zNSwtMC4wNgowLjM2LDAuMDkKMC4xOCwwLjAyCjAuODQsMC4zMgotMC4yMiwtMC4yMQotMC4zNiwwLjMKLTAuNzMsMC4yMQowLjIyLDAuMTUKLTAuODgsLTAuMwotMC4yNiwwLjE1CjAuOTMsMC4zMwotMC41MywwLjI1CjAuMTEsMC4yNQowLjIyLDAuMTEKMC42NSwwCi0wLjczLDAuMjkKMC42MSwtMC4xCi0wLjEsLTAuMDEKMC4zMSwwLjA2CjAuNzMsMC4yNAotMC40NCwtMC4xMgowLjA5LC0wLjA5CjAuNjIsMC41MQotMC40MSwtMC4yMgowLjc1LDAuMzIKLTAuOTcsLTAuMDYKLTAuMywwLjA0CjAuNzcsLTAuMgowLjUzLC0wLjA3Ci0wLjc1LDAuMzMKMC45NSwwLjEKLTAuMjMsMC4xMQowLjc2LC0wLjIxCi0wLjU2LDAuMDQKLTAuOTcsLTAuNDYKMC40MywtMC40MwotMC4wOSwtMC4xNwotMC4wNCwwLjUzCi0wLjIyLC0wLjIyCjAuMzYsMC4yMgotMC40MSwwLjE2CjAuNTYsLTAuMDYKMC4yMywtMC41MwowLjExLDAuMDUKMC4yMiwwLjA2CjAuNTQsLTAuMQowLjMzLDAuNDQKLTAuMTksLTAuMjgKLTAuMjMsLTAuMjQKLTAuMjgsMC4zMQowLjU1LC0wLjQ0CjAuMTIsMC40OQowLjY2LC0wLjMKLTAuNjEsMC4xNwotMC42LDAuMDkKLTAuMTQsLTAuMjYKMC4zMiwwLjI0Ci0wLjI2LC0wLjQzCi0wLjUyLC0wLjExCjAuNDcsLTAuMDEKMC43LDAuMzYKLTAuMDcsLTAuMDkKLTAuNDEsLTAuMjUKMC43MSwwLjAxCjAuMSwtMC4zMwowLjU5LDAuMDQKMC45OCwtMC4xCi0wLjA2LC0wLjEzCjAuODMsMC4wNgotMC43NiwwLjM3CjAuNzgsLTAuMgotMC4zOCwwLjQxCjAuNzksLTAuMDIKLTAuMjIsLTAuMzEKLTAuMzQsMC4yOQotMC41NCwtMC41MgowLjAyLC0wLjE0CjAuODEsMC4xNwowLjg1LC0wLjAzCi0wLjUzLC0wLjEKLTAuODUsLTAuNTYKLTAuNjYsMC4yNgowLjQsLTAuNTUKLTAuMjQsLTAuMDgKLTAuMSwwLjA3CjAuMjgsLTAuMDIKLTAuNTQsLTAuMjYKMC44NCwtMC4yNQowLjI4LC0wLjA4Ci0wLjYxLC0wLjQ0CjAuMTIsLTAuMDUKMC4yMiwwLjA5Ci0wLjE1LC0wLjA0Ci0wLjcyLDAuMzEKMC4yNiwtMC4xNQotMC4wOCwwLjA3CjAuMjgsLTAuMDUKMC4yOCwtMC4zMgotMC41OSwwLjMzCjAuNywtMC4wNwowLjMyLDAuMDMKLTAuMywtMC41MwotMC4xMiwtMC4wMgotMC4yLDAuMTgKMC4yLC0wLjQzCjAuODYsLTAuMTcKLTAuMTEsLTAuMDkKMC4xNCwwLjIzCjAuMTgsLTAuMDIKMC4xMSwtMC4wNAowLjk4LDAuMQotMC40NywwLjM1CjAuMjgsLTAuMDQKLTAuNTMsMC41NQowLjQxLC0wLjI0CjAuNDYsLTAuMTQKLTAuODYsLTAuMTYKMC43MSwwLjE4CjAuNzgsMC4wNgotMC41NywtMC4wOAowLjk5LC0wLjExCjAuOTIsMC4wOQotMC45MiwwLjA0CjAuMDIsLTAuMDMKMC4zMSwwLjA4CjAuMDMsLTAuMjgKLTAuNzMsLTAuMjEKLTAuMjIsMC41MQowLjIsLTAuMjcKMC41NywtMC4xOAowLjY5LC0wLjAxCi0wLjUyLDAuMjgKLTAuMDgsLTAuNDEKMC4zMywwLjA3Ci0wLjM0LDAuMTcKMC40OSwtMC4xNQotMC41OCwwLjM5CjAuNDQsMC4xMgowLjY1LDAuNDcKMC4zMSwwLjEKMC4yMSwtMC4wNwowLjM0LC0wLjA3Ci0wLjcsLTAuMDYKMC4zNSwwLjIzCjAuMDMsMC4zNQowLjU2LC0wLjE0CjAuOSwtMC40NwotMC4zOSwwLjMzCjAuNDgsLTAuMzkKLTAuNzMsMC4yNwowLjQxLDAuMTYKLTAuOTYsLTAuMDQKMC4xNSwtMC4wNAotMC41MywtMC4zMgotMC4yOSwwLjIyCjAuNywwLjI0CjAuODQsLTAuMQowLjU0LDAuNDUKMC4xNywtMC4xMQowLjEzLC0wLjIKLTAuNzIsLTAuMzkKMC40MSwtMC4yMgotMC4wNywtMC4yCi0wLjA0LDAuMgotMC4zOCwwLjE4CjAuMDYsLTAuMTIKLTAuODksMC4wOQotMC4xNCwwLjEzCjAuMjUsMC4wNgotMC4xMywtMC4zNgowLjc5LDAuMDgKMC45OCwtMC4xNwowLjc2LDAuMTgKLTAuMDEsLTAuMDIKLTAuMjYsLTAuMTIKLTAuODIsLTAuMTQKLTAuOTIsMC4yOQoxLDAuMjkKLTAuMzcsLTAuMTIKMC4yNCwwLjI1CjAuODcsMC4xNgo=</file>
-</questiontext>
-<generalfeedback format="html">
-<text><![CDATA[<p>
+<hr />
 <p>To replicate the analysis in R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-01.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<pre class="r"><code>dat &lt;- read.csv(&quot;data-01.csv&quot;)
+fit &lt;- lm(y ~ x, data = dat)
+summary(fit)</code></pre>
 <p>It is also always good practice to visualise the data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<ol type = "a">
-<li> <strong><code>x</code> and <code>y</code> are not significantly
-correlated</strong> / <code>y</code> increases significantly with <code>x</code> / <code>y</code> decreases significantly with <code>x</code> </li>
-<li> -0.0123 </li>
-<li> 0.0123 </li>
-<li> 0.0271 </li>
-</ol>
-</p>]]></text>
-</generalfeedback>
-<penalty>0</penalty>
-<defaultgrade>4</defaultgrade>
-</question>
-
-
-<question type="cloze">
-<name>
-<text> R2 Q1 : Fit a simple linear model </text>
-</name>
-<questiontext format="html">
-<text><![CDATA[
-<p>
-<p>Using the data provided in <a href="@@PLUGINFILE@@/data-01.csv">data-01.csv</a>
-estimate a linear regression of <code>y</code> on <code>x</code> and
-answer the following questions. <em><strong>For numerical answers, write
-your answer to 4 decimal places.</strong></em></p>
-<ol style="list-style-type: lower-alpha">
-<li>Which of the statement is true? {1:MULTICHOICE:=<code>x</code> and <code>y</code> are not significantly
-correlated~<code>y</code> increases significantly with <code>x</code>~<code>y</code> decreases significantly with <code>x</code>}</li>
-<li>What is the least squares estimate of the
-<strong>intercept</strong>?  {1:NUMERICAL:=-0.026:1e-04}</li>
-<li>What is the least squares estimate of the <strong>slope</strong>?
- {1:NUMERICAL:=-0.014:1e-04}</li>
-<li>What is the <strong>correlation</strong> of <code>x</code> and
-<code>y</code>?  {1:NUMERICAL:=-0.033:1e-04}</li>
-</ol>
-</p>]]></text>
-<file name="data-01.csv" encoding="base64">eCx5CjAuOSwtMC4yMgowLjYsLTAuMjIKMC4zNywwLjMxCjAuMzEsMC4xNwotMC42MiwtMC4xNgowLDAuMTEKLTAuMTIsMC4yMwowLjIsMC4wNAotMC4zMywwLjIyCi0wLjUxLC0wLjQKMC4xOSwwLjA3Ci0wLjYzLC0wLjU4CjAuMDUsLTAuMzIKLTAuNDQsLTAuMDIKLTAuODYsLTAuMTgKLTAuMiwwLjE4Ci0wLjI5LDAuMTQKMC41MSwwLjA4Ci0wLjgsLTAuMTIKMC4yOSwwLjU1CjAuOTYsLTAuNDUKMC42OSwtMC40NwowLjIxLC0wLjA2CjAuMTQsLTAuMDUKMC43NCwtMC4wNAotMC42OCwtMC4zCi0wLjAzLC0wLjE1Ci0wLjQ4LDAuMTcKLTAuODYsLTAuMjMKMC45NywtMC4zCi0wLjMsLTAuMzIKLTAuODcsMC4zNQotMC43NSwwLjA1Ci0wLjg5LC0wLjA3CjAuMjQsLTAuMTMKMC43MywwLjMzCi0wLjEyLC0wLjI2CjAuNzksLTAuMDkKLTAuNTMsLTAuMzQKMC4wMSwtMC4yMgotMC45NCwtMC4wOQowLjM0LC0wLjMKMC42NCwwLjAzCjAuMjIsMC4xMwowLjkyLC0wLjMyCjAuMiwwLjI2Ci0wLjE4LC0wLjM1Ci0wLjk2LDAuMDQKLTAuOTQsMC4yNAotMC4wMSwwCi0wLjkzLC0wLjA5CjAuNTcsLTAuNDcKMC4xOCwtMC43OAowLjkzLDAuMjEKMC42NiwtMC4wNgowLjEzLDAuMDUKLTAuNiwtMC4xCjAuODYsLTAuMTEKMC4xOCwwLjEyCjAuNjIsMC4yNAotMC41NywwLjI3Ci0wLjM3LDAuMTcKLTAuMjIsLTAuMDcKMC45OCwwLjA1CjAuNzUsMC4wNgowLjQxLC0wLjI2CjAuNTgsMC40CjAuMDEsMC4wNwotMC40MSwwLjEyCjAuMjcsLTAuMzgKLTAuMzIsLTAuMTIKMC43NiwwLjIyCi0wLjQ4LDAuMwowLjE5LDAuMzIKLTAuNjIsMC4xNwotMC45NSwtMC4wNQotMC43NCwtMC4xOQowLjIyLC0wLjE4CjAuNjEsLTAuMDIKMC40LC0wLjA0Ci0wLjAyLC0wLjA4CjAuOTcsMC4wNQowLjI2LDAuMzEKLTAuMzEsLTAuMjkKLTAuMDUsMC4yNQotMC4wMiwtMC4wMgotMC42LDAuMgotMC43NiwwLjIzCi0wLjY2LC0wLjAyCjAuODMsLTAuMzMKMC45NywwLjMxCjAuMTQsLTAuNDUKMC43MywwLjEKLTAuOCwtMC4wOAotMC4zNiwwLjE3Ci0wLjE3LDAKMC45LC0wLjM3Ci0wLjU1LDAuMzEKMC4yOSwtMC4yNAowLjgyLDAuMwotMC4zMiwwLjIzCjAuNDksMC4xOAotMC4yMywwLjEzCi0wLjAxLC0wLjIKMC41NywwLjIKLTAuNjMsMC4wMgowLjI1LDAuMjQKMC40NCwtMC4wMQotMC44LDAuMTcKLTAuNDcsMAotMC44MiwwLjA2Ci0wLjA4LDAuMzIKMC41NiwwLjA5Ci0wLjE0LDAuMzYKMC4zOSwwLjEyCjAuOCwtMC4xNQowLjM1LC0wLjE3Ci0wLjExLC0wLjI0Ci0wLjUxLC0wLjI0CjAuMjMsMC4xMgowLjUzLC0wLjA5Ci0wLjk3LC0wLjE5CjAuNjIsMC4xMQotMC4wOSwtMC4xMwotMC4zOSwwLjE4Ci0wLjA1LDAuNDQKMC42LC0wLjAzCjAuNzMsMC4wOAotMC41MywwLjI1CjAuNjEsMC4yMgotMC41OSwtMC4zMgotMC40NCwtMC4zMgowLjU5LDAuMTgKMC41OSwtMC4xOAowLjQ0LDAuMTIKLTAuMzQsLTAuMDMKLTAuNiwtMC42MwotMC4zOSwwLjE0Ci0wLjE0LC0wLjAyCjAuOSwwLjE5Ci0wLjgzLC0wLjQyCjAuMDUsMC40NAowLjQ0LC0wLjE5CjAuMjYsMAotMC40NiwtMC4yNQowLjIzLC0wLjE0Ci0wLjUyLDAuMTkKMC45MiwtMC4xNAowLjU4LC0wLjA2CjAuNTQsMC4wMQowLjMsLTAuMzYKLTAuNzksMC4xMwotMC4xOCwtMC4xMwotMC4zNCwwLjAxCjAuNDcsLTAuMDQKLTAuMDYsMC4xNgotMC41MiwwLjMzCi0wLjg1LC0wLjI0CjAuNjksLTAuMTQKLTAuMDIsLTAuMjUKLTAuNTEsMC4xOAowLjQ0LC0wLjE4Ci0wLjA4LDAuMDEKLTAuMzIsMC4zMwotMC40MiwtMC4xOAotMC4yNSwwLjEKLTAuMywtMC4yMgotMC40NSwtMC4yNQotMC4yNSwtMC4xNwowLjkyLC0wLjI4Ci0wLjgzLDAuMjIKLTAuODksLTAuMjgKMC4wNiwtMC4zCjAsMC4wNQowLjU5LC0wLjYxCjAsMC4wMQowLjc4LC0wLjQ0CjAuNTUsLTAuMjkKLTAuNjQsLTAuMDQKLTAuODcsMC4wMQotMC44MiwwLjI1CjAuMTUsLTAuNDEKLTAuNTgsMC4yCi0wLjI0LC0wLjEzCjAuNzMsMC4xMgotMC4yOSwtMC4yNQowLjU5LDAuMDcKMC42NCwtMC4wMwowLjIsLTAuMDUKLTAuNTQsMC41CjAuOCwwLjI1CjAuNDksLTAuMTMKMC41MSwwLjA2CjAuMTUsMC4yOQotMC4wNiwtMC4yMwotMC44MSwtMC4yCjAuODgsMC4yCjAuNzEsLTAuMTMKMC41MiwtMC4yMQowLjI5LC0wLjM2Cg==</file>
+<pre class="r"><code>library(ggplot2)
+ggplot(dat, aes(x, y)) +
+ geom_point() + 
+ geom_smooth(method = &quot;lm&quot;, se = FALSE)</code></pre>
+]]></text>
 </questiontext>
-<generalfeedback format="html">
-<text><![CDATA[<p>
-<p>To replicate the analysis in R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-01.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
-<p>It is also always good practice to visualise the data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<ol type = "a">
-<li> <strong><code>x</code> and <code>y</code> are not significantly
-correlated</strong> / <code>y</code> increases significantly with <code>x</code> / <code>y</code> decreases significantly with <code>x</code> </li>
-<li> -0.026 </li>
-<li> -0.014 </li>
-<li> -0.033 </li>
-</ol>
-</p>]]></text>
-</generalfeedback>
-<penalty>0</penalty>
-<defaultgrade>4</defaultgrade>
-</question>
 
-
-<question type="cloze">
-<name>
-<text> R3 Q1 : Fit a simple linear model </text>
-</name>
-<questiontext format="html">
-<text><![CDATA[
-<p>
-<p>Using the data provided in <a href="@@PLUGINFILE@@/data-01.csv">data-01.csv</a>
-estimate a linear regression of <code>y</code> on <code>x</code> and
-answer the following questions. <em><strong>For numerical answers, write
-your answer to 4 decimal places.</strong></em></p>
-<ol style="list-style-type: lower-alpha">
-<li>Which of the statement is true? {1:MULTICHOICE:=<code>x</code> and <code>y</code> are not significantly
-correlated~<code>y</code> increases significantly with <code>x</code>~<code>y</code> decreases significantly with <code>x</code>}</li>
-<li>What is the least squares estimate of the
-<strong>intercept</strong>?  {1:NUMERICAL:=0.0142:1e-04}</li>
-<li>What is the least squares estimate of the <strong>slope</strong>?
- {1:NUMERICAL:=0.0268:1e-04}</li>
-<li>What is the <strong>correlation</strong> of <code>x</code> and
-<code>y</code>?  {1:NUMERICAL:=0.063:1e-04}</li>
-</ol>
-</p>]]></text>
-<file name="data-01.csv" encoding="base64">eCx5Ci0wLjA0LDAuMTUKMC4xMywwLjAxCi0wLjksLTAuNAotMC4yMiwwLjE5CjAuMjgsLTAuMTkKLTAuNjIsMC4yNAowLjMyLC0wLjM1CjAuMjIsMC4wNQotMC4wOCwtMC40MwowLjU4LDAuMjkKMC4xNSwwLjM2CjAuMTIsMC4xCi0wLjgzLC0wLjQxCjAuNjQsLTAuMDMKMC4xMiwtMC4xMQotMC41MSwwLjIzCi0wLjA4LDAuMTUKMC4wNCwwLjI1Ci0wLjIyLDAuMDQKMC45NiwwLjAxCi0wLjU3LDAuMTMKLTAuOSwwLjM3CjAuMTUsLTAuMgotMC41MSwtMC4wNwotMC4zLDAuMTUKMC4yMiwwLjAzCjAuMjgsMC4yNwotMC45NSwwLjM0CjAuODEsMC4xCi0wLjAyLDAuNDQKLTAuNDYsMC4wMQowLjkyLDAKLTAuMTUsLTAuNTcKLTAuMTQsMC4zNgowLjQsMC4xNgowLjI4LDAuMzEKLTAuNDEsLTAuMjgKLTAuOTQsLTAuMzUKMC4xNSwwLjA5CjAuMTIsMC4xCi0wLjMzLC0wLjI5CjAuODIsMC4wNQotMC4yOCwtMC4xNgowLjMyLDAuMwotMC4xNiwtMC4wMQotMC42MiwtMC4wNwotMC45NiwtMC4xCi0wLjY1LDAuMDUKMC40MSwtMC4yOAowLjE0LDAuMTgKLTAuMzMsLTAuMjQKLTAuNDEsLTAuMTUKLTAuNTIsMC4zNgowLjY2LDAuMjEKMC41NywwLjA3Ci0wLjczLDAuNTYKMC42NiwwLjE2Ci0wLjQ1LDAuMQowLjMzLC0wLjMxCjAuNywtMC4xNgotMC4wNiwwLjIxCjAuNjIsMC4yMQowLjI0LDAuOTQKMC4zOSwwLjMKLTAuNzgsLTAuMzIKMC45NSwtMC4yCi0wLjgzLC0wLjAxCi0wLjc1LC0wLjEKMC44NiwwLjQ2CjAuMDUsLTAuMDkKMC4wMSwtMC4wMQotMC41MSwwLjEKLTAuODIsMC4wOAowLjUzLDAuMQotMC4yNCwwLjA2Ci0wLjksLTAuNTEKLTAuNDgsLTAuMQowLjE2LC0wLjA2Ci0wLjEzLDAuMjYKMC40MiwtMC4wMgotMC4xNSwtMC4yMwowLjY3LDAuMDYKMC4yMSwtMC4zMgowLjA2LC0wLjAxCjAuNTcsMC4wMgowLjkxLDAuMzQKMC42OCwwLjA3CjAuOTYsMC4xMQotMC41NSwtMC40NAowLjAxLC0wLjA1Ci0wLjg0LDAuNDgKMC41OCwtMC4wOAowLjczLDAuMjIKLTAuMjksMC4xOQowLjY0LDAuMTMKMC4zOSwwLjExCjAuODcsLTAuMgotMC45LDAuMjQKMC4wNiwtMC4wNQowLjkzLDAuMTMKLTAuMTUsLTAuMwotMC4zOSwtMC4yNwowLjIyLC0wLjUxCjAuMjcsMC4wNwotMC41MSwwLjAyCjAuOTksLTAuMzQKLTAuMjIsLTAuMTIKLTAuMDcsLTAuMTQKMC42NywtMC4yMQotMC4yNCwtMC4xMQotMC44NCwwLjM1CjAuNjksLTAuMQotMC45MSwwLjIyCjAuODgsLTAuMzIKLTAuMTgsMC4yMwotMC40NCwtMC4yOQotMC45NSwwLjA2CjAuMzEsMC4yNAowLjc4LDAuMTEKLTAuMywtMC4wNQotMC41MywtMC4yNwotMC4zMywwLjAxCjAuOTUsLTAuMjcKMC44MSwwLjIzCjAuNjMsLTAuMjUKLTAuMzksMC4xNQowLjI3LC0wLjIyCi0wLjE1LC0wLjIxCjAuOTEsMC4yNwotMC4zOSwtMC4zNAotMC44LC0wLjIKLTAuMjYsMC4wNwotMC4wMiwwCi0wLjgxLDAuNTIKLTAuNTUsLTAuMTQKLTAuNjMsLTAuMzgKMC44NywtMC4yMwotMC4zNiwwLjI0Ci0wLjczLDAuMTIKMC4wNywwLjEzCjAuNjcsLTAuMTkKMC44NSwtMC4zNwowLjA2LDAuNjEKMC41MSwtMC4zMwotMC44NywtMC4xMgowLjA0LC0wLjM4Ci0wLjc5LDAuMzIKMC41LDAuMTIKMC4zNiwtMC4xMwowLjk1LDAuMTgKLTAuODIsMC4yNgotMC44NSwwLjM0Ci0wLjg3LDAuMjEKLTAuMjMsLTAuMDQKLTAuMzYsMC4wOAotMC41NCwtMC4wMgowLjcyLC0wLjIzCjAuNzIsLTAuMDEKMC44NywwLjIyCjAuODgsMC4yMwotMC41MywtMC4wNwowLjMsMC4yCi0wLjg4LC0wLjQ5CjAuOTgsMC40MQowLjIsLTAuMjMKLTAuNDQsMC4xMwotMC4xNCwwLjMzCjAuMTEsLTAuMQowLjQsMC4xMwotMC44MiwtMC4yNAowLjg0LDAuMTQKMC4wNCwwLjU1Ci0wLjQ3LC0wLjI0Ci0wLjU3LC0wLjIxCi0wLjMyLDAuMTgKLTAuMjcsLTAuMDMKLTAuMjYsLTAuMjgKLTEsLTAuMDcKLTAuMDUsMC4yNwowLjk4LDAuMDUKLTAuMTEsMC4yOAowLC0wLjA0Ci0wLjk1LC0wLjI0Ci0wLjk0LC0wLjI4Ci0wLjgzLC0wLjMzCjAuMzksLTAuMDYKMC41MiwwLjUxCjAuOTIsMAotMC44NSwwLjM0CjAuNjgsLTAuMTIKLTAuMzgsMC4yNwotMC40NSwtMC4wMQowLjgzLDAuMTUKMC4yNSwtMC4zNgotMC45MiwtMC4xMQowLjkyLC0wLjA0Ci0wLjE5LC0wLjA4Ci0wLjA3LC0wLjE3Ci0wLjEsMC4wOQotMC43OCwwLjIK</file>
-</questiontext>
-<generalfeedback format="html">
-<text><![CDATA[<p>
-<p>To replicate the analysis in R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-01.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
-<p>It is also always good practice to visualise the data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<ol type = "a">
-<li> <strong><code>x</code> and <code>y</code> are not significantly
-correlated</strong> / <code>y</code> increases significantly with <code>x</code> / <code>y</code> decreases significantly with <code>x</code> </li>
-<li> 0.0142 </li>
-<li> 0.0268 </li>
-<li> 0.063 </li>
-</ol>
-</p>]]></text>
-</generalfeedback>
-<penalty>0</penalty>
-<defaultgrade>4</defaultgrade>
-</question>
-
-
-<question type="cloze">
-<name>
-<text> R4 Q1 : Fit a simple linear model </text>
-</name>
-<questiontext format="html">
-<text><![CDATA[
-<p>
-<p>Using the data provided in <a href="@@PLUGINFILE@@/data-01.csv">data-01.csv</a>
-estimate a linear regression of <code>y</code> on <code>x</code> and
-answer the following questions. <em><strong>For numerical answers, write
-your answer to 4 decimal places.</strong></em></p>
-<ol style="list-style-type: lower-alpha">
-<li>Which of the statement is true? {1:MULTICHOICE:<code>x</code> and <code>y</code> are not significantly
-correlated~=<code>y</code> increases significantly with <code>x</code>~<code>y</code> decreases significantly with <code>x</code>}</li>
-<li>What is the least squares estimate of the
-<strong>intercept</strong>?  {1:NUMERICAL:=0.009:1e-04}</li>
-<li>What is the least squares estimate of the <strong>slope</strong>?
- {1:NUMERICAL:=0.8849:1e-04}</li>
-<li>What is the <strong>correlation</strong> of <code>x</code> and
-<code>y</code>?  {1:NUMERICAL:=0.8948:1e-04}</li>
-</ol>
-</p>]]></text>
-<file name="data-01.csv" encoding="base64">eCx5CjAuNTksMC43OQowLjk1LDEuMjEKLTAuMDcsMC4yNgotMC42NSwtMC44NgowLjg3LDAuODQKLTAuMDUsLTAuMDUKLTAuODksLTEuMQowLjA4LDAuMTkKLTAuMDEsLTAuMQotMC4zLDAuMDYKMC43NywwLjQ4Ci0wLjEzLC0wLjE4Ci0wLjk1LC0wLjY2CjAuNzMsMC43CjAuMDUsLTAuMDgKLTAuMDQsMC4zCi0wLjExLC0wLjE5CjAsLTAuMQowLjg1LDAuODIKMC40NCwwLjUxCjAuODcsMC43MQotMC44NywtMC42MQowLjE3LC0wLjA0Ci0wLjEyLC0wLjE1CjAuMzIsMC4zCjAuMjksMC4yMQowLjc3LDAuOTYKLTAuODksLTAuOTQKLTAuNTcsLTAuMTUKMC4yNSwtMC4wMgotMC45OCwtMC45CjAuNjcsMC40OQotMC43NSwtMC44MwotMC4wNywwLjE2Ci0wLjU4LC0wLjQ0Ci0wLjg0LC0wLjgKMC41MSwwLjYxCjAuNjgsMC4zCi0wLjYzLC0wLjkxCjAuMzIsMC4yOAowLjQ1LDAuMDgKMC45MiwxLjE5CjAuMzcsMC4yNwowLjg3LDEuMzQKLTAuNDQsLTAuMzQKLTAuMjcsLTAuMwotMC41NiwtMC42MQotMC4zOSwtMC4yMwotMC43OCwtMC4zCjAuNTMsLTAuMDcKLTAuOTgsLTEuMDgKLTAuNjcsLTAuNDIKMC45NywxLjAxCi0wLjI5LC0wLjMxCi0wLjE3LC0wLjI4Ci0wLjcxLC0wLjMzCjAuNzEsMC41NAowLjU1LDAuNDIKMC40LDAuNTcKLTAuNDUsLTAuMzQKLTAuMDQsLTAuMTIKMC42OSwwLjg3Ci0wLjAyLC0wLjE4CjAuOTksMC44MgowLjM1LDAuMjUKMC4yNSwxLjA3CjAuNzQsMS4yMwotMC4xOCwwLjM2Ci0wLjUsLTAuMTUKMC4zMiwwLjUyCi0wLjE3LC0wLjA3CjAuNjgsMC41CjAuNTQsMC4wNgowLjIyLDAuMTkKMC42OSwwLjkzCjAuNTksMC43NwowLjA2LC0wLjA3Ci0wLjY3LC0wLjUyCjAuMTYsMC40MQotMC45MywtMC45MwotMC4wMiwtMC4xOAowLjAxLC0wLjEyCjAuNywwLjc1Ci0wLjAzLC0wLjE1Ci0wLjk1LC0wLjc0Ci0wLjczLC0wLjcyCi0wLjEyLC0wLjE0CjAuMjIsMC4xNwotMC44MywtMC44NQowLjc5LDAuOQotMC41OCwtMC43MwotMC41LC0wLjM2Ci0wLjU0LC0wLjc4Ci0wLjEyLC0wLjM2Ci0wLjc3LC0wLjg4Ci0wLjcsLTAuNTgKMC45MiwwLjY1CjAuNzMsMC45NQotMC42NywtMC4xMQotMC4zMSwtMC4yOQotMC4wOCwtMC4zOQowLjIyLDAuNTkKLTAuMTMsLTAuNjYKMC4yNywwLjI4Ci0wLjgxLC0wLjMKLTAuMjEsMC4wNQowLjcsMC41OQowLjE4LC0wLjI5Ci0wLjQ0LC0wLjU2Ci0wLjk3LC0wLjY1CjAuODIsMC43NAotMC44MiwtMC4yMQotMC41MSwtMC41MQotMC42OSwtMC41MgotMC44OSwtMC43NQowLjc0LDAuNjcKMC45NSwwLjg0Ci0wLjM1LC0wLjQKLTAuNjksLTAuODEKMC41MSwwLjY2CjAuNSwwLjIxCjAuNDQsMC40MQowLjUxLDAuNjkKMC44OCwwLjgxCjAuMzgsMC4wNAowLjUyLDAuMjgKLTAuOSwtMS4xNgowLjMyLDAuMjQKLTAuMTQsLTAuMjcKLTAuMDgsLTAuMzMKLTAuOTYsLTEuMTgKMC43OCwwLjEzCi0wLjY1LC0wLjI3CjAuMTMsMC4yNgowLjQxLDAuNDkKMC42NSwwLjM5CjAuMjIsMC4zCi0wLjU3LC0wLjQ4Ci0wLjEyLDAKMC45NSwwLjQ4CjAuNzYsMC40MQotMC43MywtMC41OQowLjk2LDAuODIKLTAuMzIsLTAuNDQKLTAuNjQsLTAuMTkKLTAuMjIsMC4xNQowLjE5LC0wLjI5CjAuMTgsMC41MwowLjQyLDAuMTEKLTAuNjUsLTAuMTUKLTAuMDgsMC4wMwotMC41NCwtMC40NAotMC4zLC0wLjM4CjAuNzgsMQowLjc1LDAuOTkKMC4yOCwwLjQ1Ci0wLjU0LC0wLjM2CjAuNTQsMC4yNQowLjY0LC0wLjE5CjAuNzQsMC43Ci0wLjc0LC0wLjg3CjAsLTAuMzYKLTAuODUsLTEuMTUKMC4zMiwwLjUzCi0wLjc2LC0wLjQ3CjAuOSwwLjUxCi0wLjcsLTAuNjYKMC4zMiwwLjAzCi0wLjM5LC0wLjgKMC41OSwwLjUxCjAsLTAuMjUKMC43MywwLjg4Ci0wLjMyLC0wLjMyCi0wLjQsLTAuNTMKMC42MiwwLjQKLTAuMzgsLTAuMTMKLTAuNjQsLTAuNTcKMC45NCwwLjQ3Ci0wLjczLC0wLjUzCi0wLjgzLC0wLjUyCjAuMSwwLjA5CjAuNjgsMC40MgotMC40MSwtMC4xMQotMC40MiwtMC4wMQowLjA4LDAuMzkKLTAuMjIsLTAuMzYKMC40NSwwLjQyCi0wLjEsLTAuMzYKLTAuMiwtMC4yCjAuNjEsMC4zNAowLjQyLDAuODcKMC40NCwwLjI1CjAuNTYsMC4zMQowLjU3LDEuMDMKLTAuMzIsLTAuNDUKMC4xNiwwLjEzCjAuMjEsMS4wNgotMC45NiwtMC44OAowLjY3LDAuNTgKLTAuODIsLTAuODgK</file>
-</questiontext>
-<generalfeedback format="html">
-<text><![CDATA[<p>
-<p>To replicate the analysis in R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-01.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
-<p>It is also always good practice to visualise the data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<ol type = "a">
-<li> <code>x</code> and <code>y</code> are not significantly
-correlated / <strong><code>y</code> increases significantly with
-<code>x</code></strong> / <code>y</code> decreases significantly with <code>x</code> </li>
-<li> 0.009 </li>
-<li> 0.8849 </li>
-<li> 0.8948 </li>
-</ol>
-</p>]]></text>
-</generalfeedback>
-<penalty>0</penalty>
-<defaultgrade>4</defaultgrade>
-</question>
-
-
-<question type="cloze">
-<name>
-<text> R5 Q1 : Fit a simple linear model </text>
-</name>
-<questiontext format="html">
-<text><![CDATA[
-<p>
-<p>Using the data provided in <a href="@@PLUGINFILE@@/data-01.csv">data-01.csv</a>
-estimate a linear regression of <code>y</code> on <code>x</code> and
-answer the following questions. <em><strong>For numerical answers, write
-your answer to 4 decimal places.</strong></em></p>
-<ol style="list-style-type: lower-alpha">
-<li>Which of the statement is true? {1:MULTICHOICE:<code>x</code> and <code>y</code> are not significantly
-correlated~<code>y</code> increases significantly with <code>x</code>~=<code>y</code> decreases significantly with <code>x</code>}</li>
-<li>What is the least squares estimate of the
-<strong>intercept</strong>?  {1:NUMERICAL:=-0.0111:1e-04}</li>
-<li>What is the least squares estimate of the <strong>slope</strong>?
- {1:NUMERICAL:=-0.5746:1e-04}</li>
-<li>What is the <strong>correlation</strong> of <code>x</code> and
-<code>y</code>?  {1:NUMERICAL:=-0.8215:1e-04}</li>
-</ol>
-</p>]]></text>
-<file name="data-01.csv" encoding="base64">eCx5CjAuNzgsLTAuNDQKLTAuNDQsMC41NgowLjM3LC0wLjI1CjAuNCwtMC4wMgotMC45OSwwLjM1Ci0wLjUsMC4yMQowLjg4LC0wLjMzCi0wLjIyLDAuMjkKLTAuNDksMC4wOQotMC43OCwwLjIzCi0wLjQ0LDAuMjYKMC44MSwtMC43NAowLjMxLC0wLjA4CjAuOTMsLTEuMDQKMC45NSwtMC4zNwotMC4xMSwtMC4wNgowLjE4LDAuMDMKMC4zNSwwLjEKLTAuNzUsMC4xNQowLjgzLC0wLjg0Ci0wLjk1LDAuNjEKMC4xNiwtMC4yNgotMC4zNSwwLjExCi0wLjgsMC4wOQowLjc3LC0wLjU0CjAuNDYsLTAuNTUKMC4xMiwtMC41MQotMC42NywwLjAzCi0wLjU5LDAuNTUKMC4wMSwwCjAuMTMsMC4xMQotMC45NSwwLjQ4Ci0wLjc1LDAuNDcKLTAuOTEsMC4zOAotMC4wMywtMC4xOAowLjg4LC0wLjMzCi0wLjA5LC0wLjIzCjAuNjEsLTAuNTIKMC44NSwtMC4xOQotMC40MywwLjE5CjAuNzIsLTAuNjgKMC44LC0wLjI5Ci0wLjI5LC0wLjA3CjAuNzcsLTAuODUKMC42NCwtMC4zMgotMC42NywwLjQ2CjAuNTgsLTAuMTYKMC42OSwtMC40MQowLjE3LC0wLjMzCi0wLjIyLDAuMTQKLTAuNjYsMC4yOAotMC4xOCwwLjYKLTAuNTUsMC4yNQowLjM4LC0wLjI2CjAuNTEsLTAuNgotMC45MiwwLjY3Ci0wLjU4LDAuNDQKLTAuNjUsMC4yMgotMC4wNiwtMC4yNQotMC4zMiwwLjA5Ci0wLjU1LDAuMDQKLTAuNTIsMC4yNgowLjY2LC0wLjI2Ci0wLjQsMC40MQotMC43NSwwLjM2Ci0wLjkzLDAuNzcKLTAuMjMsMC4xNgotMC4yNSwtMC4xOQotMC42NSwwLjY1Ci0wLjY0LDAuMzIKLTAuNDQsMC4zNAotMC42NiwwLjYyCi0wLjMxLDAuNgotMC4yNCwtMC4yNQowLjA0LC0wLjA3CjAuMDQsLTAuMDUKMC45NSwtMC43NAotMC4zNCwtMC4wNQotMC43LDAuNTcKLTAuMywtMC4yOQowLjY2LDAuMDIKMC4xLC0wLjM0CjAuMzcsLTAuMjUKMC44NCwtMC41NQotMC4zMywtMC40MQowLjA5LDAuMQowLjg1LC0wLjU4Ci0wLjUsMC42MwotMC45MiwwLjE1Ci0wLjk2LDAuNzcKLTAuMTcsLTAuMTUKMC4xMiwwLjA0CjAuNCwtMC4wOQotMC42NSwwLjMyCi0wLjYyLDAuMjEKLTAuODEsMC42MQowLjA5LC0wLjA3CjAuNjUsLTAuMzUKMC41NSwtMC4yMwowLjM3LC0wLjMyCjAuOCwtMC4wMQowLjQ1LC0wLjExCjAuNDgsLTAuNDIKLTAuNDgsMC41MwotMC4yLDAuMjIKMC40MiwtMC4zOAotMC41LDAuNTQKMC42MiwtMC4wOAotMC4yLDAuMwowLjI5LC0wLjQ5CjAuNzksLTAuMzkKMC45NiwtMC44MQowLjgyLC0wLjQ4Ci0wLjY0LDAuMzQKLTAuMDgsMC4zMwowLjY4LC0wLjU0CjAuODgsLTAuNDgKMC4yMSwtMC4xNgotMC4wMywtMC4xMgowLjYxLC0wLjMxCi0wLjQ5LDAuNjEKLTAuMDksLTAuMDMKLTAuNDIsMC4wNQowLjkzLC0wLjMxCjAuOTMsLTAuMjEKLTAuODIsMC40NAotMC40OSwtMC4xOAowLjczLC0wLjQyCi0wLjM4LC0wLjAxCjAuODksLTAuNzcKLTAuNTEsMC4wMwowLC0wLjI0CjAuMTYsLTAuMDkKMC4xNywtMC44MQotMC4yNywwLjE0Ci0wLjk5LDAuNzYKLTAuMzgsMC4xMwowLjU4LC0wLjM4Ci0wLjg3LDAuMzkKLTAuNzUsMC40CjAuNzQsLTAuNjYKMC41NCwtMC4zMQowLjA0LDAuMDgKMC4xNywtMC4yNwowLjk3LC0wLjU4Ci0wLjM0LDAuNDEKLTAuOTgsMC42OAowLjc2LC0wLjUKLTAuOTksMC43MgotMC44LDAuMDkKMC43NywtMC40Ci0wLjE1LDAuNDQKMC4zLC0wLjI3Ci0wLjUzLDAuMTYKMC41LC0wLjA1Ci0wLjE5LDAuMTYKLTAuNSwwLjcxCi0wLjQzLDAuNTIKMC42NCwtMC4wOQotMC4zMywwLjI5CjAuMTgsLTAuNTQKLTAuNzIsMC4zNAowLjI0LDAuMTIKLTAuMjgsMC4xCi0wLjYyLDAuMzYKMC4xNCwwLjE5Ci0wLjAyLDAuMDQKLTAuMzEsMC4xOAowLjYyLC0wLjM5CjAuNSwtMC4xNAowLjY4LDAuMDIKLTAuNSwwLjMyCjAuNzgsLTAuNTMKMC4xMywtMC4xNQotMC45MSwwLjc5CjAuMzYsLTAuMTgKLTAuNCwwLjY0Ci0wLjkzLDAuNjYKLTAuMTUsMC4yMwowLjYzLC0wLjI0Ci0wLjExLC0wLjA4CjAuNDgsLTAuODQKLTAuMzQsLTAuMjcKLTAuMjYsMC40MgowLjQ0LDAuMTcKMC4xNCwwLjMKMC45NywtMC41Ci0wLjI2LC0wLjE3Ci0wLjY1LDAuNzYKMC40NSwtMC41MQowLjE2LDAuMjgKLTAuMTQsMC4xOAowLjAyLC0wLjA5CjAuMywtMC4wMQowLjc0LC0wLjM3Ci0wLjY1LDAuNQowLjcyLC0wLjY1CjAuNDcsLTAuMjkKLTAuNTEsMC40OAotMC43NSwwLjA5Cg==</file>
-</questiontext>
-<generalfeedback format="html">
-<text><![CDATA[<p>
-<p>To replicate the analysis in R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data-01.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
-<p>It is also always good practice to visualise the data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<ol type = "a">
-<li> <code>x</code> and <code>y</code> are not significantly
-correlated / <code>y</code> increases significantly with <code>x</code> / <strong><code>y</code> decreases significantly with
-<code>x</code></strong> </li>
-<li> -0.0111 </li>
-<li> -0.5746 </li>
-<li> -0.8215 </li>
-</ol>
-</p>]]></text>
-</generalfeedback>
-<penalty>0</penalty>
-<defaultgrade>4</defaultgrade>
+<name><text>Fit</text></name>
 </question>
 
 </quiz>

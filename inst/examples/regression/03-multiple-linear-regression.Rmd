@@ -1,11 +1,11 @@
 ---
-output: moodlequiz::moodlequiz_cloze
+output: moodlequiz::moodlequiz
 title: Multiple linear regression
 times: 5
 topic: regression
-tolerance: 0.0001
-#keep_rmd: true
 ---
+
+## Multiple linear regression
 
 ```{r set-up, include = FALSE}
 library(tidyverse)
@@ -42,7 +42,7 @@ df <- tibble(race_id = 1:200) %>%
 #   scale_y_log10() +
 #   geom_line(data = pred, aes(color = factor(Climb)))
 
-fn <- "data-04.csv"
+fn <- "data-03.csv"
 
 fit1 <- lm(log10(time) ~ log10(climb) * log10(distance), data = df)
 fit2 <- lm(log10(time) ~ log10(distance), data = df)
@@ -67,12 +67,12 @@ where $i = 1, ..., 200$ and assume $e_{1i}\sim N(0, \sigma^2), e_{2i} \sim N(0, 
 
 
 a) For $M_1$, what is the least squares estimate of the following parameters to 4 decimal places? 
-  * $\hat{\beta}_0 =$ `cloze beta1[1]`
-  * $\hat{\beta}_1 =$ `cloze beta1[2]`
-  * $\hat{\beta}_2 =$ `cloze beta1[3]`
-  * $\hat{\beta}_3 =$ `cloze beta1[4]`
+  * $\hat{\beta}_0 =$ `r cloze(beta1[1], tolerance = 0.0001)`
+  * $\hat{\beta}_1 =$ `r cloze(beta1[2], tolerance = 0.0001)`
+  * $\hat{\beta}_2 =$ `r cloze(beta1[3], tolerance = 0.0001)`
+  * $\hat{\beta}_3 =$ `r cloze(beta1[4], tolerance = 0.0001)`
 b) What is the sum of the squares of the residuals for $M_1$ and $M_2$, respectively, to 4 decimal places?  
-$M_1$: `cloze round(sum(fit1$residuals^2), 4)` and $M_2$: `cloze round(sum(fit2$residuals^2), 4)`.
+$M_1$: `r cloze(round(sum(fit1$residuals^2), 4), tolerance = 0.0001)` and $M_2$: `r cloze(round(sum(fit2$residuals^2), 4), tolerance = 0.0001)`.
 c) You want to draw a scatter plot with the fitted model $M_2$ superimposed on it like the plot below.
 ```{r, fig.show="hold"}
 library(ggplot2)
@@ -88,8 +88,8 @@ Complete the code below to draw the above plot.
 library(ggplot2)
 ggplot(df, aes(distance, time)) +
   geom_point() + 
-  geom_`cloze "smooth"`(method = lm, formula = y ~ x, se = FALSE) +
-  `cloze "scale_x_log10"`() + 
+  geom_`r cloze("smooth")`(method = lm, formula = y ~ x, se = FALSE) +
+  `r cloze("scale_x_log10")`() + 
   scale_y_log10()
 ```
 
