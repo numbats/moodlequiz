@@ -16,9 +16,6 @@ function process_header (elem)
       elem.attributes.category = elem.identifier
     end
   end
-  if (elem.attributes.type == nil) then
-    elem.attributes.type = 'cloze'
-  end
   return pandoc.Div({}, elem.attr)
 end
 
@@ -26,7 +23,9 @@ function Pandoc(doc)
   local hblocks = {}
   local category_idx = 0
   local in_question = false
-  for i,el in pairs(doc.blocks) do
+
+  -- Re-organise headers into questions containing following elements
+  for _,el in pairs(doc.blocks) do
     if (el.t ~= "Header" or el.level > 2 or el.classes[1] == "header") then
       -- If a question div hasn't yet been opened, create one.
       if (not in_question) then
@@ -37,8 +36,38 @@ function Pandoc(doc)
       hblocks[category_idx].content:insert(el)
     elseif (el.t == "Header") then
       category_idx = category_idx + 1
-      table.insert(hblocks, process_header(el))
+
+      el.classes = {'question'}
+      el.attributes.name = pandoc.utils.stringify(el.content[1])
+
+      in_question = (el.level == 2)
+      if (not in_question) then
+        el.attributes.type = 'category'
+        if (el.attributes.category == nil) then
+          el.attributes.category = el.identifier
+        end
+      end
+
+      table.insert(hblocks, pandoc.Div({}, el.attr))
     end
   end
+
+  -- Look for cloze tags to set default question type 'description' or 'cloze'
+  for i,el in pairs(hblocks) do
+    if (el.attributes.type == nil) then
+      has_cloze = false
+      el.content:walk {
+        RawInline = function(el)
+          if(el.text:find("^{%d+:") ~= nil) then has_cloze = true end
+        end
+      }
+      if has_cloze then
+        hblocks[i].attributes.type = 'cloze'
+      else
+        hblocks[i].attributes.type = 'description'
+      end
+    end
+  end
+
   return pandoc.Pandoc(hblocks, doc.meta)
 end
