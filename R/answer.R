@@ -99,7 +99,7 @@ cloze.numeric <- function(x, ...) {
 #' @export
 cloze.character <- function(x, choices = NULL, ...) {
   if(is.null(choices))
-    cloze_shortanswer(x, ...)
+    cloze_shortanswer(`names<-`(1L, x), ...)
   else if(length(x) > 1)
     cloze_multichoice(choices(choices, x))
   else
