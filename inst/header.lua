@@ -6,6 +6,7 @@ local moodle_category = [[
 </question>
 ]]
 
+local base_category = nil
 local cloze_pattern = "{%d+:"
 
 function process_header (elem)
@@ -21,10 +22,23 @@ function process_header (elem)
   return pandoc.Div({}, elem.attr)
 end
 
-function Pandoc(doc)
+
+function moodlequiz_meta(meta)
+  if (meta.moodlequiz ~= nil and meta.moodlequiz.category ~= nil) then
+    base_category = pandoc.utils.stringify(meta.moodlequiz.category)
+  end
+end
+
+function header_questions(doc)
   local hblocks = {}
   local category_idx = 0
   local in_question = false
+
+  -- Set base category if specified
+  if base_category ~= nil then
+    category_idx = category_idx + 1
+    table.insert(hblocks, pandoc.Div({}, pandoc.Attr('', {'question'}, {type = 'category', category = base_category})))
+  end
 
   -- Re-organise headers into questions containing following elements
   for _,el in pairs(doc.blocks) do
@@ -33,7 +47,7 @@ function Pandoc(doc)
       if (not in_question) then
         in_question = true
         category_idx = category_idx + 1
-        table.insert(hblocks, process_header(pandoc.Header(2, 'Unnamed question', pandoc.Attr())))
+        table.insert(hblocks, pandoc.Div({}, pandoc.Attr('', {'question'})))
       end
       hblocks[category_idx].content:insert(el)
     elseif (el.t == "Header") then
@@ -46,7 +60,11 @@ function Pandoc(doc)
       if (not in_question) then
         el.attributes.type = 'category'
         if (el.attributes.category == nil) then
-          el.attributes.category = el.identifier
+          if base_category ~= nil then
+            el.attributes.category = base_category .. "/" .. el.identifier
+          else
+            el.attributes.category = el.identifier
+          end
         end
       end
 
@@ -76,3 +94,12 @@ function Pandoc(doc)
 
   return pandoc.Pandoc(hblocks, doc.meta)
 end
+
+return {
+  {
+    Meta = moodlequiz_meta
+  },
+  {
+    Pandoc = header_questions
+  }
+}
