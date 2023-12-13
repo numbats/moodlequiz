@@ -80,3 +80,28 @@ choices <- function(options, answer) {
   names(i) <- options
   i
 }
+
+#' Succinctly create a suitable cloze question
+#'
+#' @param x The correct answer
+#' @param ... Options passed on to other methods
+#'
+#' @export
+cloze <- function(x, ...) {
+  UseMethod("cloze")
+}
+
+#' @export
+cloze.numeric <- function(x, ...) {
+  answer_numerical(x, ...)
+}
+
+#' @export
+cloze.character <- function(x, choices = NULL, ...) {
+  if(is.null(choices))
+    answer_shortanswer(x, ...)
+  else if(length(x) > 1)
+    answer_multichoice(choices(choices, x))
+  else
+    answer_singlechoice(choices(choices, x))
+}
