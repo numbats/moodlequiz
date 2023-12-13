@@ -36,14 +36,15 @@ the x, y, color, and size are mapped randomly to one of the variables in
 the `mtcars` data.
 
     ---
-    output: moodlequiz::moodlequiz_cloze
+    output: moodlequiz::moodlequiz
     title: Drawing a scatterplot
     times: 5
-    topic: datavis
-    # keep_rmd: true
+    category: datavis
     ---
 
-    ```{r set-up, include = FALSE}
+    ## Scatterplots
+
+    ```{r setup, include = FALSE}
     library(tidyverse)
     library(rlang)
     knitr::opts_chunk$set(echo = FALSE,
@@ -54,8 +55,8 @@ the `mtcars` data.
                           fig.cap = "",
                           fig.align = "center")
     library(moodlequiz)
-    library(exams)
     ```
+
     ```{r data}
     cols <- colnames(mtcars)
     cats <- c("cyl", "vs", "am", "gear", "carb")
@@ -66,8 +67,6 @@ the `mtcars` data.
     size <- sample(setdiff(nums, c(x, y)), 1)
     ```
 
-
-
     You have been asked to analyse the `mtcars` data. The variables and the class types of the data is shown below.
 
     ```{r, echo = TRUE, results = "show"}
@@ -77,11 +76,11 @@ the `mtcars` data.
     As a starting point, you decide to draw a scatter plot for some variables. Complete the code below to get the target plot below:
 
     ```r
-    ggplot(mtcars, aes(x = `cloze schoice(cols, x)`, 
-                       y = `cloze schoice(cols, y)`,
-                       color = factor(`cloze schoice(cols, color)`),
-                       size = `cloze schoice(cols, size)`)) +
-        `cloze schoice(ls(envir = as.environment("package:ggplot2"), pattern = "^geom_"), "geom_point")`()
+    ggplot(mtcars, aes(x = `r cloze(x, cols)`, 
+                       y = `r cloze(y, cols)`,
+                       color = factor(`r cloze(color, cols)`),
+                       size = `r cloze(size, cols)`)) +
+        `r cloze("geom_point", ls(envir = as.environment("package:ggplot2"), pattern = "^geom_"))`()
     ```
 
     ```{r, results = "show"}
