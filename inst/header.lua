@@ -6,6 +6,8 @@ local moodle_category = [[
 </question>
 ]]
 
+local cloze_pattern = "{%d+:"
+
 function process_header (elem)
   if (elem.classes[1] == "header" or elem.level > 2) then return elem end
   elem.classes = {'question'}
@@ -58,7 +60,10 @@ function Pandoc(doc)
       has_cloze = false
       el.content:walk {
         RawInline = function(el)
-          if(el.text:find("^{%d+:") ~= nil) then has_cloze = true end
+          if(el.text:find(cloze_pattern) ~= nil) then has_cloze = true end
+        end,
+        CodeBlock = function(el)
+          if(el.text:find(cloze_pattern) ~= nil) then has_cloze = true end
         end
       }
       if has_cloze then
