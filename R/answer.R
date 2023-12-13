@@ -5,6 +5,7 @@ cloze_shortanswer <- function(
     options, weight = max(options),
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     case_sensitive = FALSE) {
+  force(feedback)
   # Validate an answer is provided
   options <- options/weight*100
   if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a short answer question.")
@@ -22,6 +23,7 @@ cloze_multichoice <- function(
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("vertical", "horizontal"),
     shuffle = FALSE) {
+  force(feedback)
   # Validate an answer is provided
   options <- options/weight*100
   if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a multiple choice question.")
@@ -43,6 +45,7 @@ cloze_singlechoice <- function(
     feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
     type = c("dropdown", "vertical", "horizontal"),
     shuffle = FALSE) {
+  force(feedback)
   # Validate an answer is provided
   options <- options/weight*100
   if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a single choice question.")
