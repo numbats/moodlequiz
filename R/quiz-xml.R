@@ -37,10 +37,16 @@ moodlequiz <- function(self_contained = TRUE,
     output_file
   }
 
+  filters <- vapply(
+    c("header.lua", "question.lua", "code.lua"),
+    system.file, character(1L),
+    package = "moodlequiz", mustWork = TRUE
+  )
+
   # return format
   out <- output_format(
     knitr = knitr_options(),
-    pandoc = pandoc_options(to = "html", ext = ".xml", lua_filters = c(system.file("question.lua", package = "moodlequiz"), system.file("code.lua", package = "moodlequiz"))),
+    pandoc = pandoc_options(to = "html", ext = ".xml", lua_filters = filters),
     pre_processor = pre_processor,
     post_processor = post_processor,
     base_format = bookdown::html_document2(
