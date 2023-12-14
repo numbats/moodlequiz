@@ -34,7 +34,7 @@ moodlequiz <- function(replicates = 1L,
     xml <- lapply(replicate_prefix, function(prefix) {
       rmarkdown::render(
         input, output_format = "moodlequiz::moodlequiz_xml", output_options = list(replicate = prefix),
-        output_file = output, quiet = FALSE
+        output_file = output, quiet = TRUE
       )
       xfun::read_utf8(output)
     })
