@@ -55,6 +55,7 @@ producing Moodle questions any type.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">moodlequiz</span><span class="op">(</span></span>
+<span>  replicates <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  self_contained <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  extra_dependencies <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  theme <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -68,7 +69,15 @@ producing Moodle questions any type.</p>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>self_contained</dt>
+    <dl><dt>replicates</dt>
+<dd><p>The number of times the questions are rendered, useful for
+producing multiple versions of the same quiz with different random samples.
+To keep identify replicates of questions for random importation into Moodle
+we recommend organising the materials into categories using top level
+headers.</p></dd>
+
+
+<dt>self_contained</dt>
 <dd><p>Produce a standalone HTML file with no external
 dependencies, using data: URIs to incorporate the contents of linked
 scripts, stylesheets, images, and videos. Note that even for self contained
