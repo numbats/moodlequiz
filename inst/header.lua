@@ -33,6 +33,7 @@ function header_questions(doc)
   local hblocks = {}
   local category_idx = 0
   local in_question = false
+  local n_questions = 0
 
   -- Set base category if specified
   if base_category ~= nil then
@@ -47,6 +48,7 @@ function header_questions(doc)
       if (not in_question) then
         in_question = true
         category_idx = category_idx + 1
+        n_questions = n_questions + 1
         table.insert(hblocks, pandoc.Div({}, pandoc.Attr('', {'question'})))
       end
       hblocks[category_idx].content:insert(el)
@@ -66,14 +68,18 @@ function header_questions(doc)
             el.attributes.category = el.identifier
           end
         end
+      else
+        n_questions = n_questions + 1
       end
 
       table.insert(hblocks, pandoc.Div({}, el.attr))
     end
   end
 
-  -- Look for cloze tags to set default question type 'description' or 'cloze'
+  question_name_fmt = "Q%0" .. tostring(n_questions):len() .. "i: %s"
+  question_num = 0
   for i,el in pairs(hblocks) do
+    -- Look for cloze tags to set default question type 'description' or 'cloze'
     if (el.attributes.type == nil) then
       has_cloze = false
       el.content:walk {
@@ -90,7 +96,13 @@ function header_questions(doc)
         hblocks[i].attributes.type = 'description'
       end
     end
+    -- Add question number prefix for ordering
+    if (el.attributes.type ~= "category") then
+      question_num = question_num + 1
+      hblocks[i].attributes.name = question_name_fmt:format(question_num, el.attributes.name)
+    end
   end
+
 
   return pandoc.Pandoc(hblocks, doc.meta)
 end
