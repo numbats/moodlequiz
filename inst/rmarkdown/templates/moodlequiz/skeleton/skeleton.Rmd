@@ -1,0 +1,60 @@
+---
+title: A simple moodle quiz
+output: 
+  moodlequiz::moodlequiz:
+    replicates: 1
+moodlequiz:
+  category: main-category
+---
+
+## Sample statistics
+
+```{r setup, include = FALSE}
+library(moodlequiz)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r data, include = FALSE}
+x <- exp(rnorm(100, 3.2, 0.4))
+```
+
+A hundred samples were collected for analysis. Complete the code used to obtain the summary statistics for this data.
+
+```r
+`r cloze("summary")`(x)
+```
+
+```{r}
+summary(x)
+```
+
+Based on these summary statistics we can see that the mean is `r cloze(mean(x), tolerance = 0.5)` and the median is `r cloze(median(x), tolerance = 0.5)`.
+
+## Visualisation
+
+Complete the code used to produce a histogram of the data.
+
+```r
+`r cloze("hist")`(x)
+```
+
+```{r}
+hist(x)
+```
+
+Alternatively we can create a density plot with the following code:
+```r
+plot(`r cloze("hist")`(x))
+```
+
+```{r}
+plot(density(x))
+```
+
+The data appears to be skewed, is the data left-skewed or right-skewed? `r cloze("Right-skewed", c("Left-skewed", "Right-skewed"))`.
+
+## Histograms or densities {type = essay}
+
+Histograms and density plots provide a similar graphical representation of the data.
+
+Compare the advantages and disadvantages of using histograms and density plots for this dataset.
