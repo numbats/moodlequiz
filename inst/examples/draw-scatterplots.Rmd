@@ -1,9 +1,8 @@
 ---
+title: Drawing a scatterplot
 output: 
   moodlequiz::moodlequiz:
     replicates: 5
-title: Drawing a scatterplot
-times: 5
 moodlequiz:
   category: datavis-scatterplots
 ---
