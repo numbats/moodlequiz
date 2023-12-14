@@ -22,6 +22,32 @@ moodlequiz <- function(replicates = 1L,
                        md_extensions = NULL,
                        pandoc_args = NULL,
                        ...) {
+  pre_knit <- function (input, ...) {
+    output <- tempfile(fileext = ".xml")
+    rmarkdown::render(
+      input, output_format = "moodlequiz_xml", output_file = output, quiet = TRUE
+    )
+    file.copy(output, xfun::with_ext(input, "xml"))
+  }
+
+  # return format
+  output_format(
+    knitr = knitr_options(),
+    pandoc = pandoc_options(to = "html"),
+    pre_knit = pre_knit,
+    base_format = rmarkdown::html_document(...)
+  )
+}
+
+moodlequiz_xml <- function(replicates = 1L,
+                           self_contained = TRUE,
+                           extra_dependencies = NULL,
+                           theme = NULL,
+                           includes = NULL,
+                           lib_dir = NULL,
+                           md_extensions = NULL,
+                           pandoc_args = NULL,
+                           ...) {
 
   post_processor <- function(metadata, input_file, output_file, ...) {
     # Convert content within pandoc divs to quiz questions
