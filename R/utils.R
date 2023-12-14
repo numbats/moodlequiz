@@ -17,7 +17,7 @@ split_rmd = function(file) {
       body = if (i[2] == n) {
         character()
       } else {
-        lapply(split(x, cut(seq_along(x), breaks = c(i[-1]-1, n))), `[`, -1L)
+        x[(i[2]+1):n]
       }
     )
   }

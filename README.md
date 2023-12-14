@@ -36,17 +36,21 @@ the x, y, color, and size are mapped randomly to one of the variables in
 the `mtcars` data.
 
     ---
-    output: moodlequiz::moodlequiz
+    output: 
+      moodlequiz::moodlequiz:
+        replicates: 5
     title: Drawing a scatterplot
     times: 5
-    category: datavis
+    moodlequiz:
+      category: datavis-scatterplots
     ---
 
-    ## Scatterplots
+    # Data
 
     ```{r setup, include = FALSE}
     library(tidyverse)
     library(rlang)
+    library(moodlequiz)
     knitr::opts_chunk$set(echo = FALSE,
                           results = "hide",
                           fig.height = 4, 
@@ -54,7 +58,6 @@ the `mtcars` data.
                           fig.path = "",
                           fig.cap = "",
                           fig.align = "center")
-    library(moodlequiz)
     ```
 
     ```{r data}
@@ -72,6 +75,8 @@ the `mtcars` data.
     ```{r, echo = TRUE, results = "show"}
     str(mtcars)
     ```
+
+    # Plot
 
     As a starting point, you decide to draw a scatter plot for some variables. Complete the code below to get the target plot below:
 

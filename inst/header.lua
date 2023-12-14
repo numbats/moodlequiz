@@ -1,20 +1,13 @@
-local moodle_category = [[
-<question type="category">
-  <category>
-    <text>$course$/%s</text>
-  </category>
-</question>
-]]
-
 local base_category = nil
 local cloze_pattern = "{%d+:"
+local replicate_num = ""
 
 function process_header (elem)
   if (elem.classes[1] == "header" or elem.level > 2) then return elem end
-  elem.classes = {'question'}
+  elem.classes = {"question"}
   elem.attributes.name = pandoc.utils.stringify(elem.content[1])
   if (elem.level == 1) then
-    elem.attributes.type = 'category'
+    elem.attributes.type = "category"
     if (elem.attributes.category == nil) then
       elem.attributes.category = elem.identifier
     end
@@ -24,8 +17,9 @@ end
 
 
 function moodlequiz_meta(meta)
-  if (meta.moodlequiz ~= nil and meta.moodlequiz.category ~= nil) then
-    base_category = pandoc.utils.stringify(meta.moodlequiz.category)
+  if (meta.moodlequiz ~= nil) then
+    if (meta.moodlequiz.category ~= nil) then base_category = pandoc.utils.stringify(meta.moodlequiz.category) end
+    if (meta.moodlequiz.replicate ~= nil) then replicate_num = pandoc.utils.stringify(meta.moodlequiz.replicate) end
   end
 end
 
@@ -76,7 +70,7 @@ function header_questions(doc)
     end
   end
 
-  question_name_fmt = "Q%0" .. tostring(n_questions):len() .. "i: %s"
+  question_name_fmt = "Q%0" .. tostring(n_questions):len() .. "i%s: %s"
   question_num = 0
   for i,el in pairs(hblocks) do
     -- Look for cloze tags to set default question type 'description' or 'cloze'
@@ -99,7 +93,7 @@ function header_questions(doc)
     -- Add question number prefix for ordering
     if (el.attributes.type ~= "category") then
       question_num = question_num + 1
-      hblocks[i].attributes.name = question_name_fmt:format(question_num, el.attributes.name)
+      hblocks[i].attributes.name = question_name_fmt:format(question_num, replicate_num, el.attributes.name)
     end
   end
 

@@ -5,6 +5,7 @@
 \title{R Markdown format for Moodle XML quizzes}
 \usage{
 moodlequiz(
+  replicates = 1L,
   self_contained = TRUE,
   extra_dependencies = NULL,
   theme = NULL,
@@ -16,6 +17,12 @@ moodlequiz(
 )
 }
 \arguments{
+\item{replicates}{The number of times the questions are rendered, useful for
+producing multiple versions of the same quiz with different random samples.
+To keep identify replicates of questions for random importation into Moodle
+we recommend organising the materials into categories using top level
+headers.}
+
 \item{self_contained}{Produce a standalone HTML file with no external
 dependencies, using data: URIs to incorporate the contents of linked
 scripts, stylesheets, images, and videos. Note that even for self contained

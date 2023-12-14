@@ -1,14 +1,14 @@
 ---
-output: moodlequiz::moodlequiz
+output: 
+  moodlequiz::moodlequiz:
+    replicates: 5
 title: Drawing a scatterplot
 times: 5
 moodlequiz:
-  category: datavis
+  category: datavis-scatterplots
 ---
 
-# Scatterplots
-
-## Data
+# Data
 
 ```{r setup, include = FALSE}
 library(tidyverse)
@@ -39,7 +39,7 @@ You have been asked to analyse the `mtcars` data. The variables and the class ty
 str(mtcars)
 ```
 
-## Plot
+# Plot
 
 As a starting point, you decide to draw a scatter plot for some variables. Complete the code below to get the target plot below:
 
