@@ -25,6 +25,7 @@ Imports:
     knitr,
     rlang,
     rmarkdown,
+    bookdown,
     xfun,
     yaml
 URL: https://github.com/emitanaka/moodlequiz,
