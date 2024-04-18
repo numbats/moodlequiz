@@ -50,7 +50,7 @@ function header_questions(doc)
       category_idx = category_idx + 1
 
       el.classes = {'question'}
-      el.attributes.name = pandoc.utils.stringify(el.content[1])
+      el.attributes.name = pandoc.utils.stringify(el.content)
 
       in_question = (el.level == 2)
       if (not in_question) then
