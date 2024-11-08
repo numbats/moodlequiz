@@ -1,27 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/404.html</loc>
-  </url>
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/authors.html</loc>
-  </url>
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/index.html</loc>
-  </url>
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/news/index.html</loc>
-  </url>
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/reference/choices.html</loc>
-  </url>
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/reference/cloze.html</loc>
-  </url>
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>http://emitanaka.org/moodlequiz/reference/moodlequiz.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://emitanaka.org/moodlequiz/404.html</loc></url>
+<url><loc>http://emitanaka.org/moodlequiz/authors.html</loc></url>
+<url><loc>http://emitanaka.org/moodlequiz/index.html</loc></url>
+<url><loc>http://emitanaka.org/moodlequiz/news/index.html</loc></url>
+<url><loc>http://emitanaka.org/moodlequiz/reference/choices.html</loc></url>
+<url><loc>http://emitanaka.org/moodlequiz/reference/cloze.html</loc></url>
+<url><loc>http://emitanaka.org/moodlequiz/reference/index.html</loc></url>
+<url><loc>http://emitanaka.org/moodlequiz/reference/moodlequiz.html</loc></url>
 </urlset>
+
