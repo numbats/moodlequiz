@@ -3,7 +3,7 @@
 #' @export
 cloze_shortanswer <- function(
     options, weight = max(options),
-    feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
+    feedback = "",
     case_sensitive = FALSE) {
   force(feedback)
   # Validate an answer is provided
@@ -20,7 +20,7 @@ cloze_shortanswer <- function(
 #' @export
 cloze_multichoice <- function(
     options, weight = max(options),
-    feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
+    feedback = "",
     type = c("vertical", "horizontal"),
     shuffle = FALSE) {
   force(feedback)
@@ -42,7 +42,7 @@ cloze_multichoice <- function(
 
 cloze_singlechoice <- function(
     options, weight = max(options),
-    feedback = ifelse(options == weight, "Correct", ifelse(options == 0, "Incorrect", "Partially correct")),
+    feedback = "",
     type = c("dropdown", "vertical", "horizontal"),
     shuffle = FALSE) {
   force(feedback)
@@ -62,7 +62,7 @@ cloze_singlechoice <- function(
 }
 
 #' @export
-cloze_numerical <- function(correct, weight = 1, tolerance = 0, feedback = sprintf("Correct, %f is the correct answer.", correct)) {
+cloze_numerical <- function(correct, weight = 1, tolerance = 0, feedback = "") {
   # Add alternative solutions / thresholds
   sprintf(
     "`{%i:NUMERICAL:=%f:%f#%s}`{=html}",
