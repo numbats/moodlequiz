@@ -62,7 +62,7 @@
 <span>  shuffle <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">cloze_numerical</span><span class="op">(</span><span class="va">correct</span>, weight <span class="op">=</span> <span class="fl">1</span>, tolerance <span class="op">=</span> <span class="fl">0</span>, feedback <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu">cloze_numerical</span><span class="op">(</span><span class="va">answer</span>, weight <span class="op">=</span> <span class="fl">1</span>, tolerance <span class="op">=</span> <span class="fl">0</span>, feedback <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">cloze</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -72,15 +72,15 @@
 
 
 <dl><dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
-<dd><p>A named vector or list of answer options. Names correspond to answers, and values specify their weights (e.g., 100 for a correct answer or partial weights for partially correct answers). For multiple-choice and single-choice questions, this includes both correct and distractor options.</p></dd>
+<dd><p>A named vector of answer options. For single/multiple choice questions the <code><a href="choices.html">choices()</a></code> helper function can help create this vector. Names correspond to answers, and values specify their weights (e.g., 100 for a correct answer or partial weights for partially correct answers). For multiple-choice and single-choice questions, this includes both correct and distractor options.</p></dd>
 
 
 <dt id="arg-weight">weight<a class="anchor" aria-label="anchor" href="#arg-weight"></a></dt>
-<dd><p>A numeric value or vector specifying the weight for the correct answer(s). Defaults to the highest weight in <code>options</code>.</p></dd>
+<dd><p>A numeric value specifying the weight for the question. Defaults to the highest weight in <code>options</code>.</p></dd>
 
 
 <dt id="arg-feedback">feedback<a class="anchor" aria-label="anchor" href="#arg-feedback"></a></dt>
-<dd><p>A character vector or named list providing feedback for answers. For named lists, names should match options.</p></dd>
+<dd><p>A character vector providing feedback for answers.</p></dd>
 
 
 <dt id="arg-case-sensitive">case_sensitive<a class="anchor" aria-label="anchor" href="#arg-case-sensitive"></a></dt>
@@ -95,8 +95,8 @@
 <dd><p>Logical. For <code>cloze_multichoice</code> and <code>cloze_singlechoice</code>, whether the answer options should be shuffled. Defaults to <code>FALSE</code>.</p></dd>
 
 
-<dt id="arg-correct">correct<a class="anchor" aria-label="anchor" href="#arg-correct"></a></dt>
-<dd><p>A numeric value or vector specifying the correct numerical answer(s). For <code>cloze_numerical</code>, this replaces <code>options</code>.</p></dd>
+<dt id="arg-answer">answer<a class="anchor" aria-label="anchor" href="#arg-answer"></a></dt>
+<dd><p>A numeric value specifying the correct numerical answer(s).</p></dd>
 
 
 <dt id="arg-tolerance">tolerance<a class="anchor" aria-label="anchor" href="#arg-tolerance"></a></dt>
@@ -128,43 +128,7 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Short-answer question</span></span></span>
-<span class="r-in"><span><span class="fu">cloze_shortanswer</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Canberra"</span> <span class="op">=</span> <span class="fl">100</span>, <span class="st">"canberra"</span> <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  feedback <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Canberra"</span> <span class="op">=</span> <span class="st">"Correct!"</span>, <span class="st">"canberra"</span> <span class="op">=</span> <span class="st">"Correct!"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  case_sensitive <span class="op">=</span> <span class="cn">FALSE</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{100:SHORTANSWER:%100%Canberra#Correct!~%100%canberra#Correct!}`{=html}"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Multiple-choice question</span></span></span>
-<span class="r-in"><span><span class="fu">cloze_multichoice</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span> <span class="op">=</span> <span class="fl">100</span>, <span class="st">"3"</span> <span class="op">=</span> <span class="fl">0</span>, <span class="st">"5"</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  feedback <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span> <span class="op">=</span> <span class="st">"Correct!"</span>, <span class="st">"3"</span> <span class="op">=</span> <span class="st">"Too low."</span>, <span class="st">"5"</span> <span class="op">=</span> <span class="st">"Too high."</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"vertical"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{100:MULTIRESPONSE:%100%4#Correct!~%0%3#Too low.~%0%5#Too high.}`{=html}"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Single-choice question</span></span></span>
-<span class="r-in"><span><span class="fu">cloze_singlechoice</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2"</span> <span class="op">=</span> <span class="fl">100</span>, <span class="st">"1"</span> <span class="op">=</span> <span class="fl">0</span>, <span class="st">"3"</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  feedback <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2"</span> <span class="op">=</span> <span class="st">"Correct!"</span>, <span class="st">"1"</span> <span class="op">=</span> <span class="st">"1 is not a prime."</span>, <span class="st">"3"</span> <span class="op">=</span> <span class="st">"Close, but 3 is larger."</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"dropdown"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{100:MULTICHOICE:%100%2#Correct!~%0%1#1 is not a prime.~%0%3#Close, but 3 is larger.}`{=html}"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Numerical question</span></span></span>
-<span class="r-in"><span><span class="fu">cloze_numerical</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  correct <span class="op">=</span> <span class="fl">5</span>,</span></span>
-<span class="r-in"><span>  tolerance <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
-<span class="r-in"><span>  feedback <span class="op">=</span> <span class="st">"Good job!"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:NUMERICAL:=5.000000:0.100000#Good job!}`{=html}"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Automatic cloze question</span></span></span>
-<span class="r-in"><span><span class="fu">cloze</span><span class="op">(</span><span class="st">"rep_len"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rep"</span>, <span class="st">"rep.int"</span>, <span class="st">"rep_len"</span>, <span class="st">"replicate"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:MULTICHOICE:%0%rep#~%0%rep.int#~%100%rep_len#~%0%replicate#}`{=html}"</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
