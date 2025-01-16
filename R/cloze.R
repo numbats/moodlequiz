@@ -46,13 +46,13 @@
 #'       "South Australia", "Tasmania", "Australian Capital Territory",
 #'       "Northern Territory"),
 #'     "Victoria"
-#'   )
+#'   ),
 #'   type = "dropdown"
 #' )
 #'
 #' # Numerical question: Pick a number between 1 and 10
 #' cloze_numerical(
-#'   correct = 5.5,
+#'   answer = 5.5,
 #'   tolerance = 4.5
 #' )
 #'
