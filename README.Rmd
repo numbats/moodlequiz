@@ -35,7 +35,7 @@ remotes::install_github("numbats/moodlequiz")
 
 Below is a Moodle quiz where the students have to select the right variables from the data to map onto the plot aesthetics in `ggplot2`. 
 
-![](man/quiz-screenshot.png){style="border:1px solid black;"}
+![](man/figures/quiz-screenshot.png){style="border:1px solid black;"}
 
 The above quiz is created from the R Markdown document below. Knitting the document below will generate 5 different versions of the quiz where the x, y, color, and size are mapped randomly to one of the variables in the `mtcars` data. 
 
