@@ -41,7 +41,7 @@ The above quiz is created from the R Markdown document below. Knitting the docum
 
 ```{r, echo = FALSE, results="asis"}
 cat("````\n")
-cat(readLines("inst/examples/draw-scatterplots.Rmd"), sep = "\n")
+cat(readLines("man/examples/draw-scatterplots.Rmd"), sep = "\n")
 cat("````")
 ```
 
