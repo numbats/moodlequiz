@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/numbats/moodlequiz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/numbats/moodlequiz/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The `moodlequiz` R package which allows the creation of [Moodle](https://moodle.org/) quiz questions using literate programming with R Markdown. This makes it easy to quickly create a quiz that can be randomly replicated with new datasets, questions, and options for answers.
