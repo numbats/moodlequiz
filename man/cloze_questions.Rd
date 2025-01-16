@@ -108,6 +108,6 @@ cloze_numerical(
 cloze(42) # Numerical
 cloze("Australia") # Short answer
 cloze("rep_len", c("rep", "rep.int", "rep_len", "replicate")) # Single choice
-cloze(c("A", "B", "C"), letters) # Multiple choice
+cloze(c("A", "B", "C"), LETTERS) # Multiple choice
 
 }
