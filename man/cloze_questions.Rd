@@ -32,16 +32,16 @@ cloze_singlechoice(
   shuffle = FALSE
 )
 
-cloze_numerical(correct, weight = 1, tolerance = 0, feedback = "")
+cloze_numerical(answer, weight = 1, tolerance = 0, feedback = "")
 
 cloze(x, ...)
 }
 \arguments{
-\item{options}{A named vector or list of answer options. Names correspond to answers, and values specify their weights (e.g., 100 for a correct answer or partial weights for partially correct answers). For multiple-choice and single-choice questions, this includes both correct and distractor options.}
+\item{options}{A named vector of answer options. For single/multiple choice questions the \code{\link[=choices]{choices()}} helper function can help create this vector. Names correspond to answers, and values specify their weights (e.g., 100 for a correct answer or partial weights for partially correct answers). For multiple-choice and single-choice questions, this includes both correct and distractor options.}
 
-\item{weight}{A numeric value or vector specifying the weight for the correct answer(s). Defaults to the highest weight in \code{options}.}
+\item{weight}{A numeric value specifying the weight for the question. Defaults to the highest weight in \code{options}.}
 
-\item{feedback}{A character vector or named list providing feedback for answers. For named lists, names should match options.}
+\item{feedback}{A character vector providing feedback for answers.}
 
 \item{case_sensitive}{Logical. For \code{cloze_shortanswer}, whether the answer should be case-sensitive. Defaults to \code{FALSE}.}
 
@@ -49,7 +49,7 @@ cloze(x, ...)
 
 \item{shuffle}{Logical. For \code{cloze_multichoice} and \code{cloze_singlechoice}, whether the answer options should be shuffled. Defaults to \code{FALSE}.}
 
-\item{correct}{A numeric value or vector specifying the correct numerical answer(s). For \code{cloze_numerical}, this replaces \code{options}.}
+\item{answer}{A numeric value specifying the correct numerical answer(s).}
 
 \item{tolerance}{A numeric value specifying the acceptable range of deviation for \code{cloze_numerical} answers. Defaults to \code{0}.}
 
@@ -75,35 +75,39 @@ These functions create cloze-type questions for Moodle quizzes, designed for use
 }
 
 \examples{
-# Short-answer question
+# Short-answer question: Where is the best coffee?
 cloze_shortanswer(
-  options = c("Canberra" = 100, "canberra" = 100),
-  feedback = c("Canberra" = "Correct!", "canberra" = "Correct!"),
+  options = c("Melbourne" = 1),
   case_sensitive = FALSE
 )
 
-# Multiple-choice question
+# Multiple-choice question: Select all lower-case answers
 cloze_multichoice(
-  options = c("4" = 100, "3" = 0, "5" = 0),
-  feedback = c("4" = "Correct!", "3" = "Too low.", "5" = "Too high."),
+  options = c("a" = 1, "F" = 0, "g" = 1, "V" = 0, "K" = 0),
   type = "vertical"
 )
 
-# Single-choice question
+# Where is Melbourne?
 cloze_singlechoice(
-  options = c("2" = 100, "1" = 0, "3" = 0),
-  feedback = c("2" = "Correct!", "1" = "1 is not a prime.", "3" = "Close, but 3 is larger."),
+  choices(
+    c("New South Wales", "Victoria", "Queensland", "Western Australia",
+      "South Australia", "Tasmania", "Australian Capital Territory",
+      "Northern Territory"),
+    "Victoria"
+  )
   type = "dropdown"
 )
 
-# Numerical question
+# Numerical question: Pick a number between 1 and 10
 cloze_numerical(
-  correct = 5,
-  tolerance = 0.1,
-  feedback = "Good job!"
+  correct = 5.5,
+  tolerance = 4.5
 )
 
-# Automatic cloze question
-cloze("rep_len", c("rep", "rep.int", "rep_len", "replicate"))
+# Automatic cloze questions
+cloze(42) # Numerical
+cloze("Australia") # Short answer
+cloze("rep_len", c("rep", "rep.int", "rep_len", "replicate")) # Single choice
+cloze(c("A", "B", "C"), letters) # Multiple choice
 
 }

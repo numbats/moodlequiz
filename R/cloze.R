@@ -5,13 +5,13 @@
 #'
 #' These functions create cloze-type questions for Moodle quizzes, designed for use with inline R code chunks in an R Markdown document formatted with the `moodlequiz::moodlequiz` output format.
 #'
-#' @param options A named vector or list of answer options. Names correspond to answers, and values specify their weights (e.g., 100 for a correct answer or partial weights for partially correct answers). For multiple-choice and single-choice questions, this includes both correct and distractor options.
-#' @param weight A numeric value or vector specifying the weight for the correct answer(s). Defaults to the highest weight in `options`.
-#' @param feedback A character vector or named list providing feedback for answers. For named lists, names should match options.
+#' @param options A named vector of answer options. For single/multiple choice questions the [`choices()`] helper function can help create this vector. Names correspond to answers, and values specify their weights (e.g., 100 for a correct answer or partial weights for partially correct answers). For multiple-choice and single-choice questions, this includes both correct and distractor options.
+#' @param weight A numeric value specifying the weight for the question. Defaults to the highest weight in `options`.
+#' @param feedback A character vector providing feedback for answers.
 #' @param case_sensitive Logical. For `cloze_shortanswer`, whether the answer should be case-sensitive. Defaults to `FALSE`.
 #' @param type A character string specifying the presentation style of the options. For `cloze_multichoice`, valid values are `"vertical"` or `"horizontal"`. For `cloze_singlechoice`, valid values are `"dropdown"`, `"vertical"`, or `"horizontal"`.
 #' @param shuffle Logical. For `cloze_multichoice` and `cloze_singlechoice`, whether the answer options should be shuffled. Defaults to `FALSE`.
-#' @param correct A numeric value or vector specifying the correct numerical answer(s). For `cloze_numerical`, this replaces `options`.
+#' @param answer A numeric value specifying the correct numerical answer(s).
 #' @param tolerance A numeric value specifying the acceptable range of deviation for `cloze_numerical` answers. Defaults to `0`.
 #' @param x For `cloze()`, the correct answer which also determines the question type (e.g. `numeric` will use `cloze_numerical()` and `character` will use `cloze_shortanswer()` or `cloze_singlechoice()`/`cloze_multichoice()` if selectable options are given as the second argument).
 #' @param ... Additional arguments passed to other `cloze()` methods (such as the available options and other `cloze_*()` arguments).
@@ -27,36 +27,40 @@
 #' @return A character string containing the Moodle-compatible XML or inline text for the specified cloze question(s).
 #'
 #' @examples
-#' # Short-answer question
+#' # Short-answer question: Where is the best coffee?
 #' cloze_shortanswer(
-#'   options = c("Canberra" = 100, "canberra" = 100),
-#'   feedback = c("Canberra" = "Correct!", "canberra" = "Correct!"),
+#'   options = c("Melbourne" = 1),
 #'   case_sensitive = FALSE
 #' )
 #'
-#' # Multiple-choice question
+#' # Multiple-choice question: Select all lower-case answers
 #' cloze_multichoice(
-#'   options = c("4" = 100, "3" = 0, "5" = 0),
-#'   feedback = c("4" = "Correct!", "3" = "Too low.", "5" = "Too high."),
+#'   options = c("a" = 1, "F" = 0, "g" = 1, "V" = 0, "K" = 0),
 #'   type = "vertical"
 #' )
 #'
-#' # Single-choice question
+#' # Where is Melbourne?
 #' cloze_singlechoice(
-#'   options = c("2" = 100, "1" = 0, "3" = 0),
-#'   feedback = c("2" = "Correct!", "1" = "1 is not a prime.", "3" = "Close, but 3 is larger."),
+#'   choices(
+#'     c("New South Wales", "Victoria", "Queensland", "Western Australia",
+#'       "South Australia", "Tasmania", "Australian Capital Territory",
+#'       "Northern Territory"),
+#'     "Victoria"
+#'   )
 #'   type = "dropdown"
 #' )
 #'
-#' # Numerical question
+#' # Numerical question: Pick a number between 1 and 10
 #' cloze_numerical(
-#'   correct = 5,
-#'   tolerance = 0.1,
-#'   feedback = "Good job!"
+#'   correct = 5.5,
+#'   tolerance = 4.5
 #' )
 #'
-#' # Automatic cloze question
-#' cloze("rep_len", c("rep", "rep.int", "rep_len", "replicate"))
+#' # Automatic cloze questions
+#' cloze(42) # Numerical
+#' cloze("Australia") # Short answer
+#' cloze("rep_len", c("rep", "rep.int", "rep_len", "replicate")) # Single choice
+#' cloze(c("A", "B", "C"), letters) # Multiple choice
 #'
 #' @name cloze_questions
 NULL
@@ -127,18 +131,18 @@ cloze_singlechoice <- function(
 
 #' @rdname cloze_questions
 #' @export
-cloze_numerical <- function(correct, weight = 1, tolerance = 0, feedback = "") {
+cloze_numerical <- function(answer, weight = 1, tolerance = 0, feedback = "") {
   # Add alternative solutions / thresholds
   sprintf(
     "`{%i:NUMERICAL:=%f:%f#%s}`{=html}",
-    weight, correct, tolerance, feedback
+    weight, answer, tolerance, feedback
   )
 }
 
 #' Create a set of choices for single or multiple choice questions
 #'
-#' @param A character vector of selectable choices
-#' @param A character vector of the correct answers
+#' @param options A character vector of selectable choices
+#' @param answer A character vector of the correct answers
 #'
 #' @export
 choices <- function(options, answer) {

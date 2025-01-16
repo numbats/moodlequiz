@@ -7,7 +7,9 @@
 choices(options, answer)
 }
 \arguments{
-\item{A}{character vector of the correct answers}
+\item{options}{A character vector of selectable choices}
+
+\item{answer}{A character vector of the correct answers}
 }
 \description{
 Create a set of choices for single or multiple choice questions
