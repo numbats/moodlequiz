@@ -128,7 +128,50 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Short-answer question: Where is the best coffee?</span></span></span>
+<span class="r-in"><span><span class="fu">cloze_shortanswer</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Melbourne"</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  case_sensitive <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:SHORTANSWER:%100%Melbourne#}`{=html}"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Multiple-choice question: Select all lower-case answers</span></span></span>
+<span class="r-in"><span><span class="fu">cloze_multichoice</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span> <span class="op">=</span> <span class="fl">1</span>, <span class="st">"F"</span> <span class="op">=</span> <span class="fl">0</span>, <span class="st">"g"</span> <span class="op">=</span> <span class="fl">1</span>, <span class="st">"V"</span> <span class="op">=</span> <span class="fl">0</span>, <span class="st">"K"</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"vertical"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:MULTIRESPONSE:%100%a#~%0%F#~%100%g#~%0%V#~%0%K#}`{=html}"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Where is Melbourne?</span></span></span>
+<span class="r-in"><span><span class="fu">cloze_singlechoice</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="choices.html">choices</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"New South Wales"</span>, <span class="st">"Victoria"</span>, <span class="st">"Queensland"</span>, <span class="st">"Western Australia"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"South Australia"</span>, <span class="st">"Tasmania"</span>, <span class="st">"Australian Capital Territory"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"Northern Territory"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"Victoria"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"dropdown"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:MULTICHOICE:%0%New South Wales#~%100%Victoria#~%0%Queensland#~%0%Western Australia#~%0%South Australia#~%0%Tasmania#~%0%Australian Capital Territory#~%0%Northern Territory#}`{=html}"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Numerical question: Pick a number between 1 and 10</span></span></span>
+<span class="r-in"><span><span class="fu">cloze_numerical</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  answer <span class="op">=</span> <span class="fl">5.5</span>,</span></span>
+<span class="r-in"><span>  tolerance <span class="op">=</span> <span class="fl">4.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:NUMERICAL:=5.500000:4.500000#}`{=html}"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Automatic cloze questions</span></span></span>
+<span class="r-in"><span><span class="fu">cloze</span><span class="op">(</span><span class="fl">42</span><span class="op">)</span> <span class="co"># Numerical</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:NUMERICAL:=42.000000:0.000000#}`{=html}"</span>
+<span class="r-in"><span><span class="fu">cloze</span><span class="op">(</span><span class="st">"Australia"</span><span class="op">)</span> <span class="co"># Short answer</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:SHORTANSWER:%100%Australia#}`{=html}"</span>
+<span class="r-in"><span><span class="fu">cloze</span><span class="op">(</span><span class="st">"rep_len"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rep"</span>, <span class="st">"rep.int"</span>, <span class="st">"rep_len"</span>, <span class="st">"replicate"</span><span class="op">)</span><span class="op">)</span> <span class="co"># Single choice</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "`{1:MULTICHOICE:%0%rep#~%0%rep.int#~%100%rep_len#~%0%replicate#}`{=html}"</span>
+<span class="r-in"><span><span class="fu">cloze</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, <span class="va">letters</span><span class="op">)</span> <span class="co"># Multiple choice</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in choices(choices, x):</span> The correct answer does not exist in the provided options.</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
