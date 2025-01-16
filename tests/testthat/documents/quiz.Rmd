@@ -1,0 +1,26 @@
+---
+output: moodlequiz::moodlequiz
+title: Multi-question example
+---
+
+## Start
+
+```{r, include = FALSE}
+library(moodlequiz)
+```
+
+What is 2 + 2? `r cloze(4)`
+
+What is 2 + 3? `r cloze(5)`
+
+
+```{r}
+hist(rnorm(100))
+```
+
+What is the command for calculating the average? `r cloze("mean")`
+
+## Easy
+
+Lucky dip, pick a number on the dice!
+`r cloze(sample(1:6, 1))`
