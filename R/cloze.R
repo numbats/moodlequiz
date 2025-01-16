@@ -73,7 +73,7 @@ cloze_shortanswer <- function(
     case_sensitive = FALSE) {
   force(feedback)
   # Validate an answer is provided
-  options <- options/weight*100
+  options <- options/pmax(weight, 0.01)*100
   if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a short answer question.")
   sprintf(
     "`{%i:SHORTANSWER%s:%s}`{=html}",
@@ -92,7 +92,7 @@ cloze_multichoice <- function(
     shuffle = FALSE) {
   force(feedback)
   # Validate an answer is provided
-  options <- options/weight*100
+  options <- options/pmax(weight, 0.01)*100
   if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a multiple choice question.")
 
   type <- match.arg(type)
@@ -115,15 +115,15 @@ cloze_singlechoice <- function(
     shuffle = FALSE) {
   force(feedback)
   # Validate an answer is provided
-  options <- options/weight*100
+  options <- options/pmax(weight, 0.01)*100
   if(!any(options == 100)) stop("At least one correct answer with mark value 1 (or more) must be specified for a single choice question.")
 
   type <- match.arg(type)
   sprintf(
-    "`{%i:MULTICHOICE%s%s:%s}`{=html}",
+    "`{%i:MULTICHOICE%s%s%s:%s}`{=html}",
     weight,
-    switch(type, dropdown = "", vertical = "_V", horizontal = "_H"),
-    #if(shuffle || type != "dropdown") "_" else "",
+    if(shuffle || type != "dropdown") "_" else "",
+    switch(type, dropdown = "", vertical = "V", horizontal = "H"),
     if(shuffle) "S" else "",
     paste0("%", options, "%", names(options), "#", feedback, collapse = "~")
   )
@@ -165,11 +165,11 @@ cloze.numeric <- function(x, ...) {
 }
 
 #' @export
-cloze.character <- function(x, choices = NULL, ...) {
+cloze.character <- function(x, choices = NULL, weight = 1L, ...) {
   if(is.null(choices))
-    cloze_shortanswer(`names<-`(1L, x), ...)
+    cloze_shortanswer(`names<-`(weight, x), weight = weight, ...)
   else if(length(x) > 1)
-    cloze_multichoice(choices(choices, x))
+    cloze_multichoice(choices(choices, x)*weight, weight = weight, ...)
   else
-    cloze_singlechoice(choices(choices, x))
+    cloze_singlechoice(choices(choices, x)*weight, weight = weight, ...)
 }
