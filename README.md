@@ -7,6 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/numbats/moodlequiz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/numbats/moodlequiz/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The `moodlequiz` R package which allows the creation of
@@ -28,7 +29,8 @@ remotes::install_github("numbats/moodlequiz")
 Below is a Moodle quiz where the students have to select the right
 variables from the data to map onto the plot aesthetics in `ggplot2`.
 
-<img src="man/quiz-screenshot.png" style="border:1px solid black;" />
+<img src="man/figures/quiz-screenshot.png"
+style="border:1px solid black;" />
 
 The above quiz is created from the R Markdown document below. Knitting
 the document below will generate 5 different versions of the quiz where
@@ -36,11 +38,10 @@ the x, y, color, and size are mapped randomly to one of the variables in
 the `mtcars` data.
 
     ---
+    title: Drawing a scatterplot
     output: 
       moodlequiz::moodlequiz:
         replicates: 5
-    title: Drawing a scatterplot
-    times: 5
     moodlequiz:
       category: datavis-scatterplots
     ---
