@@ -22,7 +22,6 @@ Language: es
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
-    knitr,
     rlang,
     rmarkdown,
     bookdown,
@@ -32,5 +31,6 @@ URL: https://github.com/emitanaka/moodlequiz,
     http://emitanaka.org/moodlequiz/
 BugReports: https://github.com/emitanaka/moodlequiz/issues
 Suggests: 
+    knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
