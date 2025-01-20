@@ -40,17 +40,17 @@ moodlequiz <- function(replicates = 1L,
     })
 
     # Combine into a single XML for upload
+    render_env <- rlang::caller_env(n = 2)
     xfun::write_utf8(
       c(
         '<?xml version="1.0" encoding="UTF-8"?>\n<quiz>',
         do.call(c, xml),
         '</quiz>'
       ),
-      xfun::with_ext(input, "xml")
+      xfun::with_ext(render_env$output_file, "xml")
     )
 
     # Prevent knitting of document
-    render_env <- rlang::caller_env(n = 2)
     rlang::env_poke(
       render_env, nm = "requires_knit", value = FALSE,
       inherit = TRUE, create = FALSE
@@ -61,10 +61,10 @@ moodlequiz <- function(replicates = 1L,
       render_env, nm = "input", value = input,
       inherit = TRUE, create = FALSE
     )
-    rlang::env_poke(
-      render_env, nm = "output_file", value = tempfile(fileext = ".html"), #normalizePath(render_env$output_file),
-      inherit = TRUE, create = FALSE
-    )
+    # rlang::env_poke(
+    #   render_env, nm = "output_file", value = tempfile(fileext = ".html"), #normalizePath(render_env$output_file),
+    #   inherit = TRUE, create = FALSE
+    # )
 
     input
   }
