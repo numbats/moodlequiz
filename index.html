@@ -60,68 +60,268 @@
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"numbats/moodlequiz"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>Below is a Moodle quiz where the students have to select the right variables from the data to map onto the plot aesthetics in <code>ggplot2</code>.</p>
-<p><img src="reference/figures/quiz-screenshot.png" style="border:1px solid black;"></p>
-<p>The above quiz is created from the R Markdown document below. Knitting the document below will generate 5 different versions of the quiz where the x, y, color, and size are mapped randomly to one of the variables in the <code>mtcars</code> data.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="sc">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>title<span class="sc">:</span> Drawing a scatterplot</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>output<span class="sc">:</span> </span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  moodlequiz<span class="sc">::</span>moodlequiz<span class="sc">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    replicates<span class="sc">:</span> <span class="dv">5</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>moodlequiz<span class="sc">:</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  category<span class="sc">:</span> datavis<span class="sc">-</span>scatterplots</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="sc">---</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Data</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="st">```</span><span class="at">{r setup, include = FALSE}</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="at">library(tidyverse)</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="at">library(rlang)</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="at">library(moodlequiz)</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="at">knitr::opts_chunk$set(echo = FALSE,</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="at">                      results = "hide",</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="at">                      fig.height = 4, </span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="at">                      fig.width = 5,</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="at">                      fig.path = "",</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="at">                      fig.cap = "",</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="at">                      fig.align = "center")</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="st">```</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="st">```</span><span class="at">{r data}</span></span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="at">cols &lt;- colnames(mtcars)</span></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="at">cats &lt;- c("cyl", "vs", "am", "gear", "carb")</span></span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="at">nums &lt;- setdiff(cols, cats)</span></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="at">x &lt;- sample(nums, 1)</span></span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="at">y &lt;- sample(setdiff(nums, x), 1)</span></span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="at">color &lt;- sample(cats, 1)</span></span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="at">size &lt;- sample(setdiff(nums, c(x, y)), 1)</span></span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="st">```</span></span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>You have been asked to analyse the <span class="st">`</span><span class="at">mtcars</span><span class="st">`</span> data. The variables and the class types of the data is shown below.</span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="st">```</span><span class="at">{r, echo = TRUE, results = "show"}</span></span>
-<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="at">str(mtcars)</span></span>
-<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="st">```</span></span>
-<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a>As a starting point, you decide to draw a scatter plot <span class="cf">for</span> some variables. Complete the code below to get the target plot below<span class="sc">:</span></span>
-<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a><span class="st">```</span><span class="at">r</span></span>
-<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="at">ggplot(mtcars, aes(x = </span><span class="st">`</span>r <span class="fu">cloze</span>(x, cols)<span class="st">`</span><span class="at">, </span></span>
-<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="at">                   y = </span><span class="st">`</span>r <span class="fu">cloze</span>(y, cols)<span class="st">`</span><span class="at">,</span></span>
-<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="at">                   color = factor(</span><span class="st">`</span>r <span class="fu">cloze</span>(color, cols)<span class="st">`</span><span class="at">),</span></span>
-<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="at">                   size = </span><span class="st">`</span>r <span class="fu">cloze</span>(size, cols)<span class="st">`</span><span class="at">)) +</span></span>
-<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a><span class="at">    </span><span class="st">`</span>r <span class="fu">cloze</span>(<span class="st">"geom_point"</span>, <span class="fu">ls</span>(<span class="at">envir =</span> <span class="fu">as.environment</span>(<span class="st">"package:ggplot2"</span>), <span class="at">pattern =</span> <span class="st">"^geom_"</span>))<span class="st">`</span><span class="at">()</span></span>
-<span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a><span class="st">```</span></span>
-<span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a><span class="st">```</span><span class="at">{r, results = "show"}</span></span>
-<span id="cb2-54"><a href="#cb2-54" tabindex="-1"></a><span class="at">ggplot(mtcars, aes(!!sym(x), !!sym(y), size = !!sym(size), color = factor(!!sym(color)))) + </span></span>
-<span id="cb2-55"><a href="#cb2-55" tabindex="-1"></a><span class="at">  geom_point() +</span></span>
-<span id="cb2-56"><a href="#cb2-56" tabindex="-1"></a><span class="at">  theme(plot.background = element_rect(color = "black"))</span></span>
-<span id="cb2-57"><a href="#cb2-57" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<p>A moodlequiz document produces a <a href="https://docs.moodle.org/405/en/Moodle_XML_format" class="external-link">Moodle XML file</a> suitable for importing quiz questions to Moodle into the question bank. Questions can be organized into categories to use Moodle’s random question functionality. An entire quiz consisting of multiple questions can be written in a single R Markdown document.</p>
+<div class="section level3">
+<h3 id="front-matter">Front matter<a class="anchor" aria-label="anchor" href="#front-matter"></a>
+</h3>
+<p>The front matter allows you to describe the number of random replications, and the general category for all of these questions. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Learning with penguins</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">  moodlequiz:</span><span class="fu">:moodlequiz</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">    </span><span class="fu">replicates</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">moodlequiz</span><span class="kw">:</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="at">  </span><span class="fu">category</span><span class="kw">:</span><span class="at"> penguins</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>In this case the questions will be imported into the ‘penguins’ category, with only 1 replicate for each question (the default).</p>
+<p>It is possible to use randomization in R to produce many different replicates of the same question (as shown in the quiz randomization vignette).</p>
+</div>
+<div class="section level3">
+<h3 id="body">Body<a class="anchor" aria-label="anchor" href="#body"></a>
+</h3>
+<p>The R Markdown document’s body is used to create quiz questions with full markdown support. Any typical markdown output including figures, equations, tables and cross-references (excepting interactive outputs <a href="https://github.com/numbats/moodlequiz/issues/31" class="external-link">#31</a>) will be imported as part of your Moodle quiz questions. As a literate programming user, writing quiz questions with full markdown support is a wonderful experience compared to the usual quiz creation workflow in Moodle.</p>
+<div class="section level4">
+<h4 id="writing-questions">Writing questions<a class="anchor" aria-label="anchor" href="#writing-questions"></a>
+</h4>
+<p>Headers are used to separate quiz questions and organize them into subcategories.</p>
+<ul>
+<li>
+<p><code># H1: Sub-category</code></p>
+<p>Questions within this header will be organised together into this sub-category.</p>
+<p>This is useful if your quiz contains several thematically similar questions, or if you want to randomize a specific question of group of questions.</p>
+</li>
+<li>
+<p><code>## H2: Quiz questions</code></p>
+<p>Quiz questions and their settings are specified within H2 headers.</p>
+</li>
+</ul>
+<p>For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu"># Basics</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>...</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="fu">## Plotting weight</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>...</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="fu">## Telling the story {type=essay}</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>...</span></code></pre></div>
+<p>This example quiz consists of a single sub-category (basics) which contains three quiz ‘questions’ of different types:</p>
+<div class="section level5">
+<h5 id="description-questions">Description questions<a class="anchor" aria-label="anchor" href="#description-questions"></a>
+</h5>
+<p>A ‘description’ question in Moodle doesn’t contain any assessment activities. It is useful to describe the activity, such as give some background information on the dataset or learning objectives.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="in">```{r setup, include = FALSE}</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="in">library(moodlequiz)</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = FALSE)</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>**Meet the penguins!**</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="al">![The Palmer Archipelago penguins. Artwork by @allison_horst.](lter_penguins.png)</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="at">&gt; The </span><span class="in">`palmerpenguins`</span><span class="at"> data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="in">```{r data, echo = TRUE}</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="in">library(palmerpenguins)</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="in">penguins</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p><img src="reference/figures/quiz-description.png"></p>
+<p>In this example, a description question is used to provide background context about the Palmer Archipelago penguins (along with a lovely illustration and preview of the dataset). Both the image and table will be bundled into the XML and imported as part of the Moodle quiz question.</p>
+</div>
+</div>
+<div class="section level4">
+<h4 id="cloze-questions">Cloze questions<a class="anchor" aria-label="anchor" href="#cloze-questions"></a>
+</h4>
+<p>The cloze style questions embed many questions within the question text (<a href="https://docs.moodle.org/405/en/Embedded_Answers_(Cloze)_question_type" class="external-link uri">https://docs.moodle.org/405/en/Embedded_Answers_(Cloze)_question_type</a>).</p>
+<p>There are four types of cloze questions:</p>
+<ul>
+<li>
+<strong><code><a href="reference/cloze_questions.html">cloze_shortanswer()</a></code></strong>: Creates a short-answer question where the student provides a text response.</li>
+<li>
+<strong><code><a href="reference/cloze_questions.html">cloze_singlechoice()</a></code></strong>: Generates a single-choice question where students select one correct answer from a list.</li>
+<li>
+<strong><code><a href="reference/cloze_questions.html">cloze_multichoice()</a></code></strong>: Creates a multiple-choice question where students can select one or more correct answers.</li>
+<li>
+<strong><code><a href="reference/cloze_questions.html">cloze_numerical()</a></code></strong>: Generates a numerical question where students input a numeric response with optional tolerance.</li>
+</ul>
+<p>The single and multiple choice cloze questions support various options that change the appearance and shuffling behaviour.</p>
+<p>There is also the <strong><code><a href="reference/cloze_questions.html">cloze()</a></code></strong> function, which automatically chooses the appropriate question type based on the class of the input:</p>
+<ul>
+<li>Numerical: <code>cloze(42)</code>
+</li>
+<li>Short answer: <code>cloze("Australia")</code>
+</li>
+<li>Single choice: <code>cloze("rep_len", c("rep", "rep.int", "rep_len", "replicate"))</code>
+</li>
+<li>Multiple choice: <code>cloze(c("A", "B", "C"), LETTERS)</code>
+</li>
+</ul>
+<p>These functions should be used with inline R code, for example: <code>`r cloze_singlechoice(choices(c("Adelie", "Chinstrap", "Gentoo"), "Chinstrap"))`</code>⁠</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">## Plotting weight</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>**Which penguins are heaviest?**</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>A summary of the penguins dataset is shown below.</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="in">summary(penguins)</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>The average weight of a penguin is <span class="in">`r cloze(mean(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`</span>, which is slightly <span class="in">`r cloze("more", c("more", "less"))`</span> than the median weight of <span class="in">`r cloze(median(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`</span>.</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>Complete the code to produce the graphic shown in figure \@ref(fig:boxplot).</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">r cloze("body_mass_g", colnames(penguins))</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>  <span class="st">`</span><span class="at">r cloze("geom_boxplot")</span><span class="st">`</span>() <span class="sc">+</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>)) <span class="sc">+</span> </span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="in">```{r boxplot, fig.cap="Boxplots of penguin weight by species"}</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="in">penguins |&gt; </span></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="in">  ggplot(aes(x = body_mass_g, y = species, fill = species)) +</span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="in">  geom_boxplot() +</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="in">  scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) + </span></span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="in">  theme_minimal()</span></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>Modify the code to investigate differences in <span class="in">`species`</span> weight by <span class="in">`sex`</span> that produces figure \@ref(fig:boxplot-sex).</span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">r cloze("body_mass_g", colnames(penguins))</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">r cloze("sex", colnames(penguins))</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>  <span class="st">`</span><span class="at">r cloze("geom_boxplot")</span><span class="st">`</span>() <span class="sc">+</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>)) <span class="sc">+</span> </span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a><span class="in">```{r boxplot-sex, fig.cap="Boxplots of penguin weight by species and sex"}</span></span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="in">penguins |&gt; </span></span>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a><span class="in">  ggplot(aes(x = body_mass_g, y = sex, fill = species)) +</span></span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="in">  geom_boxplot() +</span></span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a><span class="in">  scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) + </span></span>
+<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="in">  theme_minimal()</span></span>
+<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a>Male penguins <span class="in">`r cloze("tend to", c("almost always", "tend to"))`</span> weigh <span class="in">`r cloze("more", c("more", "less"))`</span> than female penguins. Within each species, male penguins <span class="in">`r cloze("almost always", c("almost always", "tend to"))`</span> weigh <span class="in">`r cloze("more", c("more", "less"))`</span> than female penguins.</span></code></pre></div>
+<p><img src="reference/figures/quiz-cloze.png"></p>
+</div>
+<div class="section level4">
+<h4 id="other-questions">Other questions<a class="anchor" aria-label="anchor" href="#other-questions"></a>
+</h4>
+<p>Other types of questions consist of a single answer field and some question text. You can specify any type of questions (even those defined in Moodle extension packages) with <code>## Question {type = &lt;TYPE&gt;}</code>. Question types included in standard installations of Moodle include:</p>
+<ul>
+<li>multichoice</li>
+<li>truefalse</li>
+<li>shortanswer</li>
+<li>matching (not yet supported)</li>
+<li>essay</li>
+<li>numerical</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">## Telling the story {type=essay}</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>**Tell the story**</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>Write a short paragraph about how a penguin's weight relates to their species and sex.</span></code></pre></div>
+<p><img src="reference/figures/quiz-essay.png"></p>
+<p>In the penguins example, you can see that the question type has been set to <code>essay</code>.</p>
+<hr>
+<p>These question types often have many question-specific options which are outlined in the <a href="https://docs.moodle.org/405/en/Moodle_XML_format" class="external-link">Moodle XML format</a> guide. Question specific options are specified in the question headers, for example enabling <code>shuffleanswers</code> for multiple choice questions with <code>## Multiple choice {type=multichoice shuffleanswers=1}</code>.</p>
+<p>Many of these question types require answers specified in <code>&lt;answer fraction="..."&gt;...&lt;/answer&gt;</code> sections. To specify the answers for a question with moodlequiz, use the answers div like so:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">## Multiple choice {type=multichoice shuffleanswers=1}</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>Which of the following generates random numbers from a Normal distribution</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>::: {.answer fraction="100"}</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="in">rnorm(10)</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>:::</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>::: {.answer fraction="0"}</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="in">runif(10)</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>:::</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>::: {.answer fraction="0"}</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="in">rnorm(10)^2</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>:::</span></code></pre></div>
+<p><img src="reference/figures/quiz-multichoice.png"></p>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="importing-questions-into-moodle">Importing questions into Moodle<a class="anchor" aria-label="anchor" href="#importing-questions-into-moodle"></a>
+</h2>
+<div class="section level3">
+<h3 id="create-the-xml-quiz">Create the XML quiz<a class="anchor" aria-label="anchor" href="#create-the-xml-quiz"></a>
+</h3>
+<p>Start by rendering the quiz to obtain the Moodle XML file for the quiz. You can try this with the Palmer penguins quiz described above, which is found here: <a href="https://raw.githubusercontent.com/numbats/moodlequiz/refs/heads/main/man/examples/penguins.Rmd" class="external-link uri">https://raw.githubusercontent.com/numbats/moodlequiz/refs/heads/main/man/examples/penguins.Rmd</a></p>
+<p>Once rendered, you should find a corresponding XML file in the same folder. It should look like this: <a href="https://raw.githubusercontent.com/numbats/moodlequiz/refs/heads/main/man/examples/penguins.xml" class="external-link uri">https://raw.githubusercontent.com/numbats/moodlequiz/refs/heads/main/man/examples/penguins.xml</a></p>
+</div>
+<div class="section level3">
+<h3 id="import-quiz-questions">Import quiz questions<a class="anchor" aria-label="anchor" href="#import-quiz-questions"></a>
+</h3>
+<p>To import the quiz into Moodle, go to your Moodle course’s question bank. The navigation may vary among institutions, so if you struggle to find it the URL pattern is: <code>https://&lt;DOMAIN&gt;/question/edit.php?courseid=&lt;COURSE ID&gt;</code> (where <code>&lt;COURSE_ID&gt;</code> is the number found in most URLs of your course).</p>
+<p><img src="reference/figures/moodle-question-bank.png"></p>
+<p>Import questions by selecting “Import” from the drop-down.</p>
+<p><img src="reference/figures/moodle-dropdown-import.png"></p>
+<p>From the import form:</p>
+<ol style="list-style-type: decimal">
+<li>Select “Moodle XML format” as the file format</li>
+<li>Select “Get category from file” under the “General” section</li>
+<li>Import the XML file into the file box</li>
+<li>Click import</li>
+</ol>
+<p><img src="reference/figures/moodle-question-import.png"></p>
+<p>You should now see the questions successfully imported into Moodle, along with a preview of the questions. Please report any importation issues.</p>
+<p><img src="reference/figures/moodle-import-success.png"></p>
+</div>
+<div class="section level3">
+<h3 id="creating-a-quiz">Creating a quiz<a class="anchor" aria-label="anchor" href="#creating-a-quiz"></a>
+</h3>
+<p>Create a quiz as you normally would in Moodle (instructions here: <a href="https://docs.moodle.org/en/Building_Quiz" class="external-link uri">https://docs.moodle.org/en/Building_Quiz</a>)</p>
+<p>When adding a question, select “from question bank” (or “a random question” for random questions within categories).</p>
+<p><img src="reference/figures/moodle-from-bank.png"></p>
+<p>In the question import dialogue:</p>
+<ol style="list-style-type: decimal">
+<li>Select the question category which was specified in the front matter (penguins)</li>
+<li>Sort questions alphabetically by name by clicking on the “Question” header in the table</li>
+<li>Select the questions to import via the checkboxes in the table (or select all with the checkbox in the table header)</li>
+<li>Click “Add selected questions to the quiz”</li>
+</ol>
+<p><img src="reference/figures/moodle-import-bank.png"></p>
+<p>Your questions are now added to the quiz! <span class="emoji" data-emoji="tada">🎉</span></p>
+<p><img src="reference/figures/moodle-question-success.png"></p>
+<p>You can now repaginate and further adjust the quiz settings as necessary.</p>
+<!-- ## Example -->
+<!-- Below is an example quiz question which uses the `cloze` question type to select the code which produces the plot. -->
+<!-- ![](man/figures/quiz-screenshot.png){style="border:1px solid black;"} -->
+<!-- The above quiz is created from the R Markdown document below. Knitting the document below will generate 5 different versions of the quiz where the x, y, color, and size are mapped randomly to one of the variables in the `mtcars` data.  -->
+<!-- ```{r, echo = FALSE, results="asis"} -->
+<!-- cat("````\n") -->
+<!-- cat(readLines("man/examples/draw-scatterplots.Rmd"), sep = "\n") -->
+<!-- cat("````") -->
+<!-- ``` -->
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
