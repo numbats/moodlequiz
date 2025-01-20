@@ -23,9 +23,9 @@ split_rmd = function(file) {
   }
 }
 
-list_defaults <- function(x, ...) {
-  defaults <- list(...)
-  nm <- setdiff(names(defaults), names(x))
-  x[nm] <- defaults[nm]
-  x
-}
+# list_defaults <- function(x, ...) {
+#   defaults <- list(...)
+#   nm <- setdiff(names(defaults), names(x))
+#   x[nm] <- defaults[nm]
+#   x
+# }
