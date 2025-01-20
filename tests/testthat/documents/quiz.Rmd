@@ -24,3 +24,32 @@ What is the command for calculating the average? `r cloze("mean")`
 
 Lucky dip, pick a number on the dice!
 `r cloze(sample(1:6, 1))`
+
+
+## Multiple choice {type=multichoice shuffleanswers=1}
+
+Which of the following generates random numbers from a Normal distribution
+
+::: {.answer fraction="100"}
+
+```{r}
+rnorm(10)
+```
+
+:::
+
+::: {.answer fraction="0"}
+
+```{r}
+runif(10)
+```
+
+:::
+
+::: {.answer fraction="0"}
+
+```{r}
+rnorm(10)^2
+```
+
+:::
