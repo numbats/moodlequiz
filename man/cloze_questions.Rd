@@ -67,8 +67,8 @@ These functions create cloze-type questions for Moodle quizzes, designed for use
 
 \itemize{
 \item \strong{\code{cloze_shortanswer()}}: Creates a short-answer question where the student provides a text response.
-\item \strong{\code{cloze_multichoice()}}: Creates a multiple-choice question where students can select one or more correct answers.
 \item \strong{\code{cloze_singlechoice()}}: Generates a single-choice question where students select one correct answer from a list.
+\item \strong{\code{cloze_multichoice()}}: Creates a multiple-choice question where students can select one or more correct answers.
 \item \strong{\code{cloze_numerical()}}: Generates a numerical question where students input a numeric response with optional tolerance.
 \item \strong{\code{cloze()}}: Automatic question types based on the class of the answers.
 }

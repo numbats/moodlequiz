@@ -19,8 +19,8 @@
 #' @section Functions:
 #'
 #' - **`cloze_shortanswer()`**: Creates a short-answer question where the student provides a text response.
-#' - **`cloze_multichoice()`**: Creates a multiple-choice question where students can select one or more correct answers.
 #' - **`cloze_singlechoice()`**: Generates a single-choice question where students select one correct answer from a list.
+#' - **`cloze_multichoice()`**: Creates a multiple-choice question where students can select one or more correct answers.
 #' - **`cloze_numerical()`**: Generates a numerical question where students input a numeric response with optional tolerance.
 #' - **`cloze()`**: Automatic question types based on the class of the answers.
 #'
