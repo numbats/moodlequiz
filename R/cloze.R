@@ -70,7 +70,13 @@ NULL
 # >
 # > https://docs.moodle.org/405/en/Embedded_Answers_(Cloze)_question_type)
 escape_answers <- function(x) {
-  gsub('([\\}#~/"\\\\])', '\\\\\\1', x)
+  # Escape special characters with \
+  x <- gsub('([\\}#/"\\\\])', '\\\\\\1', x)
+
+  # Escape ~ with unicode (Moodle bug)
+  x <- gsub('~', '&#x007e;', x, fixed = TRUE)
+
+  x
 }
 
 format_options <- function(x, feedback) {
