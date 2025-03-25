@@ -65,6 +65,18 @@
 #' @name cloze_questions
 NULL
 
+# > If the correct answer contains } # ~ / " or \ you will have to escape them by
+# > putting a \ in front of each such character.
+# >
+# > https://docs.moodle.org/405/en/Embedded_Answers_(Cloze)_question_type)
+escape_answers <- function(x) {
+  gsub('([\\}#~/"\\\\])', '\\\\\\1', x)
+}
+
+format_options <- function(x, feedback) {
+  paste0("%", x, "%", escape_answers(names(x)), "#", feedback, collapse = "~")
+}
+
 #' @rdname cloze_questions
 #' @export
 cloze_shortanswer <- function(
@@ -79,7 +91,7 @@ cloze_shortanswer <- function(
     "`{%i:SHORTANSWER%s:%s}`{=html}",
     weight,
     if(case_sensitive) "_C" else "",
-    paste0("%", options, "%", names(options), "#", feedback, collapse = "~")
+    format_options(options, feedback)
   )
 }
 
@@ -102,7 +114,7 @@ cloze_multichoice <- function(
     if(shuffle || type != "vertical") "_" else "",
     switch(type, vertical = "", horizontal = "H"),
     if(shuffle) "S" else "",
-    paste0("%", options, "%", names(options), "#", feedback, collapse = "~")
+    format_options(options, feedback)
   )
 }
 
@@ -125,7 +137,7 @@ cloze_singlechoice <- function(
     if(shuffle || type != "dropdown") "_" else "",
     switch(type, dropdown = "", vertical = "V", horizontal = "H"),
     if(shuffle) "S" else "",
-    paste0("%", options, "%", names(options), "#", feedback, collapse = "~")
+    format_options(options, feedback)
   )
 }
 

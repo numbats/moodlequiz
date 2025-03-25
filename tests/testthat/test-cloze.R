@@ -131,3 +131,12 @@ test_that("cloze dispatch works correctly", {
     "`{3:MULTICHOICE:%100%4#~%0%5#~%0%6#}`{=html}"
   )
 })
+
+
+test_that("escape cloze question characters (#32)", {
+  # Test escaping "~"
+  expect_equal(
+    cloze_singlechoice(c("MEAN(season_year)" = 0, "NAIVE(season_year)" = 0, "SNAIVE(season_year)" = 1, "RW(season_year ~ drift())" = 0)),
+    "`{1:MULTICHOICE:%0%MEAN(season_year)#~%0%NAIVE(season_year)#~%100%SNAIVE(season_year)#~%0%RW(season_year \\~ drift())#}`{=html}"
+  )
+})
