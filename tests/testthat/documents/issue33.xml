@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="category">
+<questiontext format="html">
+<text><![CDATA[
+
+]]></text>
+</questiontext>
+
+<category><text>$course$/STATISTICS</text></category>
+</question>
+
+<question type="category">
+<questiontext format="html">
+<text><![CDATA[
+
+]]></text>
+</questiontext>
+
+<name><text>QUIZZ_1</text></name>
+<category><text>$course$/STATISTICS/quizz_1</text></category>
+</question>
+
+<question type="truefalse">
+<questiontext format="html">
+<text><![CDATA[
+
+<p>The mean of a sample is an example of the estimator.</p>
+]]></text>
+</questiontext>
+
+<answer fraction="100">
+<p>true</p>
+</answer>
+<answer fraction="0">
+<p>false</p>
+</answer>
+<name><text>Q1: Q1_1</text></name>
+</question>
+</quiz>
