@@ -1,4 +1,4 @@
-# moodlequiz (development version)
+# moodlequiz 0.2.0
 
 First major release. 
 

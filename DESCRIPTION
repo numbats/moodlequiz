@@ -1,17 +1,17 @@
 Package: moodlequiz
 Title: R Markdown format for Moodle XML cloze quizzes
-Version: 0.1.0.9001
+Version: 0.2.0
 Authors@R: 
-    c(person(given = "Emi", 
-             family = "Tanaka", 
-             email = "dr.emi.tanaka@gmail.com", 
-             role = c("aut", "cre"),
-             comment = c(ORCID = "0000-0002-1455-259X")),
-      person(given = "Mitchell",
+    c(person(given = "Mitchell",
              family = "O'Hara-Wild",
              email = "mail@mitchelloharawild.com",
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0002-3813-7155")),
+      person(given = "Emi", 
+             family = "Tanaka", 
+             email = "dr.emi.tanaka@gmail.com", 
              role = c("aut"),
-             comment = c(ORCID = "0000-0002-3813-7155")))
+             comment = c(ORCID = "0000-0002-1455-259X")))
 Description: Enables the creation of Moodle quiz questions using literate
   programming with R Markdown. This makes it easy to quickly create a quiz that
   can be randomly replicated with new datasets, questions, and options for 
