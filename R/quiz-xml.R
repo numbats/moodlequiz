@@ -62,13 +62,9 @@ moodlequiz <- function(replicates = 1L,
       inherit = TRUE, create = FALSE
     )
     rlang::env_poke(
-      render_env, nm = "output_file", value = tempfile(fileext = ".html"),
+      render_env, nm = "output_file", value = file.path(normalizePath(render_env$output_dir), "moodlequiz-instructions.html"),
       inherit = TRUE, create = FALSE
     )
-    # rlang::env_poke(
-    #   render_env, nm = "output_file", value = tempfile(fileext = ".html"), #normalizePath(render_env$output_file),
-    #   inherit = TRUE, create = FALSE
-    # )
 
     input
   }
