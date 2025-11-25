@@ -26,7 +26,7 @@ Lucky dip, pick a number on the dice!
 `r cloze(sample(1:6, 1))`
 
 
-## Multiple choice {type=multichoice shuffleanswers=1}
+## Multiple choice {type=multichoice shuffleanswers=1 generalfeedback="Great work"}
 
 Which of the following generates random numbers from a Normal distribution
 
