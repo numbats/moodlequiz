@@ -3,7 +3,7 @@
 These functions create cloze-type questions for Moodle quizzes, designed
 for use with inline R code chunks in an R Markdown document formatted
 with the
-[`moodlequiz::moodlequiz`](http://emitanaka.org/moodlequiz/reference/moodlequiz.md)
+[`moodlequiz::moodlequiz`](https://numbats.github.io/moodlequiz/reference/moodlequiz.md)
 output format.
 
 ## Usage
@@ -43,7 +43,7 @@ cloze(x, ...)
 
   A named vector of answer options. For single/multiple choice questions
   the
-  [`choices()`](http://emitanaka.org/moodlequiz/reference/choices.md)
+  [`choices()`](https://numbats.github.io/moodlequiz/reference/choices.md)
   helper function can help create this vector. Names correspond to
   answers, and values specify their weights (e.g., 100 for a correct
   answer or partial weights for partially correct answers). For

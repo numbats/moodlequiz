@@ -139,16 +139,16 @@ The cloze style questions embed many questions within the question text
 
 There are four types of cloze questions:
 
-- **[`cloze_shortanswer()`](http://emitanaka.org/moodlequiz/reference/cloze_questions.md)**:
+- **[`cloze_shortanswer()`](https://numbats.github.io/moodlequiz/reference/cloze_questions.md)**:
   Creates a short-answer question where the student provides a text
   response.
-- **[`cloze_singlechoice()`](http://emitanaka.org/moodlequiz/reference/cloze_questions.md)**:
+- **[`cloze_singlechoice()`](https://numbats.github.io/moodlequiz/reference/cloze_questions.md)**:
   Generates a single-choice question where students select one correct
   answer from a list.
-- **[`cloze_multichoice()`](http://emitanaka.org/moodlequiz/reference/cloze_questions.md)**:
+- **[`cloze_multichoice()`](https://numbats.github.io/moodlequiz/reference/cloze_questions.md)**:
   Creates a multiple-choice question where students can select one or
   more correct answers.
-- **[`cloze_numerical()`](http://emitanaka.org/moodlequiz/reference/cloze_questions.md)**:
+- **[`cloze_numerical()`](https://numbats.github.io/moodlequiz/reference/cloze_questions.md)**:
   Generates a numerical question where students input a numeric response
   with optional tolerance.
 
@@ -156,7 +156,7 @@ The single and multiple choice cloze questions support various options
 that change the appearance and shuffling behaviour.
 
 There is also the
-**[`cloze()`](http://emitanaka.org/moodlequiz/reference/cloze_questions.md)**
+**[`cloze()`](https://numbats.github.io/moodlequiz/reference/cloze_questions.md)**
 function, which automatically chooses the appropriate question type
 based on the class of the input:
 

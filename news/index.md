@@ -15,13 +15,13 @@ with R Markdown.
 - Randomised questions with multiple replicates using the `replicates`
   output format argument.
 - Added
-  [`cloze()`](http://emitanaka.org/moodlequiz/reference/cloze_questions.md)
+  [`cloze()`](https://numbats.github.io/moodlequiz/reference/cloze_questions.md)
   and `cloze_*()` functionality.
 - Added
-  [`moodlequiz()`](http://emitanaka.org/moodlequiz/reference/moodlequiz.md)
+  [`moodlequiz()`](https://numbats.github.io/moodlequiz/reference/moodlequiz.md)
   output format for R Markdown.
 - Added
-  [`choices()`](http://emitanaka.org/moodlequiz/reference/choices.md)
+  [`choices()`](https://numbats.github.io/moodlequiz/reference/choices.md)
   helper for constructing graded vectors of choices.
 
 ## moodlequiz 0.1.0

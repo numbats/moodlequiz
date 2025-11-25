@@ -73,4 +73,4 @@ An R Markdown output format object.
 
 ## See also
 
-[`moodlequiz()`](http://emitanaka.org/moodlequiz/reference/moodlequiz.md)
+[`moodlequiz()`](https://numbats.github.io/moodlequiz/reference/moodlequiz.md)
