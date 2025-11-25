@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">moodlequiz</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,21 +33,31 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="moodlequiz-development-version">moodlequiz (development version)<a class="anchor" aria-label="anchor" href="#moodlequiz-development-version"></a></h2>
-<p>First major release.</p>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="moodlequiz-020">moodlequiz 0.2.0<a class="anchor" aria-label="anchor" href="#moodlequiz-020"></a></h2>
+<p>Initial CRAN release, allowing the creation of Moodle XML quizzes from R with R Markdown.</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>Added <code><a href="../reference/cloze_questions.html">cloze()</a></code> and <code>cloze_*()</code> functionality.</li>
+<h3 id="new-features-0-2-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-2-0"></a></h3>
+<ul><li>Categorisation of questions with H1 headings (<code># Category name</code>).</li>
+<li>Creation of individual questions with H2 headings (<code>## Question name</code>).</li>
+<li>Support for R Markdown content within question text, including figures, tables, code, and equations.</li>
+<li>Randomised questions with multiple replicates using the <code>replicates</code> output format argument.</li>
+<li>Added <code><a href="../reference/cloze_questions.html">cloze()</a></code> and <code>cloze_*()</code> functionality.</li>
 <li>Added <code><a href="../reference/moodlequiz.html">moodlequiz()</a></code> output format for R Markdown.</li>
 <li>Added <code><a href="../reference/choices.html">choices()</a></code> helper for constructing graded vectors of choices.</li>
 </ul></div>
 </div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.0" id="moodlequiz-010">moodlequiz 0.1.0<a class="anchor" aria-label="anchor" href="#moodlequiz-010"></a></h2>
+<p>Initial development version not published to CRAN.</p>
+<ul><li>Basic functionality for creating quizzes containing multiple questions in Moodle XML format.</li>
+<li>Support for cloze style questions only.</li>
+</ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Emi Tanaka, Mitchell O’Hara-Wild.</p>
+  <p>Developed by Mitchell O’Hara-Wild, Emi Tanaka.</p>
 </div>
 
 <div class="pkgdown-footer-right">
