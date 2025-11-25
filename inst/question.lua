@@ -1,3 +1,17 @@
+-- TODO: find out how to pass <![CDATA[ ... ]] through pandoc 
+--       to avoid post-processing <cdata> ... </cdata> in R
+local question_str = [=[
+<question type="%s">
+<questiontext format="html">
+<text>
+<![CDATA[
+%s
+]]
+</text>
+</questiontext>
+</question>
+]=]
+
 local question_before = [[
 <question type="%s">
 <questiontext format="html">
@@ -13,40 +27,63 @@ local question_end = [[
 </question>
 ]]
 
-local function create_dom_element(element, kv)
+-- Helper: convert blocks to plain text
+local function blocks_to_plain(blocks)
+  -- stringify: convert blocks to a Pandoc doc and then to plain text
+  local doc = pandoc.Pandoc(blocks)
+  return pandoc.write(doc, "plain")
+end
+
+
+-- Helper: convert blocks to rich html text
+local function blocks_to_html(blocks)
+  local doc = pandoc.Pandoc(blocks)
+  return pandoc.write(doc, "html")
+end
+
+local function open_dom_elements(element, kv)
   local attributes = ""
   for key, value in pairs(kv) do
     attributes = attributes .. string.format(' %s="%s"', key, value)
   end
 
   -- Create the <answer> opening tag
-  local open_element = pandoc.RawBlock("html", "<" .. element .. attributes .. ">")
-  return open_element
-
-  -- local answer_close_tag = pandoc.RawBlock("html", "</answer>")
+  return "<" .. element .. attributes .. ">"
 end
 
-local function answer_block(answers)
-  -- Create the <answer> element with attributes
-  local answer_open_tag = create_dom_element("answer", answers.attr.attributes)
-  local answer_close_tag = pandoc.RawBlock("html", "</answer>")
+local function answer_block(answers, plaintext)
+  plaintext = plaintext ~= false  -- default true
 
-  -- Wrap the content inside <text><![CDATA[]]></text>
-  local text_open_tag = pandoc.RawBlock("html", "<text><cdata>")
-  local text_close_tag = pandoc.RawBlock("html", "</cdata></text>")
+  -- Get the content as a single string
+  local content, answer_fmt
+  if plaintext then
+    content = blocks_to_plain(answers.content)
+    answer_fmt = [=[
+<text>
+%s
+</text>
+]=]
+  else
+    content = blocks_to_html(answers.content)
+    answer_fmt = [=[
+<text><cdata>
+%s
+</cdata></text>
+]=]
+  end
 
-  answer = answers.content
-  print(answers)
+  -- New list of blocks we will return
+  local out = {}
 
-  -- Combine all parts into a single block
-  table.insert(answer, 1, answer_open_tag)
-  table.insert(answer, 2, text_open_tag)
-  table.insert(answer, text_close_tag)
-  table.insert(answer, answer_close_tag)
+  -- Construct <answer></answer> tags with attributes
+  local answer_open_tag = open_dom_elements("answer", answers.attr.attributes)
+  local answer_close_tag = "</answer>"
 
-  print(answer)
+  ans = answer_open_tag .. string.format(answer_fmt, content) .. answer_close_tag
 
-  return answer
+  table.insert(out, pandoc.RawBlock("html", ans))
+
+  return out
 end
 
 function Div (elem)
@@ -60,10 +97,9 @@ function Div (elem)
     local question = elem.content:walk {
       Div = function(el)
         -- Check if the div has the class "answer"
-        print(el)
         if el.classes[1] == "answer" then
           -- Append the content of the answer div to the answers table
-          table.insert(answers, answer_block(el))
+          table.insert(answers, answer_block(el, elem.attributes['type'] == 'truefalse'))
 
           -- Remove the div from the question content
           return {}
