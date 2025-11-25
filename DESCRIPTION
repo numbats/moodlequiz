@@ -27,9 +27,9 @@ Imports:
     bookdown,
     xfun,
     yaml
-URL: https://github.com/emitanaka/moodlequiz,
-    http://emitanaka.org/moodlequiz/
-BugReports: https://github.com/emitanaka/moodlequiz/issues
+URL: https://github.com/numbats/moodlequiz,
+     https://numbats.github.io/moodlequiz/
+BugReports: https://github.com/numbats/moodlequiz/issues
 Suggests: 
     knitr,
     testthat (>= 3.0.0)
