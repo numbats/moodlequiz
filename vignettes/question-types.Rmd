@@ -1,0 +1,100 @@
+---
+title: "Moodle Quiz Question Types"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{question-types}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(moodlequiz)
+```
+
+The moodlequiz package allows you to construct quizzes using the [Moodle XML format](https://docs.moodle.org/405/en/Moodle_XML_format) question types. This vignette outlines how each quiz question type can be created in R Markdown with the moodlequiz package.
+
+## Description questions
+
+A 'description' question in Moodle doesn't contain any assessment activities. It is useful to describe the activity, such as give some background information on the dataset or learning objectives.
+
+````md
+```{r, echo = FALSE, results="asis"}
+cat(readLines("man/examples/penguins.Rmd")[13:30], sep = "\n")
+```
+````
+
+![](man/figures/quiz-description.png)
+
+In this example, a description question is used to provide background context about the Palmer Archipelago penguins (along with a lovely illustration and preview of the dataset). Both the image and table will be bundled into the XML and imported as part of the Moodle quiz question.
+
+## Cloze questions
+
+The cloze style questions embed many questions within the question text (https://docs.moodle.org/405/en/Embedded_Answers_(Cloze)_question_type).
+
+There are four types of cloze questions:
+
+- **`cloze_shortanswer()`**: Creates a short-answer question where the student provides a text response.
+- **`cloze_singlechoice()`**: Generates a single-choice question where students select one correct answer from a list.
+- **`cloze_multichoice()`**: Creates a multiple-choice question where students can select one or more correct answers.
+- **`cloze_numerical()`**: Generates a numerical question where students input a numeric response with optional tolerance.
+
+The single and multiple choice cloze questions support various options that change the appearance and shuffling behaviour.
+
+There is also the **`cloze()`** function, which automatically chooses the appropriate question type based on the class of the input:
+
+- Numerical: `cloze(42)` 
+- Short answer: `cloze("Australia")` 
+- Single choice: `cloze("rep_len", c("rep", "rep.int", "rep_len", "replicate"))`
+- Multiple choice: `cloze(c("A", "B", "C"), LETTERS)`
+
+These functions should be used with inline R code, for example: `` `r knitr::inline_expr('cloze_singlechoice(choices(c("Adelie", "Chinstrap", "Gentoo"), "Chinstrap"))')` ``⁠
+
+````md
+```{r, echo = FALSE, results="asis"}
+cat(readLines("man/examples/penguins.Rmd")[31:83], sep = "\n")
+```
+````
+
+![](man/figures/quiz-cloze.png)
+
+## Other question types
+
+Other types of questions consist of a single answer field and some question text. You can specify any type of questions (even those defined in Moodle extension packages) with `## Question {type = <TYPE>}`. Question types included in standard installations of Moodle include:
+
+* multichoice
+* truefalse
+* shortanswer
+* matching (not yet supported)
+* essay
+* numerical
+
+````md
+```{r, echo = FALSE, results="asis"}
+cat(readLines("man/examples/penguins.Rmd")[84:88], sep = "\n")
+```
+````
+
+![](man/figures/quiz-essay.png)
+
+In the penguins example, you can see that the question type has been set to `essay`.
+
+## Question options
+
+Each question type has many question-specific options which are outlined in the [Moodle XML format](https://docs.moodle.org/405/en/Moodle_XML_format) guide. Question specific options are specified in the question headers, for example enabling `shuffleanswers` for multiple choice questions with `## Multiple choice {type=multichoice shuffleanswers=1}`.
+
+Many of these question types require answers specified in `<answer fraction="...">...</answer>` sections. To specify the answers for a question with moodlequiz, use the answers div like so:
+
+````md
+```{r, echo = FALSE, results="asis"}
+cat(readLines("man/examples/other-examples.Rmd")[6:26], sep = "\n")
+```
+````
+
+![](man/figures/quiz-multichoice.png)
