@@ -10,6 +10,8 @@
 #'   headers.
 #' @inheritParams rmarkdown::html_document
 #'
+#' @return R Markdown output format to pass to [rmarkdown::render()]
+#' 
 #' @import rmarkdown
 #'
 #' @export
