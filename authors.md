@@ -13,11 +13,11 @@ Source:
 [`DESCRIPTION`](https://github.com/numbats/moodlequiz/blob/main/DESCRIPTION)
 
 O'Hara-Wild M, Tanaka E (2025). *moodlequiz: R Markdown format for
-Moodle XML cloze quizzes*. R package version 0.2.0,
+'Moodle' XML cloze quizzes*. R package version 0.2.0,
 <https://github.com/numbats/moodlequiz>.
 
     @Manual{,
-      title = {moodlequiz: R Markdown format for Moodle XML cloze quizzes},
+      title = {moodlequiz: R Markdown format for 'Moodle' XML cloze quizzes},
       author = {Mitchell O'Hara-Wild and Emi Tanaka},
       year = {2025},
       note = {R package version 0.2.0},
