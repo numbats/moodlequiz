@@ -11,6 +11,12 @@ choices(options, answer)
 
 \item{answer}{A character vector of the correct answers}
 }
+\value{
+A named vector of choices suitable for use with \code{cloze_singlechoice()} and \code{cloze_multichoice()}
+}
 \description{
 Create a set of choices for single or multiple choice questions
+}
+\seealso{
+\code{\link[=cloze_singlechoice]{cloze_singlechoice()}}, \code{\link[=cloze_multichoice]{cloze_multichoice()}}
 }

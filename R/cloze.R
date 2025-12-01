@@ -161,7 +161,11 @@ cloze_numerical <- function(answer, weight = 1, tolerance = 0, feedback = "") {
 #'
 #' @param options A character vector of selectable choices
 #' @param answer A character vector of the correct answers
-#'
+#' 
+#' @return A named vector of choices suitable for use with `cloze_singlechoice()` and `cloze_multichoice()`
+#' 
+#' @seealso [cloze_singlechoice()], [cloze_multichoice()]
+#' 
 #' @export
 choices <- function(options, answer) {
   i <- options %in% answer
