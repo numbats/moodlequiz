@@ -2,6 +2,8 @@
 
 ## moodlequiz 0.2.0
 
+CRAN release: 2025-12-06
+
 Initial CRAN release, allowing the creation of Moodle XML quizzes from R
 with R Markdown.
 
