@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">moodlequiz</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,8 +55,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of moodlequiz like so:</p>
+<p>You can install the released version of moodlequiz from CRAN with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"moodlequiz"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the development version of moodlequiz like so:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"numbats/moodlequiz"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -67,14 +70,14 @@
 <h3 id="front-matter">Front matter<a class="anchor" aria-label="anchor" href="#front-matter"></a>
 </h3>
 <p>The front matter allows you to describe the number of random replications, and the general category for all of these questions. For example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Learning with penguins</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">  moodlequiz:</span><span class="fu">:moodlequiz</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">    </span><span class="fu">replicates</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">moodlequiz</span><span class="kw">:</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="at">  </span><span class="fu">category</span><span class="kw">:</span><span class="at"> penguins</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Learning with penguins</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="at">  moodlequiz:</span><span class="fu">:moodlequiz</span><span class="kw">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">    </span><span class="fu">replicates</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">moodlequiz</span><span class="kw">:</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="at">  </span><span class="fu">category</span><span class="kw">:</span><span class="at"> penguins</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>In this case the questions will be imported into the ‘penguins’ category, with only 1 replicate for each question (the default).</p>
 <p>It is possible to use randomization in R to produce many different replicates of the same question (as shown in the quiz randomization vignette).</p>
 </div>
@@ -98,43 +101,43 @@
 </li>
 </ul>
 <p>For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu"># Basics</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>...</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="fu">## Plotting weight</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>...</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="fu">## Telling the story {type=essay}</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>...</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu"># Basics</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>...</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="fu">## Plotting weight</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>...</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="fu">## Telling the story {type=essay}</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>...</span></code></pre></div>
 <p>This example quiz consists of a single sub-category (basics) which contains three quiz ‘questions’ of different types:</p>
 <div class="section level5">
 <h5 id="description-questions">Description questions<a class="anchor" aria-label="anchor" href="#description-questions"></a>
 </h5>
 <p>A ‘description’ question in Moodle doesn’t contain any assessment activities. It is useful to describe the activity, such as give some background information on the dataset or learning objectives.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="in">```{r setup, include = FALSE}</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="in">library(moodlequiz)</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = FALSE)</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>**Meet the penguins!**</span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="al">![The Palmer Archipelago penguins. Artwork by @allison_horst.](lter_penguins.png)</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="at">&gt; The </span><span class="in">`palmerpenguins`</span><span class="at"> data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="in">```{r data, echo = TRUE}</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="in">library(palmerpenguins)</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="in">penguins</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="in">```{r setup, include = FALSE}</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="in">library(moodlequiz)</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = FALSE)</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>**Meet the penguins!**</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="al">![The Palmer Archipelago penguins. Artwork by @allison_horst.](lter_penguins.png)</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="at">&gt; The </span><span class="in">`palmerpenguins`</span><span class="at"> data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="in">```{r data, echo = TRUE}</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="in">library(palmerpenguins)</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="in">penguins</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p><img src="reference/figures/quiz-description.png"></p>
 <p>In this example, a description question is used to provide background context about the Palmer Archipelago penguins (along with a lovely illustration and preview of the dataset). Both the image and table will be bundled into the XML and imported as part of the Moodle quiz question.</p>
 </div>
@@ -167,58 +170,58 @@
 </li>
 </ul>
 <p>These functions should be used with inline R code, for example: <code>`r cloze_singlechoice(choices(c("Adelie", "Chinstrap", "Gentoo"), "Chinstrap"))`</code>⁠</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">## Plotting weight</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>**Which penguins are heaviest?**</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>A summary of the penguins dataset is shown below.</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="in">summary(penguins)</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>The average weight of a penguin is <span class="in">`r cloze(mean(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`</span>, which is slightly <span class="in">`r cloze("more", c("more", "less"))`</span> than the median weight of <span class="in">`r cloze(median(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`</span>.</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>Complete the code to produce the graphic shown in figure \@ref(fig:boxplot).</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">r cloze("body_mass_g", colnames(penguins))</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>  <span class="st">`</span><span class="at">r cloze("geom_boxplot")</span><span class="st">`</span>() <span class="sc">+</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>)) <span class="sc">+</span> </span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="in">```{r boxplot, fig.cap="Boxplots of penguin weight by species"}</span></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="in">penguins |&gt; </span></span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="in">  ggplot(aes(x = body_mass_g, y = species, fill = species)) +</span></span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="in">  geom_boxplot() +</span></span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="in">  scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) + </span></span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="in">  theme_minimal()</span></span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>Modify the code to investigate differences in <span class="in">`species`</span> weight by <span class="in">`sex`</span> that produces figure \@ref(fig:boxplot-sex).</span>
-<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">r cloze("body_mass_g", colnames(penguins))</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">r cloze("sex", colnames(penguins))</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>  <span class="st">`</span><span class="at">r cloze("geom_boxplot")</span><span class="st">`</span>() <span class="sc">+</span></span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>)) <span class="sc">+</span> </span>
-<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a><span class="in">```{r boxplot-sex, fig.cap="Boxplots of penguin weight by species and sex"}</span></span>
-<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="in">penguins |&gt; </span></span>
-<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a><span class="in">  ggplot(aes(x = body_mass_g, y = sex, fill = species)) +</span></span>
-<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="in">  geom_boxplot() +</span></span>
-<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a><span class="in">  scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) + </span></span>
-<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="in">  theme_minimal()</span></span>
-<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a></span>
-<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a>Male penguins <span class="in">`r cloze("tend to", c("almost always", "tend to"))`</span> weigh <span class="in">`r cloze("more", c("more", "less"))`</span> than female penguins. Within each species, male penguins <span class="in">`r cloze("almost always", c("almost always", "tend to"))`</span> weigh <span class="in">`r cloze("more", c("more", "less"))`</span> than female penguins.</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">## Plotting weight</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>**Which penguins are heaviest?**</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>A summary of the penguins dataset is shown below.</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="in">summary(penguins)</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>The average weight of a penguin is <span class="in">`r cloze(mean(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`</span>, which is slightly <span class="in">`r cloze("more", c("more", "less"))`</span> than the median weight of <span class="in">`r cloze(median(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`</span>.</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>Complete the code to produce the graphic shown in figure \@ref(fig:boxplot).</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">r cloze("body_mass_g", colnames(penguins))</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>  <span class="st">`</span><span class="at">r cloze("geom_boxplot")</span><span class="st">`</span>() <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>)) <span class="sc">+</span> </span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="in">```{r boxplot, fig.cap="Boxplots of penguin weight by species"}</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="in">penguins |&gt; </span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="in">  ggplot(aes(x = body_mass_g, y = species, fill = species)) +</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="in">  geom_boxplot() +</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="in">  scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) + </span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="in">  theme_minimal()</span></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>Modify the code to investigate differences in <span class="in">`species`</span> weight by <span class="in">`sex`</span> that produces figure \@ref(fig:boxplot-sex).</span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">r cloze("body_mass_g", colnames(penguins))</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">r cloze("sex", colnames(penguins))</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">r cloze("species", colnames(penguins))</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a>  <span class="st">`</span><span class="at">r cloze("geom_boxplot")</span><span class="st">`</span>() <span class="sc">+</span></span>
+<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>)) <span class="sc">+</span> </span>
+<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="in">```{r boxplot-sex, fig.cap="Boxplots of penguin weight by species and sex"}</span></span>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="in">penguins |&gt; </span></span>
+<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="in">  ggplot(aes(x = body_mass_g, y = sex, fill = species)) +</span></span>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="in">  geom_boxplot() +</span></span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="in">  scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) + </span></span>
+<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="in">  theme_minimal()</span></span>
+<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a></span>
+<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a>Male penguins <span class="in">`r cloze("tend to", c("almost always", "tend to"))`</span> weigh <span class="in">`r cloze("more", c("more", "less"))`</span> than female penguins. Within each species, male penguins <span class="in">`r cloze("almost always", c("almost always", "tend to"))`</span> weigh <span class="in">`r cloze("more", c("more", "less"))`</span> than female penguins.</span></code></pre></div>
 <p><img src="reference/figures/quiz-cloze.png"></p>
 </div>
 <div class="section level4">
@@ -233,37 +236,37 @@
 <li>essay</li>
 <li>numerical</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">## Telling the story {type=essay}</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>**Tell the story**</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>Write a short paragraph about how a penguin's weight relates to their species and sex.</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">## Telling the story {type=essay}</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>**Tell the story**</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>Write a short paragraph about how a penguin's weight relates to their species and sex.</span></code></pre></div>
 <p><img src="reference/figures/quiz-essay.png"></p>
 <p>In the penguins example, you can see that the question type has been set to <code>essay</code>.</p>
 <hr>
 <p>These question types often have many question-specific options which are outlined in the <a href="https://docs.moodle.org/405/en/Moodle_XML_format" class="external-link">Moodle XML format</a> guide. Question specific options are specified in the question headers, for example enabling <code>shuffleanswers</code> for multiple choice questions with <code>## Multiple choice {type=multichoice shuffleanswers=1}</code>.</p>
 <p>Many of these question types require answers specified in <code>&lt;answer fraction="..."&gt;...&lt;/answer&gt;</code> sections. To specify the answers for a question with moodlequiz, use the answers div like so:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">## Multiple choice {type=multichoice shuffleanswers=1}</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>Which of the following generates random numbers from a Normal distribution</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>::: {.answer fraction="100"}</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="in">rnorm(10)</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>:::</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>::: {.answer fraction="0"}</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="in">runif(10)</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>:::</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>::: {.answer fraction="0"}</span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="in">rnorm(10)^2</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>:::</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">## Multiple choice {type=multichoice shuffleanswers=1}</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>Which of the following generates random numbers from a Normal distribution</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>::: {.answer fraction="100"}</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="in">rnorm(10)</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>:::</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>::: {.answer fraction="0"}</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="in">runif(10)</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>:::</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>::: {.answer fraction="0"}</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="in">rnorm(10)^2</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>:::</span></code></pre></div>
 <p><img src="reference/figures/quiz-multichoice.png"></p>
 </div>
 </div>

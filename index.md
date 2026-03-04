@@ -8,6 +8,12 @@ answers.
 
 ## Installation
 
+You can install the released version of moodlequiz from CRAN with:
+
+``` r
+install.packages("moodlequiz")
+```
+
 You can install the development version of moodlequiz like so:
 
 ``` r
