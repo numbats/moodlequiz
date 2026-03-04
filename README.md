@@ -7,6 +7,8 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/moodlequiz)](https://CRAN.R-project.org/package=moodlequiz)
 [![R-CMD-check](https://github.com/numbats/moodlequiz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/numbats/moodlequiz/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
