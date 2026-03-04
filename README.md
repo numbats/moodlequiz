@@ -18,6 +18,12 @@ answers.
 
 ## Installation
 
+You can install the released version of moodlequiz from CRAN with:
+
+``` r
+install.packages("moodlequiz")
+```
+
 You can install the development version of moodlequiz like so:
 
 ``` r
@@ -369,11 +375,19 @@ You can now repaginate and further adjust the quiz settings as
 necessary.
 
 <!-- ## Example -->
+
 <!-- Below is an example quiz question which uses the `cloze` question type to select the code which produces the plot. -->
+
 <!-- ![](man/figures/quiz-screenshot.png){style="border:1px solid black;"} -->
+
 <!-- The above quiz is created from the R Markdown document below. Knitting the document below will generate 5 different versions of the quiz where the x, y, color, and size are mapped randomly to one of the variables in the `mtcars` data.  -->
+
 <!-- ```{r, echo = FALSE, results="asis"} -->
+
 <!-- cat("````\n") -->
+
 <!-- cat(readLines("man/examples/draw-scatterplots.Rmd"), sep = "\n") -->
+
 <!-- cat("````") -->
+
 <!-- ``` -->

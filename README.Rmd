@@ -25,6 +25,12 @@ The `moodlequiz` R package which allows the creation of [Moodle](https://moodle.
 
 ## Installation
 
+You can install the released version of moodlequiz from CRAN with:
+
+``` r
+install.packages("moodlequiz")
+```
+
 You can install the development version of moodlequiz like so:
 
 ``` r
