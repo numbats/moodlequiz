@@ -2,6 +2,8 @@
 
 ## moodlequiz (development version)
 
+Minor patch to fix the incorrect language in the DESCRIPTION.
+
 ## moodlequiz 0.2.0
 
 CRAN release: 2025-12-06
