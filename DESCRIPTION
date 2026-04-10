@@ -1,6 +1,6 @@
 Package: moodlequiz
 Title: R Markdown format for 'Moodle' XML cloze quizzes
-Version: 0.2.1
+Version: 0.2.1.9000
 Authors@R: 
     c(person(given = "Mitchell",
              family = "O'Hara-Wild",
