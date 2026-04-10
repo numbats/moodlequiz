@@ -1,5 +1,7 @@
 # moodlequiz (development version)
 
+Minor patch to fix the incorrect language in the DESCRIPTION.
+
 # moodlequiz 0.2.0
 
 Initial CRAN release, allowing the creation of Moodle XML quizzes from R with 
