@@ -13,12 +13,11 @@
 #' @param shuffle Logical. For `cloze_multichoice` and `cloze_singlechoice`, whether the answer options should be shuffled. Defaults to `FALSE`.
 #' @param answer A numeric value specifying the correct numerical answer(s).
 #' @param tolerance A numeric value specifying the acceptable range of deviation for `cloze_numerical` answers. Defaults to `0`.
+#' @param x For `cloze()`, the correct answer which also determines the question type (e.g. `numeric` will use `cloze_numerical()` and `character` will use `cloze_shortanswer()` or `cloze_singlechoice()`/`cloze_multichoice()` if selectable options are given as the second argument).
+#' @param ... Additional arguments passed to other `cloze()` methods (such as the available options and other `cloze_*()` arguments).
 #' @param answer1,answer2 Numeric values for the two accepted correct answers.
 #' @param tolerance1,tolerance2 Acceptable deviation for each answer. Defaults to `0`.
 #' @param feedback1,feedback2 Feedback strings shown for each correct answer.
-#' @param x For `cloze()`, the correct answer which also determines the question type (e.g. `numeric` will use `cloze_numerical()` and `character` will use `cloze_shortanswer()` or `cloze_singlechoice()`/`cloze_multichoice()` if selectable options are given as the second argument).
-#' @param ... Additional arguments passed to other `cloze()` methods (such as the available options and other `cloze_*()` arguments).
-#'
 #' @section Functions:
 #'
 #' - **`cloze_shortanswer()`**: Creates a short-answer question where the student provides a text response.
@@ -73,12 +72,20 @@ NULL
 # >
 # > https://docs.moodle.org/405/en/Embedded_Answers_(Cloze)_question_type)
 escape_answers <- function(x) {
-  # Escape special characters with \
-  x <- gsub('([\\}#/"\\\\])', '\\\\\\1', x)
-
-  # Escape ~ with unicode (Moodle bug)
-  x <- gsub('~', '&#x007e;', x, fixed = TRUE)
-
+  # Escape Moodle-specific special characters: }, #, /, ", ~ ORIGINAL escape_answers
+  x <- gsub('([}#/"~])', '\\\\\\1', x)
+  
+  # Replace < and > with HTML entities to prevent HTML tag issues - added by joaomaroco
+  x <- gsub('<', '<', x)
+  x <- gsub('>', '>', x)
+  
+  # Escape other Moodle-relevant characters that could interfere  - added by joaomaroco
+  x <- gsub('%', '\\%', x)
+  x <- gsub('&', '&', x)
+  
+  # Note: Do NOT escape underscores (_) or backslashes (\) in LaTeX, 
+  # as they are valid in MathJax within \(...\)
+  
   x
 }
 
@@ -159,13 +166,12 @@ cloze_numerical <- function(answer, weight = 1, tolerance = 0, feedback = "") {
     weight, answer, tolerance, feedback
   )
 }
-
 #' @rdname cloze_questions
 #' @export
 cloze_numerical2 <- function(answer1, answer2,
-                              tolerance1 = 0, tolerance2 = 0,
-                              weight = 1,
-                              feedback1 = "Correct", feedback2 = "Also correct") {
+                             tolerance1 = 0, tolerance2 = 0,
+                             weight = 1,
+                             feedback1 = "Correct", feedback2 = "Also correct") {
   sprintf(
     "`{%i:NUMERICAL:=%f:%f#%s~=%f:%f#%s}`{=html}",
     weight,
@@ -173,15 +179,12 @@ cloze_numerical2 <- function(answer1, answer2,
     answer2, tolerance2, feedback2
   )
 }
+
 #' Create a set of choices for single or multiple choice questions
 #'
 #' @param options A character vector of selectable choices
 #' @param answer A character vector of the correct answers
-#' 
-#' @return A named vector of choices suitable for use with `cloze_singlechoice()` and `cloze_multichoice()`
-#' 
-#' @seealso [cloze_singlechoice()], [cloze_multichoice()]
-#' 
+#'
 #' @export
 choices <- function(options, answer) {
   i <- options %in% answer
